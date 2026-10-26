@@ -4,7 +4,7 @@ Instructions for AI coding agents working in this repository.
 
 ## Project overview
 
-`ufore-xxx-yyy` is a minimal Kotlin/JVM application scaffold for Team Uføre at Nav. 
+`ufore-soknad-mottak` is a minimal Kotlin/JVM application scaffold for Team Uføre at Nav. 
 The purpose of this repository is...
 
 - Language/runtime: Kotlin, JDK 25 (via Gradle toolchain)

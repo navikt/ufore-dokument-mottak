@@ -1,4 +1,4 @@
 FROM europe-north1-docker.pkg.dev/cgr-nav/pull-through/nav.no/jre:openjdk-25
 ENV TZ="Europe/Oslo"
-COPY build/libs/ufore-xxx-yyy.jar app.jar
+COPY build/libs/ufore-soknad-mottak.jar app.jar
 CMD ["-jar","app.jar"]

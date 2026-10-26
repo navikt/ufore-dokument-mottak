@@ -11,9 +11,9 @@ Beskrivelse av hva appen/tjenesten/tingen som lages i dette repositoryet gjør.
 For hvilke versjoner som brukes, [se versjonsfilen](/gradle/libs.versions.toml)
 
 ### Følgende steg må gjennomføres for å få repoet ditt i kjørbar tilstand
-- søk etter teksten `ufore-xxx-yyy` og erstatt med navnet på ditt repo. Her er en kommando som gjør det for deg på macOS dersom du står i repoets rotkatalog
+- søk etter teksten `ufore-soknad-mottak` og erstatt med navnet på ditt repo. Her er en kommando som gjør det for deg på macOS dersom du står i repoets rotkatalog
 ```sh
-repo_name=$(basename "$PWD") && grep -Irwl --null --exclude-dir=.git --exclude-dir=build -e 'ufore-xxx-yyy' . | xargs -0 env REPO_NAME="$repo_name" perl -pi -e 's/\bufore-xxx-yyy\b/$ENV{REPO_NAME}/g'
+repo_name=$(basename "$PWD") && grep -Irwl --null --exclude-dir=.git --exclude-dir=build -e 'ufore-soknad-mottak' . | xargs -0 env REPO_NAME="$repo_name" perl -pi -e 's/\bufore-xxx-yyy\b/$ENV{REPO_NAME}/g'
 ```
 - gi repoet et eierskap på https://console.nav.cloud.nais.io/team/ufore/repositories
 - på repoets side på GitHub → Settings → Secrets and variables → Actions

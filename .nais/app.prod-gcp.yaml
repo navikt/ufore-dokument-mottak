@@ -1,6 +1,6 @@
 spec:
   #ingresses:
-  #  - https://ufore-xxx-yyy.intern.nav.no
+  #  - https://ufore-soknad-mottak.intern.nav.no
   replicas:
     min: 2
     max: 4
