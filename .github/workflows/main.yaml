@@ -1,0 +1,49 @@
+name: Build and deploy
+on:
+  push:
+    branches:
+      - main
+jobs:
+  build:
+    name: Build and push image
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    outputs:
+      image: ${{ steps.docker-build-push.outputs.image }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+      - name: Build application jar
+        run: ./gradlew --no-daemon jar
+      - name: Build and push image and SBOM to OCI registry
+        uses: nais/docker-build-push@dd7421d5068057a020ca46ead966c26190c516b1
+        id: docker-build-push
+        with:
+          team: ufore
+
+  deploy:
+    name: Deploy
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+      - uses: nais/setup@fb8692f65df9c904e2cdac5d395630ac876abdcf
+        with:
+          team: ufore
+      - name: Deploy to dev-gcp
+        run: |
+          nais apply .nais/app.yaml \
+            --environment dev-gcp \
+            --set spec.image="${{ needs.build.outputs.image }}" \
+            --wait
+      - name: Deploy to prod-gcp
+        if: ${{ false }} # fjern denne raden når du vil deploye til prod-gcp
+        run: |
+          nais apply .nais/app.yaml \
+            --environment prod-gcp \
+            --set spec.image="${{ needs.build.outputs.image }}" \
+            --wait

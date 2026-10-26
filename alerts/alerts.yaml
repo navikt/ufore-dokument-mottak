@@ -1,0 +1,26 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  labels:
+    team: ufore
+  name: ufore-xxx-yyy-alerts
+  namespace: ufore
+spec:
+  groups:
+    - name: ufore-xxx-yyy-alerts
+      rules:
+        - alert: "For mange serverfeil"
+          expr: |
+            round(
+                sum(rate(http_server_requests_seconds_count{app=~"ufore-xxx-yyy", status=~"[5].."}[5m])) by (app, uri) / sum(rate(http_server_requests_seconds_count{app=~"ufore-xxx-yyy"}[5m])) by (app, uri) * 100 
+            ) > 10
+          for: 2m
+          annotations:
+            message: "*{{ $labels.app }}*: {{ $value }}% 5xx-feil fra `{{ $labels.uri }}` siste 2 min!"
+            # action: "https://logs.az.nav.no/goto/ae4094e3dd306b3e8e64f2a0086f2db7?security_tenant=navlogs"
+            # dashboard_url: 'https://grafana.nav.cloud.nais.io/d/din-uforetrygd-monitoring/din-uforetrygd'
+          labels:
+            severity: error
+            namespace: ufore
+            ufore_alerts: slack
+            alert_type: custom

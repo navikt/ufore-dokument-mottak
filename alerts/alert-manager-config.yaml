@@ -1,0 +1,61 @@
+apiVersion: monitoring.coreos.com/v1alpha1
+kind: AlertmanagerConfig
+metadata:
+  name: ufore-alert-manager-config
+  namespace: ufore
+  labels:
+    alertmanagerConfig: ufore-alert-manager-config
+spec:
+  receivers:
+    - name: ufore-alerts-receiver
+      slackConfigs:
+        - apiURL:
+            key: apiUrl
+            name: slack-webhook
+          channel: "#team-uføre-alerts"
+          iconEmoji: ":trygdebeistet:"
+          username: "Trygdebeistet"
+          sendResolved: true
+          title: |-
+            {{ if eq .Status "resolved" }}[{{ .Status | title }}]{{ end }} {{ .CommonLabels.alertname }}
+          text: |-
+            {{ if eq .Status "firing" }}
+            {{ range .Alerts -}}
+            {{ .Annotations.message }}
+            {{ end }}
+            {{ if .CommonAnnotations.action }}:elasticsearch: <{{ .CommonAnnotations.action }}|Sjekk logger i Kibana (siste time)>{{ end }}
+            {{ if .CommonAnnotations.dashboard_url }}:grafana: <{{ .CommonAnnotations.dashboard_url }}?from={{ sub (index .Alerts 0).StartsAt.Unix 3600 }}000&to={{ add (index .Alerts 0).StartsAt.Unix 3600 }}000|Grafana dashboard>{{ end }}
+            {{ end }}
+          color: |-
+            {{ if eq .Status "firing" -}}
+              {{ if eq .CommonLabels.severity "warning" -}}
+                warning
+              {{- else if eq .CommonLabels.severity "fatal" -}}
+                #611f69
+              {{- else if eq .CommonLabels.severity "critical" -}}
+                #611f69
+              {{- else if eq .CommonLabels.severity "danger" -}}
+                danger
+              {{- else if eq .CommonLabels.severity "error" -}}
+                danger
+              {{- else if eq .CommonLabels.severity "notice" -}}
+                good
+              {{- else if eq .CommonLabels.severity "info" -}}
+                #36c5f0
+              {{- else -}}
+                .CommonLabels.severity
+              {{- end -}}
+            {{ else -}}
+            good
+            {{- end }}
+  route:
+    groupBy:
+      - alertname
+    matchers:
+      - name: "ufore_alerts"
+        matchType: "="
+        value: "slack"
+    groupInterval: 10s
+    groupWait: 1m
+    receiver: ufore-alerts-receiver
+    repeatInterval: 12h

@@ -1,0 +1,44 @@
+plugins {
+    alias(libs.plugins.kotlin.jvm)
+
+    application
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation(libs.junit.jupiter)
+    testImplementation(libs.mockk)
+    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+
+    implementation(libs.kotlin.logging.jvm)
+    implementation(libs.ktor.server.core)
+    implementation(libs.ktor.server.netty)
+    runtimeOnly(libs.logback.classic)
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(25)
+    }
+}
+
+application {
+    mainClass = "no.nav.uføre.AppKt"
+}
+
+tasks.jar {
+    manifest {
+        attributes["Main-Class"] = "no.nav.uføre.AppKt"
+    }
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    from(configurations.runtimeClasspath.map { cp ->
+        cp.map { if (it.isDirectory) it else zipTree(it) }
+    })
+}
+
+tasks.named<Test>("test") {
+    useJUnitPlatform()
+}
