@@ -1,4 +1,4 @@
-# Søknadsmottaker for Uføretrygd
+# Søknadsmottaker for uføretrygd
 
 Denne applikasjonen lytter på meldinger fra Joark som omhandler førstegangssøknader for uføretrygd, henter relevant dokumentasjon fra SAF og oppretter oppgaver mot oppgavebehandling-api.
 
