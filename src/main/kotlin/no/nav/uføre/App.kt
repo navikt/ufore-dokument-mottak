@@ -10,6 +10,7 @@ import io.ktor.server.routing.routing
 fun main() {
     val log = KotlinLogging.logger {}
     log.info { "Starter server" }
+//    val kafkeLytter = KafkaConfig.aivenConsumer().also { it.start() }
     embeddedServer(Netty, port = 8080) {
         routing {
             get("/") {

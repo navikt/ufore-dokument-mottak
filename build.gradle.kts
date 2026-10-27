@@ -6,6 +6,7 @@ plugins {
 
 repositories {
     mavenCentral()
+    maven("https://packages.confluent.io/maven/")
 }
 
 dependencies {
@@ -14,6 +15,9 @@ dependencies {
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 
     implementation(libs.kotlin.logging.jvm)
+    implementation(libs.kafka.clients)
+    implementation(libs.avro)
+    implementation(libs.confluent.avro.serializer)
     implementation(libs.ktor.server.core)
     implementation(libs.ktor.server.netty)
     runtimeOnly(libs.logback.classic)

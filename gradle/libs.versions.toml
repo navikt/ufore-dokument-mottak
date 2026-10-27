@@ -4,6 +4,9 @@ mockk = "1.14.11"
 kotlin-logging = "8.0.4"
 logback = "1.6.5"
 ktor = "3.6.0"
+kafka = "4.4.0"
+avro = "1.12.1"
+confluent = "8.4.0"
 
 [libraries]
 junit-jupiter = { module = "org.junit.jupiter:junit-jupiter", version.ref = "junit-jupiter" }
@@ -12,6 +15,9 @@ kotlin-logging-jvm = { module = "io.github.oshai:kotlin-logging-jvm", version.re
 logback-classic = { module = "ch.qos.logback:logback-classic", version.ref = "logback" }
 ktor-server-core = { module = "io.ktor:ktor-server-core", version.ref = "ktor" }
 ktor-server-netty = { module = "io.ktor:ktor-server-netty", version.ref = "ktor" }
+kafka-clients = { module = "org.apache.kafka:kafka-clients", version.ref = "kafka" }
+avro = { module = "org.apache.avro:avro", version.ref = "avro" }
+confluent-avro-serializer = { module = "io.confluent:kafka-avro-serializer", version.ref = "confluent"}
 
 [plugins]
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version = "2.4.21" }
