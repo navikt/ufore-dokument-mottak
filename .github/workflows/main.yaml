@@ -41,7 +41,6 @@ jobs:
             --set spec.image="${{ needs.build.outputs.image }}" \
             --wait
       - name: Deploy to prod-gcp
-        if: ${{ false }} # fjern denne raden når du vil deploye til prod-gcp
         run: |
           nais apply .nais/app.yaml \
             --environment prod-gcp \
