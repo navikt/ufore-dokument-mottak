@@ -18,7 +18,9 @@ import kotlin.jvm.java
 object KafkaConfig {
     internal const val JOURNALFOERING_REPLICATOR_GROUPID = "ufore-journalfoering-v1"
     internal fun aivenConsumer(): KafkaConsumer<String, GenericRecord> {
-        val maxPollIntervalMs = Duration.ofSeconds(60 + 50 * 2.toLong()).toMillis()
+        val maxPollRecords = 50
+        val maxPollIntervalMs = Duration.ofSeconds(60 + maxPollRecords * 2.toLong()).toMillis()
+        val joarkTopic = "teamdokumenthandtering.aapen-dok-journalfoering"
         val props = Properties()
         val env = System.getenv()
         props[CommonClientConfigs.BOOTSTRAP_SERVERS_CONFIG] = env.getValue("KAFKA_BROKERS")
@@ -39,10 +41,10 @@ object KafkaConfig {
         props[SchemaRegistryClientConfig.BASIC_AUTH_CREDENTIALS_SOURCE] = "USER_INFO"
         props[SchemaRegistryClientConfig.USER_INFO_CONFIG] =
             env.getValue("KAFKA_SCHEMA_REGISTRY_USER") + ":" + env.getValue("KAFKA_SCHEMA_REGISTRY_PASSWORD")
-        props[ConsumerConfig.MAX_POLL_RECORDS_CONFIG] = 50
+        props[ConsumerConfig.MAX_POLL_RECORDS_CONFIG] = maxPollRecords
         props[ConsumerConfig.MAX_POLL_INTERVAL_MS_CONFIG] = "$maxPollIntervalMs"
         val kafkaConsumer = KafkaConsumer<String, GenericRecord>(props)
-        kafkaConsumer.subscribe(listOf("teamdokumenthandtering.aapen-dok-journalfoering"))
+        kafkaConsumer.subscribe(listOf(joarkTopic))
         return kafkaConsumer
     }
 }
