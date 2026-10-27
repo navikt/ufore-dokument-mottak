@@ -6,28 +6,12 @@ import io.ktor.server.netty.Netty
 import io.ktor.server.response.respondText
 import io.ktor.server.routing.get
 import io.ktor.server.routing.routing
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import java.time.Duration
 
 fun main() {
     val log = KotlinLogging.logger {}
     log.info { "Starter server" }
 
-    val kafkaLytter = KafkaConfig.aivenConsumer()
-    CoroutineScope(Dispatchers.IO).launch {
-        while (true) {
-            val meldinger = kafkaLytter.poll(Duration.ofMillis(100))
-            meldinger.forEach { melding ->
-                val tema = melding.value().get("temaNytt")
-                if (tema == "UFO") {
-                    log.info { "Fikk melding med nøkkel: ${melding.key()}, verdi: ${melding.value()}" }
-                }
-            }
-            kafkaLytter.commitSync()
-        }
-    }
+    JoarkConsumer(KafkaConfig.aivenConsumer()).consume()
 
     embeddedServer(Netty, port = 8080) {
         routing {
