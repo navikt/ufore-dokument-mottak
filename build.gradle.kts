@@ -21,6 +21,7 @@ dependencies {
     implementation(libs.ktor.server.core)
     implementation(libs.ktor.server.netty)
     runtimeOnly(libs.logback.classic)
+    runtimeOnly(libs.logstash.logback)
 }
 
 java {
