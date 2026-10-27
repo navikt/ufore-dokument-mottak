@@ -1,7 +1,7 @@
 apiVersion: nais.io/v1alpha1
 kind: Application
 metadata:
-  name: ufore-soknad-mottak
+  name: ufore-dokument-mottak
   namespace: ufore
   labels:
     team: ufore

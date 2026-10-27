@@ -1,1 +1,1 @@
-rootProject.name = "ufore-soknad-mottak"
+rootProject.name = "ufore-dokument-mottak"

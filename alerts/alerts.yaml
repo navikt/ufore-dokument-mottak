@@ -3,16 +3,16 @@ kind: PrometheusRule
 metadata:
   labels:
     team: ufore
-  name: ufore-soknad-mottak-alerts
+  name: ufore-dokument-mottak-alerts
   namespace: ufore
 spec:
   groups:
-    - name: ufore-soknad-mottak-alerts
+    - name: ufore-dokument-mottak-alerts
       rules:
         - alert: "For mange serverfeil"
           expr: |
             round(
-                sum(rate(http_server_requests_seconds_count{app=~"ufore-soknad-mottak", status=~"[5].."}[5m])) by (app, uri) / sum(rate(http_server_requests_seconds_count{app=~"ufore-soknad-mottak"}[5m])) by (app, uri) * 100 
+                sum(rate(http_server_requests_seconds_count{app=~"ufore-dokument-mottak", status=~"[5].."}[5m])) by (app, uri) / sum(rate(http_server_requests_seconds_count{app=~"ufore-dokument-mottak"}[5m])) by (app, uri) * 100 
             ) > 10
           for: 2m
           annotations:
