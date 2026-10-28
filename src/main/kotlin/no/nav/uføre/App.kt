@@ -11,14 +11,13 @@ fun main() {
     val log = KotlinLogging.logger {}
     log.info { "Starter server" }
 
-    JoarkConsumer(KafkaConfig.aivenConsumer()).consume()
+    val consumer = KafkaConfig.aivenConsumer()
+    JoarkConsumer(consumer).consume()
 
     embeddedServer(Netty, port = 8080) {
+        setupPrometheusMetrics(consumer)
+
         routing {
-            get("/") {
-                call.respondText("Hello, world!")
-                log.info { "Hello Nav!" }
-            }
             get("/isalive") {
                 call.respondText("ok")
             }

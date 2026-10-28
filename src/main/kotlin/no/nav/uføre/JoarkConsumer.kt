@@ -5,11 +5,11 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import org.apache.avro.generic.GenericRecord
+import org.apache.kafka.clients.consumer.Consumer
 import org.apache.kafka.clients.consumer.ConsumerRecord
-import org.apache.kafka.clients.consumer.KafkaConsumer
 import java.time.Duration
 
-class JoarkConsumer (private val kafkaConsumer: KafkaConsumer<String, GenericRecord>) {
+class JoarkConsumer (private val kafkaConsumer: Consumer<String, GenericRecord>) {
     val log = KotlinLogging.logger {}
 
     fun consume() {
