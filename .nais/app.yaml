@@ -33,7 +33,7 @@ spec:
         - id: loki
   prometheus:
     enabled: true
-    path: actuator/prometheus
+    path: /prometheus
   accessPolicy:
     outbound:
       rules:
