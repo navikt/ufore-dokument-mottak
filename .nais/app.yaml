@@ -39,3 +39,5 @@ spec:
       rules:
         - application: logging
           namespace: nais-system
+        - application: saf
+          namespace: teamdokumenthandtering

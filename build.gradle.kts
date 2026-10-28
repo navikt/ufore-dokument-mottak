@@ -20,6 +20,8 @@ dependencies {
     implementation(libs.confluent.avro.serializer)
     implementation(libs.ktor.server.core)
     implementation(libs.ktor.server.netty)
+    implementation(libs.ktor.client.core)
+    implementation(libs.ktor.client.cio)
     implementation(libs.ktor.server.metrics.micrometer)
     implementation(libs.micrometer.prometheus)
     runtimeOnly(libs.logback.classic)

@@ -1,6 +1,8 @@
 package no.nav.uføre
 
 import io.github.oshai.kotlinlogging.KotlinLogging
+import io.ktor.client.HttpClient
+import io.ktor.client.engine.cio.CIO
 import io.ktor.server.engine.embeddedServer
 import io.ktor.server.netty.Netty
 import io.ktor.server.response.respondText
@@ -11,6 +13,7 @@ fun main() {
     val log = KotlinLogging.logger {}
     log.info { "Starter server" }
 
+    val safClient = SafClient(HttpClient(CIO))
     val consumer = KafkaConfig.aivenConsumer()
     JoarkConsumer(consumer).consume()
 
