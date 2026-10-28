@@ -15,7 +15,7 @@ jobs:
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
       - name: Build application jar
-        run: ./gradlew --no-daemon jar
+        run: ./gradlew --no-daemon build
       - name: Build and push image and SBOM to OCI registry
         uses: nais/docker-build-push@dd7421d5068057a020ca46ead966c26190c516b1
         id: docker-build-push
