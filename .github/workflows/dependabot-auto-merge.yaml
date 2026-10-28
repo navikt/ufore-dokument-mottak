@@ -15,12 +15,6 @@ jobs:
         uses: dependabot/fetch-metadata@25dd0e34f4fe68f24cc83900b1fe3fe149efef98
         with:
           github-token: "${{ secrets.GITHUB_TOKEN }}"
-      - name: Check out PR code
-        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
-        with:
-          persist-credentials: false
-      - name: Build and test
-        run: ./gradlew --no-daemon build
       - name: Auto-merge changes from Dependabot
         # allow all major updates if build ok. Uncomment if you want manual approval of major version changes
         # if: steps.metadata.outputs.update-type != 'version-update:semver-major' || steps.metadata.outputs.package-ecosystem == 'github_actions'
