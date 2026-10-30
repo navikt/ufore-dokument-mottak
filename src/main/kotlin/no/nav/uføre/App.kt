@@ -15,7 +15,7 @@ fun main() {
 
     val safClient = SafClient(HttpClient(CIO), TokenClient())
     val consumer = KafkaConfig.aivenConsumer()
-    JoarkConsumer(consumer).consume()
+    JoarkConsumer(consumer, safClient).consume()
 
     embeddedServer(Netty, port = 8080) {
         setupPrometheusMetrics(consumer)
