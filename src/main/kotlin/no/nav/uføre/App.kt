@@ -13,7 +13,7 @@ fun main() {
     val log = KotlinLogging.logger {}
     log.info { "Starter server" }
 
-    val safClient = SafClient(HttpClient(CIO))
+    val safClient = SafClient(HttpClient(CIO), TokenClient())
     val consumer = KafkaConfig.aivenConsumer()
     JoarkConsumer(consumer).consume()
 
