@@ -9,7 +9,7 @@ import org.apache.kafka.clients.consumer.Consumer
 import org.apache.kafka.clients.consumer.ConsumerRecord
 import java.time.Duration
 
-class JoarkConsumer (private val kafkaConsumer: Consumer<String, GenericRecord>) {
+class JoarkConsumer(private val kafkaConsumer: Consumer<String, GenericRecord>, private val safClient: SafClient) {
     val log = KotlinLogging.logger {}
 
     fun consume() {
@@ -19,6 +19,9 @@ class JoarkConsumer (private val kafkaConsumer: Consumer<String, GenericRecord>)
                 meldinger.forEach { melding ->
                     if (skalBehandle(melding)) {
                         log.info { "Fikk melding med nøkkel: ${melding.key()}, verdi: ${melding.value()}" }
+
+                        val journalpostId = JournalpostId(melding.key())
+                        safClient.hentJournalpost(journalpostId)
                     }
                 }
                 kafkaConsumer.commitSync()

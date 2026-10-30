@@ -10,3 +10,8 @@ spec:
       memory: 256Mi
   kafka:
     pool: nav-prod
+  env:
+    - name: SAF_URL
+      value: "https://saf.prod-fss-pub.nais.io/graphql"
+    - name: SAF_SCOPE
+      value: "api://prod-fss.teamdokumenthandtering.saf/.default"

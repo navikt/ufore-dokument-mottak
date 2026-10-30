@@ -13,9 +13,9 @@ fun main() {
     val log = KotlinLogging.logger {}
     log.info { "Starter server" }
 
-    val safClient = SafClient(HttpClient(CIO))
+    val safClient = SafClient(HttpClient(CIO), TokenClient())
     val consumer = KafkaConfig.aivenConsumer()
-    JoarkConsumer(consumer).consume()
+    JoarkConsumer(consumer, safClient).consume()
 
     embeddedServer(Netty, port = 8080) {
         setupPrometheusMetrics(consumer)
