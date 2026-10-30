@@ -13,26 +13,30 @@ class SafClient(private val httpClient: HttpClient, private val tokenClient: Tok
 
     suspend fun hentJournalpost(journalpostId: JournalpostId) {
         val body = """query {
-  journalpost(journalpostId: "$journalpostId") {
-    journalpostId
-    dokumenter {
-      dokumentInfoId
-      tittel
-      dokumentvarianter {
-        variantformat
-        filnavn
-        filtype
-      }
-    }
-  }
-}"""
+          journalpost(journalpostId: "${journalpostId.journalpostId}") {
+            journalpostId
+            dokumenter {
+              dokumentInfoId
+              tittel
+              dokumentvarianter {
+                variantformat
+                filnavn
+                filtype
+              }
+            }
+          }
+        }""".trimIndent()
+
         val response: HttpResponse = httpClient.post(url) {
             contentType(ContentType.Application.Json)
             header(HttpHeaders.Authorization, "Bearer ${tokenClient.hentM2mToken()}")
             setBody(body)
         }
 
-        log.info { "Hentet journalpost ${response}" }
+        val responseBody = response.bodyAsText()
+        val responseStatus = response.status
+
+        log.info { "Hentet journalpost body: $responseBody, status: $responseStatus" }
     }
 
 }
