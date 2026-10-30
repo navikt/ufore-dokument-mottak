@@ -15,3 +15,7 @@ spec:
       value: "https://saf-q2.dev-fss-pub.nais.io/graphql"
     - name: SAF_SCOPE
       value: "api://dev-fss.teamdokumenthandtering.saf/.default"
+  accessPolicy:
+    outbound:
+      external:
+        - host: saf-q2.dev-fss-pub.nais.io
