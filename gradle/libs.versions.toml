@@ -28,6 +28,6 @@ confluent-avro-serializer = { module = "io.confluent:kafka-avro-serializer", ver
 micrometer-prometheus = { module = "io.micrometer:micrometer-registry-prometheus", version.ref = "prometheus" }
 kotlinx-serialization = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinx-serialization" }
 
-
 [plugins]
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version = "2.4.21" }
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version = "2.4.21" }
