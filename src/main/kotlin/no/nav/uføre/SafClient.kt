@@ -5,6 +5,7 @@ import io.ktor.client.*
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
 import io.ktor.http.*
+import kotlinx.serialization.json.Json
 
 class SafClient(private val httpClient: HttpClient, private val tokenClient: TokenClient) {
 
@@ -30,7 +31,7 @@ class SafClient(private val httpClient: HttpClient, private val tokenClient: Tok
         val response: HttpResponse = httpClient.post(url) {
             contentType(ContentType.Application.Json)
             header(HttpHeaders.Authorization, "Bearer ${tokenClient.hentM2mToken()}")
-            setBody(body)
+            setBody(Json.encodeToString(mapOf("query" to body)))
         }
 
         val responseBody = response.bodyAsText()
