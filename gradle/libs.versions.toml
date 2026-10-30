@@ -9,6 +9,7 @@ kafka = "4.4.0"
 avro = "1.12.2"
 confluent = "8.4.0"
 prometheus = "1.17.2"
+kotlinx-serialization = "1.12.0"
 
 [libraries]
 junit-jupiter = { module = "org.junit.jupiter:junit-jupiter", version.ref = "junit-jupiter" }
@@ -25,6 +26,8 @@ kafka-clients = { module = "org.apache.kafka:kafka-clients", version.ref = "kafk
 avro = { module = "org.apache.avro:avro", version.ref = "avro" }
 confluent-avro-serializer = { module = "io.confluent:kafka-avro-serializer", version.ref = "confluent"}
 micrometer-prometheus = { module = "io.micrometer:micrometer-registry-prometheus", version.ref = "prometheus" }
+kotlinx-serialization = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinx-serialization" }
+
 
 [plugins]
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version = "2.4.21" }
