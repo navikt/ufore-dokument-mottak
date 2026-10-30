@@ -24,6 +24,7 @@ dependencies {
     implementation(libs.ktor.client.cio)
     implementation(libs.ktor.server.metrics.micrometer)
     implementation(libs.micrometer.prometheus)
+    implementation(libs.kotlinx.serialization)
     runtimeOnly(libs.logback.classic)
     runtimeOnly(libs.logstash.logback)
 }
