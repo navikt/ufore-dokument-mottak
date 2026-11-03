@@ -12,6 +12,7 @@ repositories {
 dependencies {
     testImplementation(libs.junit.jupiter)
     testImplementation(libs.mockk)
+    testImplementation(libs.ktor.client.mock)
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 
     implementation(libs.kotlin.logging.jvm)
@@ -51,4 +52,6 @@ tasks.jar {
 
 tasks.named<Test>("test") {
     useJUnitPlatform()
+    environment("NAIS_TOKEN_ENDPOINT", "http://localhost/token")
+    environment("SAF_SCOPE", "api://localhost/.default")
 }

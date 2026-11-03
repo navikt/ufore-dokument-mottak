@@ -1,0 +1,47 @@
+{
+  "data": {
+    "journalpost": {
+      "journalpostId": "771888888",
+      "dokumenter": [
+        {
+          "dokumentInfoId": "810878888",
+          "tittel": "Søknad om barnetillegg for deg som har uføretrygd",
+          "dokumentvarianter": [
+            {
+              "variantformat": "ARKIV",
+              "filnavn": "Søknad om barnetillegg for deg som har uføretrygd",
+              "filtype": "PDF"
+            },
+            {
+              "variantformat": "ORIGINAL",
+              "filnavn": "Søknad om barnetillegg for deg som har uføretrygd",
+              "filtype": "JSON"
+            }
+          ]
+        },
+        {
+          "dokumentInfoId": "810877777",
+          "tittel": "Meklingsattest",
+          "dokumentvarianter": [
+            {
+              "variantformat": "ARKIV",
+              "filnavn": "Meklingsattest",
+              "filtype": "PDF"
+            }
+          ]
+        },
+        {
+          "dokumentInfoId": "810876666",
+          "tittel": "Samværsavtale",
+          "dokumentvarianter": [
+            {
+              "variantformat": "ARKIV",
+              "filnavn": "Samværsavtale",
+              "filtype": "PDF"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
