@@ -8,17 +8,20 @@ import io.ktor.server.netty.Netty
 import io.ktor.server.response.respondText
 import io.ktor.server.routing.get
 import io.ktor.server.routing.routing
+import io.micrometer.prometheusmetrics.PrometheusConfig
+import io.micrometer.prometheusmetrics.PrometheusMeterRegistry
 
 fun main() {
     val log = KotlinLogging.logger {}
     log.info { "Starter server" }
 
-    val safClient = SafClient(HttpClient(CIO), TokenClient())
+    val meterRegistry = PrometheusMeterRegistry(PrometheusConfig.DEFAULT)
+    val safClient = SafClient(HttpClient(CIO), TokenClient(), meterRegistry)
     val consumer = KafkaConfig.aivenConsumer()
     JoarkConsumer(consumer, safClient).consume()
 
     embeddedServer(Netty, port = 8080) {
-        setupPrometheusMetrics(consumer)
+        setupPrometheusMetrics(consumer, meterRegistry)
 
         routing {
             get("/isalive") {

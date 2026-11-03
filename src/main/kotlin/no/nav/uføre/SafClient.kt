@@ -5,10 +5,11 @@ import io.ktor.client.*
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
 import io.ktor.http.*
+import io.micrometer.core.instrument.MeterRegistry
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
 
-class SafClient(private val httpClient: HttpClient, private val tokenClient: TokenClient) {
+class SafClient(private val httpClient: HttpClient, private val tokenClient: TokenClient, private val meterRegistry: MeterRegistry) {
 
     val url = System.getenv("SAF_URL") ?: "en lokal URL"
     val log = KotlinLogging.logger {}
@@ -37,6 +38,8 @@ class SafClient(private val httpClient: HttpClient, private val tokenClient: Tok
         }
 
         val responseBody = json.decodeFromString<SafResponse>(response.bodyAsText())
+        val dokumentTittel = responseBody.data.journalpost.dokumenter.first().tittel ?: "Tittel mangler"
+        meterRegistry.counter("ufore_dokument_tittel", "tittel", dokumentTittel).increment()
         val responseStatus = response.status
 
         log.info { "Hentet journalpost body: $responseBody, status: $responseStatus" }
@@ -76,20 +79,35 @@ data class Dokument(
     val dokumentvarianter: List<Dokumentvariant>,
 )
 
+// TODO: slå opp i kodeverk istedenfor hardkoding https://kodeverk.ansatt.nav.no/kodeverk/Variantformater
 enum class Variantformat {
     ARKIV,
     ORIGINAL,
-    SLADDET,
     FULLVERSJON,
     SKANNING_META,
     BREVBESTILLING,
-    PRODUKSJON,
-    PRODUKSJON_DLF
+    PRODUKSJON
+}
+
+// TODO: slå opp i kodeverk istedenfor hardkoding https://kodeverk.ansatt.nav.no/kodeverk/Arkivfiltyper
+enum class Filtype {
+    PDFA,
+    PDF,
+    XML,
+    AXML,
+    JSON,
+    RTF,
+    DLF,
+    XLSX,
+    JPEG,
+    PNG,
+    TIFF,
+    DXML
 }
 
 @Serializable
 data class Dokumentvariant(
     val filnavn: String?,
-    val filtype: String,
+    val filtype: Filtype,
     val variantformat: Variantformat,
 )

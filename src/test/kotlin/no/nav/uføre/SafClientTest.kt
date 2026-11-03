@@ -3,6 +3,7 @@ package no.nav.uføre
 import io.ktor.client.*
 import io.ktor.client.engine.mock.*
 import io.ktor.http.*
+import io.micrometer.core.instrument.simple.SimpleMeterRegistry
 import io.mockk.coEvery
 import io.mockk.mockk
 import org.junit.jupiter.api.Assertions.assertEquals
@@ -10,6 +11,7 @@ import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Test
 
 class SafClientTest {
+    private val meterRegistry = SimpleMeterRegistry()
 
     companion object {
         private val tokenClient = mockk<TokenClient>()
@@ -31,7 +33,7 @@ class SafClientTest {
                 headers = headersOf(HttpHeaders.ContentType, "application/json")
             )
         }
-        val safClient = SafClient(HttpClient(mockEngine), tokenClient)
+        val safClient = SafClient(HttpClient(mockEngine), tokenClient, meterRegistry)
 
         // when
         val response: SafResponse = safClient.hentJournalpost(JournalpostId("1"))
@@ -50,7 +52,7 @@ class SafClientTest {
                 headers = headersOf(HttpHeaders.ContentType, "application/json")
             )
         }
-        val safClient = SafClient(HttpClient(mockEngine), tokenClient)
+        val safClient = SafClient(HttpClient(mockEngine), tokenClient, meterRegistry)
 
         // when
         val response: SafResponse = safClient.hentJournalpost(JournalpostId("1"))
