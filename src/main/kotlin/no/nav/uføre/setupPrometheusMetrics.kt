@@ -11,14 +11,14 @@ import io.micrometer.core.instrument.binder.jvm.JvmGcMetrics
 import io.micrometer.core.instrument.binder.jvm.JvmMemoryMetrics
 import io.micrometer.core.instrument.binder.kafka.KafkaClientMetrics
 import io.micrometer.core.instrument.binder.system.ProcessorMetrics
-import io.micrometer.prometheusmetrics.PrometheusConfig
 import io.micrometer.prometheusmetrics.PrometheusMeterRegistry
 import org.apache.avro.generic.GenericRecord
 import org.apache.kafka.clients.consumer.Consumer
 
-fun Application.setupPrometheusMetrics(consumer: Consumer<String, GenericRecord>) {
-    val meterRegistry = PrometheusMeterRegistry(PrometheusConfig.DEFAULT)
-
+fun Application.setupPrometheusMetrics(
+    consumer: Consumer<String, GenericRecord>,
+    meterRegistry: PrometheusMeterRegistry
+) {
     install(MicrometerMetrics) {
         registry = meterRegistry
         meterBinders = listOf(
