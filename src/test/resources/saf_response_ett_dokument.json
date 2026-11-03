@@ -1,0 +1,25 @@
+{
+  "data": {
+    "journalpost": {
+      "journalpostId": "771899999",
+      "dokumenter": [
+        {
+          "dokumentInfoId": "810899999",
+          "tittel": "Søknad om uføretrygd",
+          "dokumentvarianter": [
+            {
+              "variantformat": "ORIGINAL",
+              "filnavn": "Søknad om uføretrygd",
+              "filtype": "JSON"
+            },
+            {
+              "variantformat": "ARKIV",
+              "filnavn": "Søknad om uføretrygd",
+              "filtype": "PDF"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
