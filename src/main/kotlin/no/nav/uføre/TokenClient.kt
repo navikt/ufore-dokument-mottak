@@ -11,7 +11,7 @@ import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
 
 class TokenClient {
-    val restClient: HttpClient = HttpClient(CIO)
+    private val restClient: HttpClient = HttpClient(CIO)
     private val json = Json { ignoreUnknownKeys = true }
 
     suspend fun hentM2mToken(): String {

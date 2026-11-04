@@ -11,9 +11,10 @@ import io.ktor.server.routing.routing
 import io.micrometer.prometheusmetrics.PrometheusConfig
 import io.micrometer.prometheusmetrics.PrometheusMeterRegistry
 
+private val logger = KotlinLogging.logger {}
+
 fun main() {
-    val log = KotlinLogging.logger {}
-    log.info { "Starter server" }
+    logger.info { "Starter server" }
 
     val meterRegistry = PrometheusMeterRegistry(PrometheusConfig.DEFAULT)
     val safClient = SafClient(HttpClient(CIO), TokenClient(), meterRegistry)

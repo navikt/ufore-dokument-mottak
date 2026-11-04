@@ -9,10 +9,11 @@ import io.micrometer.core.instrument.MeterRegistry
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
 
+private val logger = KotlinLogging.logger {}
+
 class SafClient(private val httpClient: HttpClient, private val tokenClient: TokenClient, private val meterRegistry: MeterRegistry) {
 
-    val url = System.getenv("SAF_URL") ?: "en lokal URL"
-    val log = KotlinLogging.logger {}
+    private val url = System.getenv("SAF_URL") ?: "en lokal URL"
     private val json = Json { ignoreUnknownKeys = true }
 
     suspend fun hentJournalpost(journalpostId: JournalpostId): SafResponse {
@@ -40,9 +41,8 @@ class SafClient(private val httpClient: HttpClient, private val tokenClient: Tok
         val responseBody = json.decodeFromString<SafResponse>(response.bodyAsText())
         val dokumentTittel = responseBody.data.journalpost.dokumenter.first().tittel ?: "Tittel mangler"
         meterRegistry.counter("ufore_dokument_tittel", "tittel", dokumentTittel).increment()
-        val responseStatus = response.status
 
-        log.info { "Hentet journalpost body: $responseBody, status: $responseStatus" }
+        logger.info { "Hentet journalpost body: $responseBody, status: ${response.status}" }
         return responseBody
     }
 
