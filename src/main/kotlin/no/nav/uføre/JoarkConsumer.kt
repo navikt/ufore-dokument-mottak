@@ -3,6 +3,7 @@ package no.nav.uføre
 import io.github.oshai.kotlinlogging.KotlinLogging
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import org.apache.avro.generic.GenericRecord
 import org.apache.kafka.clients.consumer.Consumer
@@ -13,18 +14,22 @@ private val logger = KotlinLogging.logger {}
 
 class JoarkConsumer(private val kafkaConsumer: Consumer<String, GenericRecord>, private val safClient: SafClient) {
 
-    suspend fun consume() {
-        while (true) {
-            val meldinger = kafkaConsumer.poll(Duration.ofSeconds(1))
-            meldinger.forEach { melding ->
-                if (skalBehandle(melding)) {
-                    logger.info { "Fikk melding med nøkkel: ${melding.key()}, verdi: ${melding.value()}" }
+    private val job = Job()
 
-                    val journalpostId = JournalpostId(melding.key())
-                    safClient.hentJournalpost(journalpostId)
+    fun consume() {
+        CoroutineScope(Dispatchers.IO + job).launch {
+            while (job.isActive) {
+                val meldinger = kafkaConsumer.poll(Duration.ofSeconds(1))
+                meldinger.forEach { melding ->
+                    if (skalBehandle(melding)) {
+                        logger.info { "Fikk melding med nøkkel: ${melding.key()}" }
+
+                        val journalpostId = JournalpostId(melding.key())
+                        safClient.hentJournalpost(journalpostId)
+                    }
                 }
+                kafkaConsumer.commitSync()
             }
-            kafkaConsumer.commitSync()
         }
     }
 

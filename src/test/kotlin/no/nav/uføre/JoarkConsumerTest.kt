@@ -31,9 +31,7 @@ class JoarkConsumerTest {
         coEvery { safClient.hentJournalpost(JournalpostId("123")) } just awaits
 
         // when
-        CoroutineScope(Dispatchers.IO).launch {
-            joarkConsumer.consume()
-        }
+        joarkConsumer.consume()
 
         mockConsumer.addRecord(ConsumerRecord("topic", 1, 1, "nøkkel", lagJoarkHendelse(1L, "UFO", "MOTTATT", "kanal")))
 
