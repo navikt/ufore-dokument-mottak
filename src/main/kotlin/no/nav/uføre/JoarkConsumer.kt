@@ -8,6 +8,8 @@ import kotlinx.coroutines.launch
 import org.apache.avro.generic.GenericRecord
 import org.apache.kafka.clients.consumer.Consumer
 import org.apache.kafka.clients.consumer.ConsumerRecord
+import org.apache.kafka.clients.consumer.ConsumerRecords
+import org.apache.kafka.common.TopicPartition
 import java.time.Duration
 
 private val logger = KotlinLogging.logger {}
@@ -18,19 +20,39 @@ class JoarkConsumer(private val kafkaConsumer: Consumer<String, GenericRecord>, 
 
     fun consume() {
         CoroutineScope(Dispatchers.IO + job).launch {
+            // try catch - kafka konsument feiler
             while (job.isActive) {
                 val meldinger = kafkaConsumer.poll(Duration.ofSeconds(1))
-                meldinger.forEach { melding ->
-                    if (skalBehandle(melding)) {
-                        logger.info { "Fikk melding med nøkkel: ${melding.key()}" }
+                håndter(meldinger)
 
-                        val journalpostId = JournalpostId(melding.key())
-                        safClient.hentJournalpost(journalpostId)
-                    }
-                }
-                kafkaConsumer.commitSync()
             }
         }
+    }
+
+    suspend fun håndter(meldinger: ConsumerRecords<String, GenericRecord>) {
+        val offsets = meldinger
+            .groupBy { TopicPartition(it.topic(), it.partition()) }
+            .mapValues { partition -> partition.value.minOf { it.offset() } }
+            .toMutableMap()
+
+        try {
+            meldinger.forEach { melding ->
+                if (skalBehandle(melding)) {
+                    logger.info { "Fikk melding med nøkkel: ${melding.key()}" }
+
+                    val journalpostId = JournalpostId(melding.key())
+                    safClient.hentJournalpost(journalpostId)
+                }
+                offsets[TopicPartition(melding.topic(), melding.partition())] = melding.offset() + 1
+            }
+
+        } catch (e: Exception) {
+            logger.error(e) { "Feil ved håndtering av medling" }
+            offsets.forEach { (partition, offset) -> kafkaConsumer.seek(partition, offset) }
+        } finally {
+            kafkaConsumer.commitSync()
+        }
+
     }
 
     private fun skalBehandle(melding: ConsumerRecord<String, GenericRecord>): Boolean {
