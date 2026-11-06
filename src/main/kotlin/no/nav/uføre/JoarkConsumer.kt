@@ -13,20 +13,18 @@ private val logger = KotlinLogging.logger {}
 
 class JoarkConsumer(private val kafkaConsumer: Consumer<String, GenericRecord>, private val safClient: SafClient) {
 
-    fun consume() {
-        CoroutineScope(Dispatchers.IO).launch {
-            while (true) {
-                val meldinger = kafkaConsumer.poll(Duration.ofSeconds(1))
-                meldinger.forEach { melding ->
-                    if (skalBehandle(melding)) {
-                        logger.info { "Fikk melding med nøkkel: ${melding.key()}, verdi: ${melding.value()}" }
+    suspend fun consume() {
+        while (true) {
+            val meldinger = kafkaConsumer.poll(Duration.ofSeconds(1))
+            meldinger.forEach { melding ->
+                if (skalBehandle(melding)) {
+                    logger.info { "Fikk melding med nøkkel: ${melding.key()}, verdi: ${melding.value()}" }
 
-                        val journalpostId = JournalpostId(melding.key())
-                        safClient.hentJournalpost(journalpostId)
-                    }
+                    val journalpostId = JournalpostId(melding.key())
+                    safClient.hentJournalpost(journalpostId)
                 }
-                kafkaConsumer.commitSync()
             }
+            kafkaConsumer.commitSync()
         }
     }
 

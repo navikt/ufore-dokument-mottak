@@ -10,6 +10,9 @@ import io.ktor.server.routing.get
 import io.ktor.server.routing.routing
 import io.micrometer.prometheusmetrics.PrometheusConfig
 import io.micrometer.prometheusmetrics.PrometheusMeterRegistry
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 private val logger = KotlinLogging.logger {}
 
@@ -19,7 +22,10 @@ fun main() {
     val meterRegistry = PrometheusMeterRegistry(PrometheusConfig.DEFAULT)
     val safClient = SafClient(HttpClient(CIO), TokenClient(), meterRegistry)
     val consumer = KafkaConfig.aivenConsumer()
-    JoarkConsumer(consumer, safClient).consume()
+
+    CoroutineScope(Dispatchers.IO).launch {
+        JoarkConsumer(consumer, safClient).consume()
+    }
 
     embeddedServer(Netty, port = 8080) {
         setupPrometheusMetrics(consumer, meterRegistry)
