@@ -40,8 +40,7 @@ class JoarkConsumer(private val kafkaConsumer: Consumer<String, GenericRecord>, 
                 if (skalBehandle(melding)) {
                     logger.info { "Fikk melding med nøkkel: ${melding.key()}" }
 
-                    val journalpostId = JournalpostId(melding.key())
-                    safClient.hentJournalpost(journalpostId)
+                    safClient.hentJournalpost(melding.key())
                 }
                 offsets[TopicPartition(melding.topic(), melding.partition())] = melding.offset() + 1
             }
