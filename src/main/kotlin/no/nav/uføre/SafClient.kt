@@ -6,8 +6,12 @@ import io.ktor.client.request.*
 import io.ktor.client.statement.*
 import io.ktor.http.*
 import io.micrometer.core.instrument.MeterRegistry
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.JsonElement
+import kotlinx.serialization.json.JsonTransformingSerializer
+import kotlinx.serialization.json.jsonObject
 
 private val logger = KotlinLogging.logger {}
 
@@ -16,9 +20,9 @@ class SafClient(private val httpClient: HttpClient, private val tokenClient: Tok
     private val url = System.getenv("SAF_URL") ?: "en lokal URL"
     private val json = Json { ignoreUnknownKeys = true }
 
-    suspend fun hentJournalpost(journalpostId: JournalpostId): SafResponse {
+    suspend fun hentJournalpost(journalpostId: String): SafResponse {
         val body = """query {
-          journalpost(journalpostId: "${journalpostId.journalpostId}") {
+          journalpost(journalpostId: "$journalpostId") {
             journalpostId
             dokumenter {
               dokumentInfoId
@@ -39,32 +43,28 @@ class SafClient(private val httpClient: HttpClient, private val tokenClient: Tok
         }
 
         val responseBody = json.decodeFromString<SafResponse>(response.bodyAsText())
-        val dokumentTittel = responseBody.data.journalpost.dokumenter.first().tittel ?: "Tittel mangler"
+        val dokumentTittel = responseBody.journalpost.dokumenter.first().tittel ?: "Tittel mangler"
         meterRegistry.counter("ufore_dokument_tittel", "tittel", dokumentTittel).increment()
 
-        logger.info { "Hentet journalpost body: $responseBody, status: ${response.status}" }
+        logger.info { "Hentet journalpost: $dokumentTittel, status: ${response.status}" }
         return responseBody
     }
 
 }
 
-@JvmInline
-value class JournalpostId(val journalpostId: String) {
-    init {
-        require(journalpostId.isNotEmpty()) { "JournalpostId kan ikke være tom" }
-        require(journalpostId.toIntOrNull() != null) { "JournalpostId må være tall" }
-    }
-}
-
 @Serializable
 data class SafResponse(
-    val data: SafData,
-)
-
-@Serializable
-data class SafData(
+    @SerialName("data")
+    @Serializable(with = JournalpostFromDataSerializer::class)
     val journalpost: Journalpost,
 )
+
+object JournalpostFromDataSerializer :
+    JsonTransformingSerializer<Journalpost>(Journalpost.serializer()) {
+
+    override fun transformDeserialize(element: JsonElement): JsonElement =
+        element.jsonObject.getValue("journalpost")
+}
 
 @Serializable
 data class Journalpost(
