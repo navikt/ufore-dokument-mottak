@@ -18,7 +18,7 @@ dependencies {
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
     testImplementation("io.kotest:kotest-assertions-core-jvm:6.2.6")
 
-    implementation("io.github.oshai:kotlin-logging-jvm:8.0.4")
+    implementation("io.github.oshai:kotlin-logging-jvm:8.0.6")
     implementation("org.apache.kafka:kafka-clients:8.4.0-ccs")
     implementation("org.apache.avro:avro:1.12.2")
     implementation("io.confluent:kafka-avro-serializer:8.4.0")
