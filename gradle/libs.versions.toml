@@ -10,6 +10,7 @@ avro = "1.12.2"
 confluent = "8.4.0"
 prometheus = "1.17.2"
 kotlinx-serialization = "1.12.0"
+kotest = "6.2.6"
 
 [libraries]
 junit-jupiter = { module = "org.junit.jupiter:junit-jupiter", version.ref = "junit-jupiter" }
@@ -28,6 +29,7 @@ avro = { module = "org.apache.avro:avro", version.ref = "avro" }
 confluent-avro-serializer = { module = "io.confluent:kafka-avro-serializer", version.ref = "confluent"}
 micrometer-prometheus = { module = "io.micrometer:micrometer-registry-prometheus", version.ref = "prometheus" }
 kotlinx-serialization = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinx-serialization" }
+kotest-assertions-core = { group = "io.kotest", name = "kotest-assertions-core-jvm", version.ref = "kotest" }
 
 [plugins]
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version = "2.4.21" }

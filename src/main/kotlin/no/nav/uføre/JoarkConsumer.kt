@@ -21,6 +21,7 @@ class JoarkConsumer(private val kafkaConsumer: Consumer<String, GenericRecord>, 
     fun consume() {
         CoroutineScope(Dispatchers.IO + job).launch {
             // try catch - kafka konsument feiler
+
             while (job.isActive) {
                 val meldinger = kafkaConsumer.poll(Duration.ofSeconds(1))
                 håndter(meldinger)
@@ -47,11 +48,14 @@ class JoarkConsumer(private val kafkaConsumer: Consumer<String, GenericRecord>, 
         } catch (e: Exception) {
             logger.error(e) { "Feil ved håndtering av medling" }
             offsets.forEach { (partition, offset) -> kafkaConsumer.seek(partition, offset) }
+            throw e
         } finally {
             kafkaConsumer.commitSync()
         }
 
     }
+
+    fun isAlive(): Boolean = job.isActive
 
     private fun skalBehandle(melding: ConsumerRecord<String, GenericRecord>): Boolean {
         val tema = melding.value().get("temaNytt")

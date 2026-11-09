@@ -1,5 +1,6 @@
 package no.nav.uføre
 
+import io.kotest.assertions.nondeterministic.eventually
 import io.mockk.coEvery
 import io.mockk.mockk
 import kotlinx.coroutines.delay
@@ -10,6 +11,7 @@ import org.apache.kafka.clients.consumer.MockConsumer
 import org.apache.kafka.common.TopicPartition
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
+import kotlin.time.Duration.Companion.seconds
 
 class JoarkConsumerTest {
 
@@ -62,6 +64,31 @@ class JoarkConsumerTest {
 
         val actual = mockConsumer.committed(setOf(topicPartition))
         assertEquals(1, actual[topicPartition]?.offset())
+    }
+
+    @Test
+    fun `hvis meldingshåndtering kaster feil så skal jobben bli stoppet`() {
+        // given
+        val journalpostId = "123"
+        val topicPartition = TopicPartition("topic", 1).apply { }
+        val mockConsumer = MockConsumer<String, GenericRecord>("earliest").apply {
+            updateBeginningOffsets(mapOf(topicPartition to 1))
+            assign(listOf(topicPartition))
+        }
+        val safClient = mockk<SafClient>()
+        val joarkConsumer = JoarkConsumer(mockConsumer, safClient)
+
+        coEvery { safClient.hentJournalpost(journalpostId) } throws Exception("Feil")
+
+        // when
+        mockConsumer.addRecord(ConsumerRecord("topic", 1, 1, journalpostId, lagJoarkHendelse(journalpostId.toLong(), "UFO", "JournalpostMottatt", "kanal")))
+        joarkConsumer.consume()
+
+        runBlocking {
+            eventually(duration = 5.seconds) {
+                assertEquals(false, joarkConsumer.isAlive())
+            }
+        }
     }
 
 }

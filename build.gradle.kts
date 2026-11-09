@@ -14,6 +14,7 @@ dependencies {
     testImplementation(libs.mockk)
     testImplementation(libs.ktor.client.mock)
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+    testImplementation(libs.kotest.assertions.core)
 
     implementation(libs.kotlin.logging.jvm)
     implementation(libs.kafka.clients)

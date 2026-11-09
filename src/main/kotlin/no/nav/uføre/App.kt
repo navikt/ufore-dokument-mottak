@@ -1,18 +1,15 @@
 package no.nav.uføre
 
 import io.github.oshai.kotlinlogging.KotlinLogging
-import io.ktor.client.HttpClient
-import io.ktor.client.engine.cio.CIO
-import io.ktor.server.engine.embeddedServer
-import io.ktor.server.netty.Netty
-import io.ktor.server.response.respondText
-import io.ktor.server.routing.get
-import io.ktor.server.routing.routing
+import io.ktor.client.*
+import io.ktor.client.engine.cio.*
+import io.ktor.http.*
+import io.ktor.server.engine.*
+import io.ktor.server.netty.*
+import io.ktor.server.response.*
+import io.ktor.server.routing.*
 import io.micrometer.prometheusmetrics.PrometheusConfig
 import io.micrometer.prometheusmetrics.PrometheusMeterRegistry
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 private val logger = KotlinLogging.logger {}
 
@@ -23,14 +20,20 @@ fun main() {
     val safClient = SafClient(HttpClient(CIO), TokenClient(), meterRegistry)
     val consumer = KafkaConfig.aivenConsumer()
 
-    JoarkConsumer(consumer, safClient).consume()
+    val joarkConsumer = JoarkConsumer(consumer, safClient)
+
+    joarkConsumer.consume()
 
     embeddedServer(Netty, port = 8080) {
         setupPrometheusMetrics(consumer, meterRegistry)
 
         routing {
             get("/isalive") {
-                call.respondText("ok")
+                if (joarkConsumer.isAlive()) {
+                    call.respondText("ok")
+                } else {
+                    call.respondText("ERROR", status = HttpStatusCode.ServiceUnavailable)
+                }
             }
             get("/isready") {
                 call.respondText("ok")
