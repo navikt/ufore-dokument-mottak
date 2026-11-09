@@ -24,7 +24,6 @@ class JoarkConsumer(private val kafkaConsumer: Consumer<String, GenericRecord>, 
             while (job.isActive) {
                 val meldinger = kafkaConsumer.poll(Duration.ofSeconds(1))
                 håndter(meldinger)
-
             }
         }
     }
@@ -56,8 +55,8 @@ class JoarkConsumer(private val kafkaConsumer: Consumer<String, GenericRecord>, 
 
     private fun skalBehandle(melding: ConsumerRecord<String, GenericRecord>): Boolean {
         val tema = melding.value().get("temaNytt")
-        val journalpostStatus = melding.value().get("journalpostStatus")
+        val hendelsesType = melding.value().get("hendelsesType")
         val mottaksKanal = melding.value().get("mottaksKanal")
-        return tema == "UFO" && journalpostStatus == "MOTTATT" && mottaksKanal != "EESSI"
+        return tema == "UFO" && hendelsesType == "JournalpostMottatt" && mottaksKanal != "EESSI"
     }
 }

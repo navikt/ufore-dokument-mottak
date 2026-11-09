@@ -1,13 +1,8 @@
 package no.nav.uføre
 
-import io.mockk.awaits
 import io.mockk.coEvery
-import io.mockk.just
 import io.mockk.mockk
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import org.apache.avro.generic.GenericRecord
 import org.apache.kafka.clients.consumer.ConsumerRecord
@@ -17,9 +12,11 @@ import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
 class JoarkConsumerTest {
+
     @Test
-    fun `hvis meldingshåndtering kjører uten feil så skal offsett committes`() {
+    fun `hvis meldingshåndtering kjører uten feil så skal vi committe neste offset`() {
         // given
+        val journalpostId = "123"
         val topicPartition = TopicPartition("topic", 1).apply {  }
         val mockConsumer = MockConsumer<String, GenericRecord>("earliest").apply {
             updateBeginningOffsets(mapOf(topicPartition to 1))
@@ -28,18 +25,43 @@ class JoarkConsumerTest {
         val safClient = mockk<SafClient>()
         val joarkConsumer = JoarkConsumer(mockConsumer, safClient)
 
-        coEvery { safClient.hentJournalpost("123") } just awaits
+        coEvery { safClient.hentJournalpost(journalpostId) } returns SafResponse(Journalpost(journalpostId, emptyList()))
 
         // when
         joarkConsumer.consume()
 
-        mockConsumer.addRecord(ConsumerRecord("topic", 1, 1, "nøkkel", lagJoarkHendelse(1L, "UFO", "MOTTATT", "kanal")))
+        mockConsumer.addRecord(ConsumerRecord("topic", 1, 1, journalpostId, lagJoarkHendelse(journalpostId.toLong(), "UFO", "JournalpostMottatt", "kanal")))
 
         runBlocking { delay(500) }
 
         // then
         val actual = mockConsumer.committed(setOf(topicPartition))
         assertEquals(2, actual[topicPartition]?.offset())
+    }
+
+    @Test
+    fun `hvis meldingshåndtering kaster feil så skal vi ikke oppdatere offset`() {
+        // given
+        val journalpostId = "123"
+        val topicPartition = TopicPartition("topic", 1).apply {  }
+        val mockConsumer = MockConsumer<String, GenericRecord>("earliest").apply {
+            updateBeginningOffsets(mapOf(topicPartition to 1))
+            assign(listOf(topicPartition))
+        }
+        val safClient = mockk<SafClient>()
+        val joarkConsumer = JoarkConsumer(mockConsumer, safClient)
+
+        coEvery { safClient.hentJournalpost(journalpostId) } throws Exception("Feil")
+
+        // when
+        joarkConsumer.consume()
+
+        mockConsumer.addRecord(ConsumerRecord("topic", 1, 1, journalpostId, lagJoarkHendelse(journalpostId.toLong(), "UFO", "JournalpostMottatt", "kanal")))
+
+        runBlocking { delay(500) }
+
+        val actual = mockConsumer.committed(setOf(topicPartition))
+        assertEquals(1, actual[topicPartition]?.offset())
     }
 
 }
