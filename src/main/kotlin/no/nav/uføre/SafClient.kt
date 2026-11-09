@@ -73,7 +73,7 @@ object JournalpostFromDataSerializer :
 data class Journalpost(
     val journalpostId: String,
     val behandlingstema: String?,
-    val behandlingstemaNavn: String?,
+    val behandlingstemanavn: String?,
     val dokumenter: List<Dokument>,
 )
 
