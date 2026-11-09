@@ -72,8 +72,8 @@ object JournalpostFromDataSerializer :
 @Serializable
 data class Journalpost(
     val journalpostId: String,
-    val behandlingstema: String,
-    val behandlingstemaNavn: String,
+    val behandlingstema: String?,
+    val behandlingstemaNavn: String?,
     val dokumenter: List<Dokument>,
 )
 
@@ -81,7 +81,7 @@ data class Journalpost(
 data class Dokument(
     val dokumentInfoId: String,
     val tittel: String?,
-    val brevkode: String,
+    val brevkode: String?,
     val dokumentvarianter: List<Dokumentvariant>,
 )
 
