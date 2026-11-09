@@ -2,10 +2,13 @@
   "data": {
     "journalpost": {
       "journalpostId": "771899999",
+      "behandlingstema": "foo",
+      "behandlingstemaNavn": "bar",
       "dokumenter": [
         {
           "dokumentInfoId": "810899999",
           "tittel": "Søknad om uføretrygd",
+          "brevkode": "NAV-12.06.05",
           "dokumentvarianter": [
             {
               "variantformat": "ORIGINAL",

@@ -2,10 +2,13 @@
   "data": {
     "journalpost": {
       "journalpostId": "771888888",
+      "behandlingstema": "foo",
+      "behandlingstemaNavn": "bar",
       "dokumenter": [
         {
           "dokumentInfoId": "810878888",
           "tittel": "Søknad om barnetillegg for deg som har uføretrygd",
+          "brevkode": "NAV-12.06.05",
           "dokumentvarianter": [
             {
               "variantformat": "ARKIV",
@@ -22,6 +25,7 @@
         {
           "dokumentInfoId": "810877777",
           "tittel": "Meklingsattest",
+          "brevkode": "noe",
           "dokumentvarianter": [
             {
               "variantformat": "ARKIV",
@@ -33,6 +37,7 @@
         {
           "dokumentInfoId": "810876666",
           "tittel": "Samværsavtale",
+          "brevkode": "noe",
           "dokumentvarianter": [
             {
               "variantformat": "ARKIV",

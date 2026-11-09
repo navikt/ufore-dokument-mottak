@@ -27,7 +27,7 @@ class JoarkConsumerTest {
         val safClient = mockk<SafClient>()
         val joarkConsumer = JoarkConsumer(mockConsumer, safClient)
 
-        coEvery { safClient.hentJournalpost(journalpostId) } returns SafResponse(Journalpost(journalpostId, emptyList()))
+        coEvery { safClient.hentJournalpost(journalpostId) } returns SafResponse(Journalpost(journalpostId, "", "",emptyList()))
 
         // when
         joarkConsumer.consume()
