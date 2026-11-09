@@ -3,7 +3,7 @@
     "journalpost": {
       "journalpostId": "771899999",
       "behandlingstema": "foo",
-      "behandlingstemaNavn": "bar",
+      "behandlingstemanavn": "bar",
       "dokumenter": [
         {
           "dokumentInfoId": "810899999",
