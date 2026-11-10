@@ -10,8 +10,9 @@ import org.apache.kafka.clients.consumer.ConsumerRecord
 import org.apache.kafka.clients.consumer.MockConsumer
 import org.apache.kafka.common.TopicPartition
 import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
+import java.time.Duration
 import kotlin.time.Duration.Companion.seconds
 
 class JoarkConsumerTest {
@@ -60,13 +61,16 @@ class JoarkConsumerTest {
         joarkConsumer.consume()
 
         mockConsumer.addRecord(ConsumerRecord("topic", 1, 1, journalpostId, lagJoarkHendelse(journalpostId.toLong(), "UFO", "JournalpostMottatt", "kanal")))
+        val meldinger = mockConsumer.poll(Duration.ZERO)
 
-        runBlocking { delay(500) }
+        assertThrows<Exception> {
+            runBlocking {
+                joarkConsumer.håndter(meldinger)
+            }
+        }
 
-//        val actual = mockConsumer.committed(setOf(topicPartition))
-//        assertEquals(1, actual[topicPartition]?.offset())
-
-        assertTrue(mockConsumer.closed())
+        val actual = mockConsumer.committed(setOf(topicPartition))
+        assertEquals(1L, actual[topicPartition]?.offset())
     }
 
     @Test
@@ -93,5 +97,6 @@ class JoarkConsumerTest {
             }
         }
     }
+
 
 }
