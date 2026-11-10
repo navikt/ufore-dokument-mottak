@@ -10,21 +10,29 @@ import org.apache.kafka.clients.consumer.Consumer
 import org.apache.kafka.clients.consumer.ConsumerRecord
 import org.apache.kafka.clients.consumer.ConsumerRecords
 import org.apache.kafka.common.TopicPartition
+import org.apache.kafka.common.errors.WakeupException
 import java.time.Duration
 
 private val logger = KotlinLogging.logger {}
 
-class JoarkConsumer(private val kafkaConsumer: Consumer<String, GenericRecord>, private val safClient: SafClient) {
+class JoarkConsumer(private val consumer: Consumer<String, GenericRecord>, private val safClient: SafClient) {
 
     private val job = Job()
 
-    fun consume() {
-        CoroutineScope(Dispatchers.IO + job).launch {
-            // try catch - kafka konsument feiler
+    init {
+        Runtime.getRuntime().addShutdownHook(Thread(::stop))
+    }
 
-            while (job.isActive) {
-                val meldinger = kafkaConsumer.poll(Duration.ofSeconds(1))
-                håndter(meldinger)
+    fun start() {
+        CoroutineScope(Dispatchers.IO + job).launch {
+            try {
+                while (job.isActive) {
+                    val meldinger = consumer.poll(Duration.ofSeconds(1))
+                    håndter(meldinger)
+                }
+            } catch (ex: WakeupException) {
+            } finally {
+                shutdown()
             }
         }
     }
@@ -47,15 +55,25 @@ class JoarkConsumer(private val kafkaConsumer: Consumer<String, GenericRecord>, 
 
         } catch (e: Exception) {
             logger.error(e) { "Feil ved håndtering av medling" }
-            offsets.forEach { (partition, offset) -> kafkaConsumer.seek(partition, offset) }
+            offsets.forEach { (partition, offset) -> consumer.seek(partition, offset) }
             throw e
         } finally {
-            kafkaConsumer.commitSync()
+            consumer.commitSync()
         }
 
     }
 
     fun isAlive(): Boolean = job.isActive
+
+    fun stop() {
+        consumer.wakeup()
+        job.cancel()
+    }
+
+    fun shutdown() {
+        consumer.unsubscribe()
+        consumer.close()
+    }
 
     private fun skalBehandle(melding: ConsumerRecord<String, GenericRecord>): Boolean {
         val tema = melding.value().get("temaNytt")

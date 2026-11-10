@@ -10,7 +10,11 @@ import org.apache.kafka.clients.consumer.ConsumerRecord
 import org.apache.kafka.clients.consumer.MockConsumer
 import org.apache.kafka.common.TopicPartition
 import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertFalse
+import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
+import java.time.Duration
 import kotlin.time.Duration.Companion.seconds
 
 class JoarkConsumerTest {
@@ -30,7 +34,7 @@ class JoarkConsumerTest {
         coEvery { safClient.hentJournalpost(journalpostId) } returns SafResponse(Journalpost(journalpostId, "", "",emptyList()))
 
         // when
-        joarkConsumer.consume()
+        joarkConsumer.start()
 
         mockConsumer.addRecord(ConsumerRecord("topic", 1, 1, journalpostId, lagJoarkHendelse(journalpostId.toLong(), "UFO", "JournalpostMottatt", "kanal")))
 
@@ -56,21 +60,26 @@ class JoarkConsumerTest {
         coEvery { safClient.hentJournalpost(journalpostId) } throws Exception("Feil")
 
         // when
-        joarkConsumer.consume()
+        joarkConsumer.start()
 
         mockConsumer.addRecord(ConsumerRecord("topic", 1, 1, journalpostId, lagJoarkHendelse(journalpostId.toLong(), "UFO", "JournalpostMottatt", "kanal")))
+        val meldinger = mockConsumer.poll(Duration.ZERO)
 
-        runBlocking { delay(500) }
+        assertThrows<Exception> {
+            runBlocking {
+                joarkConsumer.håndter(meldinger)
+            }
+        }
 
         val actual = mockConsumer.committed(setOf(topicPartition))
-        assertEquals(1, actual[topicPartition]?.offset())
+        assertEquals(1L, actual[topicPartition]?.offset())
     }
 
     @Test
     fun `hvis meldingshåndtering kaster feil så skal jobben bli stoppet`() {
         // given
         val journalpostId = "123"
-        val topicPartition = TopicPartition("topic", 1).apply { }
+        val topicPartition = TopicPartition("topic", 1)
         val mockConsumer = MockConsumer<String, GenericRecord>("earliest").apply {
             updateBeginningOffsets(mapOf(topicPartition to 1))
             assign(listOf(topicPartition))
@@ -82,13 +91,15 @@ class JoarkConsumerTest {
 
         // when
         mockConsumer.addRecord(ConsumerRecord("topic", 1, 1, journalpostId, lagJoarkHendelse(journalpostId.toLong(), "UFO", "JournalpostMottatt", "kanal")))
-        joarkConsumer.consume()
+        joarkConsumer.start()
 
         runBlocking {
             eventually(duration = 5.seconds) {
-                assertEquals(false, joarkConsumer.isAlive())
+                assertFalse(joarkConsumer.isAlive())
+                assertTrue(mockConsumer.closed())
             }
         }
     }
+
 
 }

@@ -22,7 +22,7 @@ fun main() {
 
     val joarkConsumer = JoarkConsumer(consumer, safClient)
 
-    joarkConsumer.consume()
+    joarkConsumer.start()
 
     embeddedServer(Netty, port = 8080) {
         setupPrometheusMetrics(consumer, meterRegistry)
