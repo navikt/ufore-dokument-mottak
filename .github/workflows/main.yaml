@@ -22,6 +22,17 @@ jobs:
         with:
           team: ufore
 
+      - name: "Send slack-notifikasjon om bygget feiler"
+        if: ${{ failure() }}
+        run: |
+          PAYLOAD="payload={ \"attachments\": [{\"color\": \"danger\", \"text\": \"*Bygg av ufore-dokument-mottak før deploy feilet* :broken_heart: \nAnsvarlig: \${slack_id}\nCommit: <https://github.com/navikt/ufore-dokument-mottak/commit/$GITHUB_SHA|$GITHUB_SHA>\" }] }"
+          chmod +x "${GITHUB_WORKSPACE}/.github/notify-slack.sh"
+          "${GITHUB_WORKSPACE}/.github/notify-slack.sh" "${SSH_KEY}" "${AUTHOR}" "${PAYLOAD}" "${WEBHOOK_URL}"
+        env:
+          SSH_KEY: ${{ secrets.SSH_KEY_NOTIFY_TO_SLACK }}
+          AUTHOR: ${{ github.actor }}
+          WEBHOOK_URL: ${{ secrets.SLACK_INCOMING_WEBHOOK_URL }}
+
   deploy:
     name: Deploy
     needs: build
@@ -46,3 +57,14 @@ jobs:
             --environment prod-gcp \
             --set spec.image="${{ needs.build.outputs.image }}" \
             --wait
+
+      - name: "Send slack-notifikasjon om deploy feiler"
+        if: ${{ failure() }}
+        run: |
+          PAYLOAD="payload={ \"attachments\": [{\"color\": \"danger\", \"text\": \"*Deploy av ufore-dokument-mottak feilet* :bomb: \nAnsvarlig: \${slack_id}\nCommit: <https://github.com/navikt/ufore-dokument-mottak/commit/$GITHUB_SHA|$GITHUB_SHA>\" }] }"
+          chmod +x "${GITHUB_WORKSPACE}/.github/notify-slack.sh"
+          "${GITHUB_WORKSPACE}/.github/notify-slack.sh" "${SSH_KEY}" "${AUTHOR}" "${PAYLOAD}" "${WEBHOOK_URL}"
+        env:
+          SSH_KEY: ${{ secrets.SSH_KEY_NOTIFY_TO_SLACK }}
+          AUTHOR: ${{ github.actor }}
+          WEBHOOK_URL: ${{ secrets.SLACK_INCOMING_WEBHOOK_URL }}
