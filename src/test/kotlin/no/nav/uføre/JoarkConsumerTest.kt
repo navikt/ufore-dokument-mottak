@@ -9,6 +9,7 @@ import org.apache.avro.generic.GenericRecord
 import org.apache.kafka.clients.consumer.ConsumerRecord
 import org.apache.kafka.clients.consumer.MockConsumer
 import org.apache.kafka.common.TopicPartition
+import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertFalse
 import org.junit.jupiter.api.Assertions.assertTrue
@@ -36,6 +37,11 @@ class JoarkConsumerTest {
             assign(listOf(topicPartition))
         }
         joarkConsumer = JoarkConsumer(mockConsumer, safClient)
+    }
+
+    @AfterEach
+    fun ryddOpp() = runBlocking {
+        joarkConsumer.stop()
     }
 
     @Test
