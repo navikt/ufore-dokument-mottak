@@ -10,6 +10,8 @@ import org.apache.kafka.clients.consumer.ConsumerRecord
 import org.apache.kafka.clients.consumer.MockConsumer
 import org.apache.kafka.common.TopicPartition
 import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertFalse
+import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import java.time.Duration
@@ -32,7 +34,7 @@ class JoarkConsumerTest {
         coEvery { safClient.hentJournalpost(journalpostId) } returns SafResponse(Journalpost(journalpostId, "", "",emptyList()))
 
         // when
-        joarkConsumer.consume()
+        joarkConsumer.start()
 
         mockConsumer.addRecord(ConsumerRecord("topic", 1, 1, journalpostId, lagJoarkHendelse(journalpostId.toLong(), "UFO", "JournalpostMottatt", "kanal")))
 
@@ -58,7 +60,7 @@ class JoarkConsumerTest {
         coEvery { safClient.hentJournalpost(journalpostId) } throws Exception("Feil")
 
         // when
-        joarkConsumer.consume()
+        joarkConsumer.start()
 
         mockConsumer.addRecord(ConsumerRecord("topic", 1, 1, journalpostId, lagJoarkHendelse(journalpostId.toLong(), "UFO", "JournalpostMottatt", "kanal")))
         val meldinger = mockConsumer.poll(Duration.ZERO)
@@ -89,11 +91,12 @@ class JoarkConsumerTest {
 
         // when
         mockConsumer.addRecord(ConsumerRecord("topic", 1, 1, journalpostId, lagJoarkHendelse(journalpostId.toLong(), "UFO", "JournalpostMottatt", "kanal")))
-        joarkConsumer.consume()
+        joarkConsumer.start()
 
         runBlocking {
             eventually(duration = 5.seconds) {
-                assertEquals(false, joarkConsumer.isAlive())
+                assertFalse(joarkConsumer.isAlive())
+                assertTrue(mockConsumer.closed())
             }
         }
     }

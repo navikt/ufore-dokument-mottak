@@ -23,7 +23,7 @@ class JoarkConsumer(private val consumer: Consumer<String, GenericRecord>, priva
         Runtime.getRuntime().addShutdownHook(Thread(::stop))
     }
 
-    fun consume() {
+    fun start() {
         CoroutineScope(Dispatchers.IO + job).launch {
             try {
                 while (job.isActive) {
@@ -32,7 +32,7 @@ class JoarkConsumer(private val consumer: Consumer<String, GenericRecord>, priva
                 }
             } catch (ex: WakeupException) {
             } finally {
-                close()
+                shutdown()
             }
         }
     }
@@ -70,7 +70,7 @@ class JoarkConsumer(private val consumer: Consumer<String, GenericRecord>, priva
         job.cancel()
     }
 
-    fun close() {
+    fun shutdown() {
         consumer.unsubscribe()
         consumer.close()
     }
