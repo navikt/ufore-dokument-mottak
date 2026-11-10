@@ -13,7 +13,7 @@ val ktorVersjon = "3.6.1"
 
 dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter:6.1.3")
-    testImplementation("io.mockk:mockk:1.14.11")
+    testImplementation("io.mockk:mockk:1.14.12")
     testImplementation("io.ktor:ktor-client-mock:$ktorVersjon")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
     testImplementation("io.kotest:kotest-assertions-core-jvm:6.2.6")
