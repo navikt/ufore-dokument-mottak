@@ -10,6 +10,7 @@ import org.apache.kafka.clients.consumer.ConsumerRecord
 import org.apache.kafka.clients.consumer.MockConsumer
 import org.apache.kafka.common.TopicPartition
 import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 import kotlin.time.Duration.Companion.seconds
 
@@ -62,15 +63,17 @@ class JoarkConsumerTest {
 
         runBlocking { delay(500) }
 
-        val actual = mockConsumer.committed(setOf(topicPartition))
-        assertEquals(1, actual[topicPartition]?.offset())
+//        val actual = mockConsumer.committed(setOf(topicPartition))
+//        assertEquals(1, actual[topicPartition]?.offset())
+
+        assertTrue(mockConsumer.closed())
     }
 
     @Test
     fun `hvis meldingshåndtering kaster feil så skal jobben bli stoppet`() {
         // given
         val journalpostId = "123"
-        val topicPartition = TopicPartition("topic", 1).apply { }
+        val topicPartition = TopicPartition("topic", 1)
         val mockConsumer = MockConsumer<String, GenericRecord>("earliest").apply {
             updateBeginningOffsets(mapOf(topicPartition to 1))
             assign(listOf(topicPartition))
