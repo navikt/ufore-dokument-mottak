@@ -46,10 +46,9 @@ class SafClient(private val httpClient: HttpClient, private val tokenClient: Tok
         }
 
         val responseBody = json.decodeFromString<SafResponse>(response.bodyAsText())
-        val dokumentTittel = responseBody.journalpost.dokumenter.first().tittel ?: "Tittel mangler"
-        meterRegistry.counter("ufore_dokument_tittel", "tittel", dokumentTittel).increment()
-
-        logger.info { "Hentet journalpost: $responseBody, status: ${response.status}" }
+//        val dokumentTittel = responseBody.journalpost.dokumenter.first().tittel ?: "Tittel mangler"
+//        meterRegistry.counter("ufore_dokument_tittel", "tittel", dokumentTittel).increment()
+//        logger.info { "Hentet journalpost: $responseBody, status: ${response.status}" }
         return responseBody
     }
 
