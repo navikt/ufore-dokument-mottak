@@ -66,7 +66,6 @@ class JoarkConsumerTest {
         coEvery { safClient.hentJournalpost(journalpostId) } throws Exception("Feil")
 
         // when
-        joarkConsumer.start()
         mockConsumer.addRecord(ConsumerRecord("topic", 1, 1, journalpostId, joarkHendelse))
 
         val meldinger = mockConsumer.poll(Duration.ZERO)
