@@ -1,0 +1,59 @@
+flowchart LR
+    %% Vedleggsregler fra søknaden-vår.json, revisjon 74.
+    %% Dette er et avhengighetsdiagram. Vilkårene vurderes uavhengig.
+    %% Flere vedlegg kan vises samtidig. Minst ett barn betyr en hvilken som helst datagrid-rad.
+
+    subgraph Svar["Svar som styrer vedlegg"]
+        BarnNummer["Minst ett barn uten norsk fødselsnummer/d-nummer"]
+        BarnBilde["Minst ett barn har legitimasjon med bilde"]
+        Bidrag["Minst ett barn: nei til bidrag via Nav"]
+        EktefelleNummer["Ektefelle/partner har ikke norsk fødselsnummer/d-nummer"]
+        SamboerNummer["Samboer har ikke norsk fødselsnummer/d-nummer"]
+        Jobbe["Ja til å jobbe ved siden av uføretrygden"]
+        FirmaVedlegg["Valgt eget vedlegg med opplysninger om arbeidsforhold"]
+        Gaard["Ja til å drive gårdsbruk"]
+        Firma["Ja til eget firma"]
+        Avsluttet["Ja til avsluttet næringsvirksomhet"]
+        Avtalt["Ja til avtalt ekstra dokumentasjon med Nav"]
+    end
+
+    subgraph Dokumenter["Side 16: Betingede vedlegg"]
+        Attest["Kopi av fødselsattest"]
+        Legitimasjon["Kopi av barnets legitimasjon"]
+        Avtale["Forsørgelses- eller samværsavtale"]
+        EktefellePass["Pass eller vigselsattest til ektefelle/partner"]
+        SamboerPass["Pass til samboer"]
+        Loenn["Kopi av siste lønnslipp"]
+        Arbeidsforhold["Informasjon om firma og arbeidsforhold"]
+        GaardSkjema["Inntektsskjema for gårdbrukere<br/>NAV 12-06.09"]
+        FirmaSkjema["Inntektsskjema for næringsdrivende<br/>og ansatt i eget aksjeselskap<br/>NAV 12-06.07"]
+        Avslutning["Dokumentasjon på avsluttet næringsvirksomhet"]
+        Ekstra["Dokumentasjon som er avtalt med Nav"]
+    end
+
+    BarnNummer --> Attest
+    BarnBilde --> Legitimasjon
+    Bidrag --> Avtale
+    EktefelleNummer --> EktefellePass
+    SamboerNummer --> SamboerPass
+    Jobbe --> Loenn
+    FirmaVedlegg --> Arbeidsforhold
+    Gaard --> GaardSkjema
+    Firma --> FirmaSkjema
+    Avsluttet --> Avslutning
+    Avtalt --> Ekstra
+
+    Attest --> Standard
+    Legitimasjon --> Standard
+    Avtale --> Standard
+    EktefellePass --> Standard
+    SamboerPass --> Standard
+    Loenn --> Standard
+    GaardSkjema --> Standard
+    FirmaSkjema --> Standard
+    Avslutning --> Standard
+    Ekstra --> Standard["Velg for hvert synlig vedlegg:<br/>Legg ved nå, ettersend eller levert tidligere"]
+    Arbeidsforhold --> FirmaValg["Velg: legg ved nå eller ettersend"]
+
+    Alltid["Vises uavhengig av svarene"] --> Annet["Annen dokumentasjon"]
+    Annet --> AnnetValg["Velg: nei eller legg ved nå"]

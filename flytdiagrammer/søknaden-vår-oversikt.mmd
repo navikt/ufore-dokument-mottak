@@ -1,0 +1,28 @@
+flowchart LR
+    %% Forenklet sideflyt fra søknaden-vår.json, revisjon 74.
+    %% Spørsmål inne på sidene er utelatt, bortsett fra de som styrer sidevalg.
+    Start(["Søknad om uføretrygd"])
+    Start --> Situasjon["1. Din situasjon"]
+    Situasjon --> Person["2. Dine opplysninger"]
+    Person --> Status{"3. Sivilstatus"}
+    Status -->|Gift eller partner| Ektefelle["4. Ektefelle eller partner"]
+    Status -->|Samboer| Samboer["5. Samboer"]
+    Status -->|Andre svar| Arbeid["6. Arbeid"]
+    Ektefelle --> Arbeid
+    Samboer --> Arbeid
+    Arbeid --> Utland["7. Utenlandsopphold"]
+    Utland --> Skade["8. Yrkesskade og yrkessykdom"]
+    Skade --> Barn{"9. Barn under 18 år?<br/>Registrer barn ved ja"}
+    Barn -->|Ja| Egen["10. Egen inntekt"]
+    Egen --> EktefelleForelder{"Ektefelle/partner er forelder<br/>til barnet det søkes barnetillegg for?"}
+    EktefelleForelder -->|Ja| EktefelleInntekt["11. Ektefelles eller partners inntekt"]
+    EktefelleForelder -->|Nei eller ikke aktuelt| SamboerForelder
+    EktefelleInntekt --> SamboerForelder{"Samboer er forelder<br/>til barnet det søkes barnetillegg for?"}
+    SamboerForelder -->|Ja| SamboerInntekt["12. Samboers inntekt"]
+    SamboerForelder -->|Nei eller ikke aktuelt| Bosted
+    SamboerInntekt --> Bosted["13. Bor utenfor Norge og EØS"]
+    Barn -->|Nei| Bosted
+    Bosted --> Ekstra["14. Ekstra dokumentasjon til Nav"]
+    Ekstra --> Erklaering["15. Erklæring"]
+    Erklaering --> Vedlegg["16. Vedlegg"]
+    Vedlegg --> Slutt(["Slutt på skjemadefinisjonen"])

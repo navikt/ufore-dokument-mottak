@@ -1,0 +1,37 @@
+flowchart LR
+    %% Detaljvisning av side 9 i søknaden-vår.json, revisjon 74.
+    %% Stiplede piler viser vedlegg som vises senere på side 16.
+    Start(["Fra yrkesskade og yrkessykdom"])
+    Start --> HarBarn{"Har du barn under 18 år?"}
+    HarBarn -->|Nei| UtenBarn(["Til side 13: Bor utenfor Norge og EØS"])
+    HarBarn -->|Ja| Status{"Sivilstatus?"}
+    Status -->|Gift eller partner| EktefelleForelder["Er ektefelle/partner forelder til barnet<br/>du søker barnetillegg for?"]
+    Status -->|Samboer| SamboerForelder["Er samboer forelder til barnet<br/>du søker barnetillegg for?"]
+    Status -->|Andre svar| Navn
+    EktefelleForelder --> Navn["Barnets fornavn og etternavn"]
+    SamboerForelder --> Navn
+    Navn --> Identitet{"Har barnet norsk fødselsnummer eller d-nummer?"}
+    Identitet -->|Ja| Nummer["Oppgi fødselsnummer/d-nummer"]
+    Identitet -->|Nei| Dato["Oppgi fødselsdato"]
+    Dato --> Bilde{"Har barnet legitimasjon med bilde?"}
+    Nummer --> Adresse
+    Bilde -->|Ja eller nei| Adresse{"Bor barnet og begge foreldrene på samme adresse?"}
+    Adresse -->|Ja| Foster
+    Adresse -->|Nei| Delt{"Avtale om delt bosted etter barneloven § 36?"}
+    Delt -->|Ja| Foster
+    Delt -->|Nei| BorMedDeg{"Bor barnet med deg?"}
+    BorMedDeg -->|Ja| Foster
+    BorMedDeg -->|Nei| Forsoerger{"Forsørger du barnet?"}
+    Forsoerger -->|Nei| Foster
+    Forsoerger -->|Ja| Bidrag{"Betales det bidrag for barnet via Nav?"}
+    Bidrag -->|Ja| Foster
+    Bidrag -->|Nei| Informasjon["Vis informasjon om forsørgelses- eller samværsavtale"]
+    Informasjon --> Foster["Er barnet ditt fosterbarn?"]
+    Foster --> Flere{"Flere barn å registrere?"}
+    Flere -->|Ja| Navn
+    Flere -->|Nei| Inntekt(["Til side 10: Egen inntekt"])
+
+    Identitet -.->|Nei for minst ett barn| Attest["Side 16: Kopi av fødselsattest"]
+    Bilde -.->|Ja for minst ett barn| Legitimasjon["Side 16: Kopi av barnets legitimasjon"]
+    Bidrag -.->|Nei for minst ett barn| Avtale["Side 16: Forsørgelses- eller samværsavtale"]
+    %% Flere barn er en illustrasjon av gjentatte datagrid-rader, ikke et eget skjemafelt.

@@ -1,0 +1,27 @@
+flowchart LR
+    %% Inntektssidene i søknaden-vår.json, revisjon 74.
+    %% Inntektstypene er samlet i noder. Hver type har eget ja/nei-spørsmål.
+    Start(["Fra side 9: Barn under 18 år"])
+    Start --> Barn{"Har du barn under 18 år?"}
+    Barn -->|Nei| Neste
+    Barn -->|Ja| Aar["Side 10: Egen inntekt<br/>Oppgi året inntektsopplysningene gjelder for"]
+    Aar --> EgneTyper["Spør om hver inntektstype:<br/>Arbeidsinntekt<br/>Pensjonsgivende ytelser fra Nav<br/>Næringsinntekt<br/>Inntekt fra utlandet<br/>Pensjon fra andre enn Nav<br/>Familiepleieytelse/krigspensjon fra Nav"]
+    EgneTyper --> EgneBeloep["For hver type med ja:<br/>oppgi årlig bruttobeløp"]
+    EgneBeloep --> UtlandTidligere{"Ja til pensjon fra utlandet på side 7?"}
+    UtlandTidligere -->|Ja| Pensjon{"Mottar du pensjon fra utlandet?<br/>Nytt spørsmål på side 10"}
+    Pensjon -->|Ja| PensjonBeloep["Oppgi brutto årlig pensjon fra utlandet"]
+    Pensjon -->|Nei| EktefelleForelder
+    PensjonBeloep --> EktefelleForelder
+    UtlandTidligere -->|Nei| EktefelleForelder
+
+    EktefelleForelder{"Ja til at ektefelle/partner er forelder<br/>til barnet det søkes barnetillegg for?"}
+    EktefelleForelder -->|Ja| Ektefelle["Side 11: Ektefelles eller partners inntekt<br/>Spør om hver inntektstype nedenfor<br/>Oppgi årlig bruttobeløp ved ja"]
+    EktefelleForelder -->|Nei eller ikke aktuelt| SamboerForelder
+    Ektefelle --> SamboerForelder{"Ja til at samboer er forelder<br/>til barnet det søkes barnetillegg for?"}
+    SamboerForelder -->|Ja| Samboer["Side 12: Samboers inntekt<br/>Spør om hver inntektstype nedenfor<br/>Oppgi årlig bruttobeløp ved ja"]
+    SamboerForelder -->|Nei eller ikke aktuelt| Neste
+    Samboer --> Neste(["Til side 13: Bor utenfor Norge og EØS"])
+
+    Ektefelle -.-> Typer["Inntektstyper for ektefelle/partner og samboer:<br/>Arbeidsinntekt<br/>Pensjonsgivende ytelser fra Nav<br/>Næringsinntekt<br/>Inntekt fra utlandet<br/>Pensjon fra andre enn Nav<br/>Introduksjonsstønad/supplerende stønad/krigspensjon fra Nav<br/>Pensjon fra utlandet"]
+    Samboer -.-> Typer
+    %% Stiplede piler viser felles feltinnhold, ikke navigasjon.
