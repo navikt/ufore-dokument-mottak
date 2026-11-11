@@ -1,0 +1,108 @@
+flowchart LR
+    %% Kilde: søknaden-vår.json, revisjon 74, NAV 12-06.05.
+    %% Heltrukne piler viser skjemaflyten. Stiplede piler viser vilkår for vedlegg.
+    %% Beslektede felt er samlet. Innebygde komponenter som identity og navAddress
+    %% har ikke alle sine interne spørsmål definert i JSON-filen.
+
+    Start(["Søknad om uføretrygd"])
+    Start --> Jobbe
+
+    subgraph DinSituasjon["1. Din situasjon"]
+        Jobbe{"Skal du jobbe ved siden av uføretrygden?"}
+        Jobbe -->|Ja| Maanedsinntekt["Forventet månedsinntekt før skatt"]
+        Jobbe -->|Nei| Firma
+        Maanedsinntekt --> Firma
+        Firma{"Har du eget firma?"}
+        Firma -->|Ja| Firmadata["Firmaets navn og organisasjonsnummer"]
+        Firmadata --> EgetVedlegg{"Opplysninger om arbeidsforhold som eget vedlegg?"}
+        EgetVedlegg -->|Ja| Gaardsbruk
+        EgetVedlegg -->|Nei| Firmatekst["Informasjon om firma som fritekst"]
+        Firmatekst --> Gaardsbruk
+        Firma -->|Nei| Gaardsbruk
+        Gaardsbruk["Driver du gårdsbruk?"]
+    end
+
+    Gaardsbruk --> Person["2. Dine opplysninger<br/>Fornavn, etternavn og identitet<br/>Adresse vises ved manglende fødselsnummer<br/>eller forhåndsutfylt identitetsnummer uten ja/nei-svar<br/>Adressevarighet vises ut fra adresseopplysningene"]
+    Person --> Sivilstatus{"3. Sivilstatus"}
+    Sivilstatus -->|Gift eller partner| Ektefelle["4. Ektefelle eller partner<br/>Navn og fødselsnummer/d-nummer eller fødselsdato<br/>Utenlandsk statsborger: statsborgerskap<br/>og spørsmål om tidligere navn<br/>Felles adresse?"]
+    Sivilstatus -->|Samboer| Samboer["5. Samboer<br/>Navn og fødselsnummer/d-nummer eller fødselsdato<br/>Utenlandsk statsborger: statsborgerskap<br/>Felles adresse? Når ble dere samboere?<br/>Felles barn?"]
+    Sivilstatus -->|Enslig, skilt, separert eller enke/enkemann| Arbeid
+    Ektefelle --> Arbeid
+    Samboer --> Arbeid
+
+    Arbeid["6. Arbeid<br/>Skal jobbe: fostergodtgjørelse/omsorgslønn og sluttoppgjør<br/>Eget firma: ansatt i egen bedrift og styrehonorar/verv<br/>Arbeidstaker da du ble syk: arbeidsgivere og stillingsprosent<br/>Næringsdrivende/gårdbruker da du ble syk: avsluttet virksomhet?<br/>Førstegangstjeneste: oppgi år hvis ja"]
+    Arbeid --> Utland["7. Utenlandsopphold<br/>Bodd/arbeidet utenfor Norge etter fylte 16 år?<br/>Hvis ja: land, perioder og bodd/arbeidet<br/>Ikke norsk statsborger: oppgi statsborgerskap<br/>Pensjon fra utlandet: land, type og årlig beløp før skatt"]
+    Utland --> Yrkesskade["8. Yrkesskade og yrkessykdom<br/>Godkjent yrkesskade eller yrkessykdom<br/>som er årsak til søknaden?"]
+    Yrkesskade --> HarBarn
+
+    subgraph Barn["9. Barn under 18 år"]
+        HarBarn{"Har du barn under 18 år?"}
+        HarBarn -->|Ja| Forelder["Hvis gift/partner eller samboer:<br/>Er ektefellen/partneren eller samboeren<br/>forelder til barnet du søker barnetillegg for?"]
+        Forelder --> BarnIdentitet["Per barn: navn og fødselsnummer/d-nummer<br/>Uten nummer: fødselsdato og spørsmål om legitimasjon med bilde"]
+        BarnIdentitet --> SammeAdresse{"Bor barnet og begge foreldrene på samme adresse?"}
+        SammeAdresse -->|Ja| Fosterbarn
+        SammeAdresse -->|Nei| DeltBosted{"Avtale om delt bosted etter barneloven § 36?"}
+        DeltBosted -->|Ja| Fosterbarn
+        DeltBosted -->|Nei| BorMedDeg{"Bor barnet med deg?"}
+        BorMedDeg -->|Ja| Fosterbarn
+        BorMedDeg -->|Nei| Forsoerger{"Forsørger du barnet?"}
+        Forsoerger -->|Nei| Fosterbarn
+        Forsoerger -->|Ja| Bidrag["Betales det bidrag for barnet via Nav?"]
+        Bidrag --> Fosterbarn["Er barnet ditt fosterbarn?<br/>Gjenta opplysningene for hvert barn"]
+    end
+
+    Fosterbarn --> EgenInntekt["10. Egen inntekt<br/>År opplysningene gjelder for<br/>Arbeidsinntekt, pensjonsgivende Nav-ytelser og næringsinntekt<br/>Inntekt fra utlandet, pensjon fra andre enn Nav<br/>Familiepleieytelse/krigspensjon fra Nav<br/>Pensjon fra utlandet spørres om hvis ja på side 7<br/>Oppgi årlig bruttobeløp ved ja til inntektstypen"]
+    EgenInntekt --> EktefelleForelder{"Ektefelle/partner er forelder<br/>til barnet det søkes barnetillegg for?"}
+    EktefelleForelder -->|Ja| EktefelleInntekt["11. Ektefelles eller partners inntekt<br/>Arbeidsinntekt, pensjonsgivende Nav-ytelser og næringsinntekt<br/>Inntekt fra utlandet, pensjon fra andre enn Nav<br/>Introduksjonsstønad/supplerende stønad/krigspensjon fra Nav<br/>Pensjon fra utlandet<br/>Oppgi årlig bruttobeløp ved ja til inntektstypen"]
+    EktefelleForelder -->|Nei eller ikke aktuelt| SamboerForelder
+    EktefelleInntekt --> SamboerForelder{"Samboer er forelder<br/>til barnet det søkes barnetillegg for?"}
+    SamboerForelder -->|Ja| SamboerInntekt["12. Samboers inntekt<br/>Samme inntektstyper som for ektefelle/partner<br/>Oppgi årlig bruttobeløp ved ja til inntektstypen"]
+    SamboerForelder -->|Nei eller ikke aktuelt| Utenfor
+    SamboerInntekt --> Utenfor
+    HarBarn -->|Nei| Utenfor
+
+    subgraph BostedUtland["13. Bor utenfor Norge og EØS"]
+        Utenfor{"Bor du utenfor Norge eller EØS?"}
+        Utenfor -->|Ja| UtenforDetaljer["Hatt opphold i Norge? Hvis ja: perioder<br/>I arbeid nå? Hvis nei: når sluttet du?<br/>Utdanning? Hvis ja: skole/kurs, periode og grad/tittel<br/>Arbeidsforhold? Hvis ja: arbeidsgiver, stilling,<br/>stillingsprosent og periode"]
+    end
+    Utenfor -->|Nei| Ekstra
+    UtenforDetaljer --> Ekstra
+
+    subgraph EkstraDokumentasjon["14. Ekstra dokumentasjon til Nav"]
+        Ekstra{"Avtalt med Nav å sende mer dokumentasjon?"}
+        Ekstra -->|Ja| BeskrivDokumentasjon["Beskriv hvilken dokumentasjon som er avtalt"]
+    end
+    Ekstra -->|Nei| Erklaering
+    BeskrivDokumentasjon --> Erklaering["15. Erklæring<br/>Obligatorisk bekreftelse av erklæringen"]
+    Erklaering --> Vedlegg
+
+    subgraph VedleggSide["16. Vedlegg"]
+        Vedlegg["Vis vedlegg som svarene utløser<br/>For hvert relevant vedlegg: legg ved nå, ettersend<br/>eller oppgi levert tidligere der dette er tillatt"]
+        Vedlegg --> Annet["Annen dokumentasjon?<br/>Nei eller legg ved nå"]
+        Annet --> Slutt(["Slutt på skjemadefinisjonen"])
+
+        Foedselsattest["Kopi av fødselsattest"]
+        BarnLegitimasjon["Kopi av barnets legitimasjon"]
+        Samvaersavtale["Forsørgelses- eller samværsavtale"]
+        EktefellePass["Pass eller vigselsattest til ektefelle/partner"]
+        SamboerPass["Pass til samboer"]
+        Loennslipp["Kopi av siste lønnslipp"]
+        FirmaVedlegg["Informasjon om firma og arbeidsforhold<br/>Legg ved nå eller ettersend"]
+        GaardInntekt["Inntektsskjema for gårdbrukere<br/>NAV 12-06.09"]
+        FirmaInntekt["Inntektsskjema for næringsdrivende<br/>og ansatt i eget aksjeselskap<br/>NAV 12-06.07"]
+        AvsluttetFirma["Dokumentasjon på avsluttet næringsvirksomhet"]
+        AvtaltDokumentasjon["Dokumentasjon som er avtalt med Nav"]
+    end
+
+    %% Vedleggsvilkårene vurderes uavhengig. Flere vedlegg kan vises samtidig.
+    BarnIdentitet -.->|Minst ett barn uten fødselsnummer/d-nummer| Foedselsattest
+    BarnIdentitet -.->|Minst ett barn har legitimasjon med bilde| BarnLegitimasjon
+    Bidrag -.->|Minst ett barn har nei til bidrag via Nav| Samvaersavtale
+    Ektefelle -.->|Har ikke norsk fødselsnummer/d-nummer| EktefellePass
+    Samboer -.->|Har ikke norsk fødselsnummer/d-nummer| SamboerPass
+    Jobbe -.->|Ja| Loennslipp
+    EgetVedlegg -.->|Ja| FirmaVedlegg
+    Gaardsbruk -.->|Ja| GaardInntekt
+    Firma -.->|Ja| FirmaInntekt
+    Arbeid -.->|Ja til avsluttet næringsvirksomhet| AvsluttetFirma
+    Ekstra -.->|Ja| AvtaltDokumentasjon
