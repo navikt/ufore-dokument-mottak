@@ -17,7 +17,7 @@ jobs:
       - name: Build application jar
         run: ./gradlew --no-daemon build
       - name: Build and push image and SBOM to OCI registry
-        uses: nais/docker-build-push@ceabe305c64640175f133b7e59af6666b0a3c46c
+        uses: nais/docker-build-push@588f76a6f45aeb1e75d5e8417ec6ef6d79b2b39f
         id: docker-build-push
         with:
           team: ufore
