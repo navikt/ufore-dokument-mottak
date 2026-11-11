@@ -1,6 +1,7 @@
 package no.nav.uføre
 
 import io.github.oshai.kotlinlogging.KotlinLogging
+import io.github.oshai.kotlinlogging.Marker
 import io.ktor.client.*
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
@@ -19,6 +20,10 @@ class SafClient(private val httpClient: HttpClient, private val tokenClient: Tok
 
     private val url = System.getenv("SAF_URL") ?: "en lokal URL"
     private val json = Json { ignoreUnknownKeys = true }
+    private val tillatteTitler = listOf("Søknad om uføretrygd", "NAV 12-06.05 Søknad om uføretrygd", "Ettersendelse til søknad om uføretrygd", "Ettersendelse til klage", "Klage", "Anke", "Tittel mangler")
+    private val teamLogsMarker = object : Marker {
+        override fun getName(): String = "TEAM_LOGS"
+    }
 
     suspend fun hentJournalpost(journalpostId: String): SafResponse {
         val body = """query {
@@ -46,9 +51,10 @@ class SafClient(private val httpClient: HttpClient, private val tokenClient: Tok
         }
 
         val responseBody = json.decodeFromString<SafResponse>(response.bodyAsText())
-//        val dokumentTittel = responseBody.journalpost.dokumenter.first().tittel ?: "Tittel mangler"
-//        meterRegistry.counter("ufore_dokument_tittel", "tittel", dokumentTittel).increment()
-//        logger.info { "Hentet journalpost: $responseBody, status: ${response.status}" }
+        val dokumentTittel = responseBody.journalpost.dokumenter.firstOrNull()?.tittel ?: "Tittel mangler"
+        val tillattTittel = if (dokumentTittel in tillatteTitler) dokumentTittel else "Annet dokument"
+        meterRegistry.counter("ufore_dokument_tittel", "tittel", tillattTittel).increment()
+        logger.info(teamLogsMarker) { "Hentet journalpost: $tillattTittel, status: ${response.status}" }
         return responseBody
     }
 
