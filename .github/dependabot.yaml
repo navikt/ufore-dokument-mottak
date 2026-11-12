@@ -13,3 +13,13 @@ updates:
       interval: daily
     cooldown:
       default-days: 3
+
+  - package-ecosystem: docker
+    ignore: # hold Java-version på gjeldende major-release. Ved oppgradering av major-versjon, oppdater også build.gradle.kts
+      - dependency-name: "cgr-nav/pull-through/nav.no/jre"
+        update-types: [ "version-update:semver-major" ]
+    directory: "/"
+    schedule:
+      interval: daily
+    cooldown:
+      default-days: 3
