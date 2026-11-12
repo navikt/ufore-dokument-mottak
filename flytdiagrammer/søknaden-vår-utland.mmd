@@ -1,0 +1,58 @@
+flowchart LR
+    %% Kilde: søknaden-vår.json, revisjon 74.
+    %% Alle spørsmål og felt på side 7 og 13. Minimumsflyt ellers, uten barn.
+    %% Ordlyden «utenfor Norge eller EØS» er beholdt fra skjemafeltet.
+    %% Datagrid-felt kan fylles ut med flere rader.
+    %% Eksempelsvar utenom utlandsdelene må tilpasses søkerens situasjon.
+
+    Start(["Søknad om uføretrygd"])
+    Start --> Situasjon["1. Din situasjon<br/>Jobbe ved siden av uføretrygden: nei<br/>Eget firma: nei<br/>Driver gårdsbruk: nei"]
+    Situasjon --> Person["2. Dine opplysninger<br/>Fornavn, etternavn og identitet<br/>Har norsk fødselsnummer: ja"]
+    Person --> Status["3. Sivilstatus<br/>Enslig"]
+    Status --> Arbeid["6. Arbeid<br/>Arbeidstaker da du ble syk: nei<br/>Næringsdrivende/gårdbruker da du ble syk: nei<br/>Avtjent førstegangstjeneste: nei"]
+    Arbeid --> Opphold
+
+    subgraph Utenlandsopphold["7. Utenlandsopphold"]
+        Opphold{"Har du bodd og/eller arbeidet utenfor Norge<br/>etter at du fylte 16 år?"}
+        Opphold -->|Ja| Oppholdsland["Oppholdsland"]
+        Oppholdsland --> Oppholdsperiode["Opphold fra og til<br/>Måned og år"]
+        Oppholdsperiode --> Oppholdstype["Har du bodd eller arbeidet i oppholdslandet?<br/>Velg bodd og/eller arbeidet<br/>Gjenta feltene for hvert opphold"]
+        Oppholdstype --> Norsk
+        Opphold -->|Nei| Norsk{"Er du norsk statsborger?"}
+        Norsk -->|Nei| Statsborgerskap["Oppgi statsborgerskap"]
+        Norsk -->|Ja| Pensjon
+        Statsborgerskap --> Pensjon{"Mottar du pensjon fra utlandet?"}
+        Pensjon -->|Ja| Pensjonsland["Land du mottar pensjon fra"]
+        Pensjonsland --> Pensjonstype["Type pensjon"]
+        Pensjonstype --> Pensjonsbeloep["Beløp per år før skatt<br/>Gjenta land, type og beløp for hver pensjon"]
+    end
+
+    Pensjon -->|Nei| Skade
+    Pensjonsbeloep --> Skade["8. Yrkesskade og yrkessykdom<br/>Godkjent yrkesskade/yrkessykdom som årsak til søknaden: nei"]
+    Skade --> Barn["9. Barn under 18 år<br/>Nei"]
+    %% Side 10–12 vises ikke i denne eksempelruten uten barn.
+    %% Derfor vises heller ikke det ekstra spørsmålet om utenlandsk pensjon på side 10.
+    Barn --> Utenfor
+
+    subgraph Bosted["13. Bor utenfor Norge og EØS"]
+        Utenfor{"Bor du utenfor Norge eller EØS?"}
+        Utenfor -->|Ja| NorgeOpphold{"Har du hatt opphold i Norge?"}
+        NorgeOpphold -->|Ja| NorgePerioder["Periodene du har bodd i Norge<br/>Opphold fra og til, måned og år<br/>Kan registrere flere perioder"]
+        NorgeOpphold -->|Nei| ArbeidNaa
+        NorgePerioder --> ArbeidNaa{"Er du i arbeid nå?"}
+        ArbeidNaa -->|Nei| Sluttet["Når sluttet du å arbeide?<br/>Måned og år"]
+        ArbeidNaa -->|Ja| Utdanning
+        Sluttet --> Utdanning{"Har du utdanning?"}
+        Utdanning -->|Ja| Utdanningsdata["Utdanningen din<br/>Skole/kurs<br/>Utdanning fra og til, måned og år<br/>Grad/tittel<br/>Kan registrere flere utdanninger"]
+        Utdanning -->|Nei| Arbeidsforhold
+        Utdanningsdata --> Arbeidsforhold{"Har du arbeidsforhold?"}
+        Arbeidsforhold -->|Ja| Arbeidsdata["Arbeidsforholdene dine<br/>Arbeidsgiver og stilling<br/>Stillingsprosent<br/>Ansatt fra og til, måned og år<br/>Kan registrere flere arbeidsforhold"]
+    end
+
+    Utenfor -->|Nei| Ekstra
+    Arbeidsforhold -->|Nei| Ekstra
+    Arbeidsdata --> Ekstra["14. Ekstra dokumentasjon til Nav<br/>Avtalt å sende mer dokumentasjon: nei"]
+    Ekstra --> Erklaering["15. Erklæring<br/>Bekreft erklæringen"]
+    Erklaering --> Vedlegg["16. Vedlegg<br/>Annen dokumentasjon: nei"]
+    %% Svarene på side 7 og 13 utløser ingen egne vedlegg i skjemadefinisjonen.
+    Vedlegg --> Slutt(["Slutt på skjemadefinisjonen"])
