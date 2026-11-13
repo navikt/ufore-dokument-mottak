@@ -57,4 +57,5 @@ tasks.named<Test>("test") {
     useJUnitPlatform()
     environment("NAIS_TOKEN_ENDPOINT", "http://localhost/token")
     environment("SAF_SCOPE", "api://localhost/.default")
+    jvmArgs("-XX:+EnableDynamicAgentLoading", "-Xshare:off")
 }
