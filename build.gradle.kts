@@ -57,5 +57,4 @@ tasks.named<Test>("test") {
     useJUnitPlatform()
     environment("NAIS_TOKEN_ENDPOINT", "http://localhost/token")
     environment("SAF_SCOPE", "api://localhost/.default")
-    systemProperty("logback.configurationFile", "logback-local.xml")
 }
