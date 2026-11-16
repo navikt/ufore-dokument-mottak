@@ -16,7 +16,7 @@ dependencies {
     testImplementation("io.mockk:mockk:1.14.12")
     testImplementation("io.ktor:ktor-client-mock:$ktorVersjon")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
-    testImplementation("io.kotest:kotest-assertions-core-jvm:6.2.6")
+    testImplementation("io.kotest:kotest-assertions-core-jvm:6.2.7")
 
     implementation("io.github.oshai:kotlin-logging-jvm:8.0.7")
     implementation("org.apache.kafka:kafka-clients:8.4.0-ccs")
