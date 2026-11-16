@@ -54,15 +54,18 @@ class SafClient(private val httpClient: HttpClient, private val tokenClient: Tok
         }
 
         val responseBody = json.decodeFromString<SafResponse>(response.bodyAsText())
+        kategoriserSøknad(responseBody)
+
         val dokumentTittel = responseBody.journalpost.dokumenter.firstOrNull()?.tittel ?: "Tittel mangler"
         val tillattTittel = if (dokumentTittel in tillatteTitler) dokumentTittel else "Annet dokument"
+        meterRegistry.counter("ufore_dokument_tittel", "tittel", tillattTittel).increment()
 
-        // {kanal="SKAN_IM", skjema="NAVp 12-06.05"}
-        // {kanal="SKAN_IM", skjema="NAV 12-06.05"}
+        logger.info(teamLogsMarker) { "Hentet journalpost: $responseBody, status: ${response.status}" }
+        return responseBody
+    }
 
-
-        // {kanal="NAV_NO", skjema="NAV 12-06.05"}
-        val journalpost = responseBody.journalpost
+    private fun kategoriserSøknad(safResponse: SafResponse) {
+        val journalpost = safResponse.journalpost
         val digitalFørstegangssøknad = journalpost.kanal == "NAV_NO" &&
                 journalpost.dokumenter.any { dokument ->
                     dokument.brevkode == "NAV 12-06.05" &&
@@ -71,18 +74,24 @@ class SafClient(private val httpClient: HttpClient, private val tokenClient: Tok
                             }
                 }
 
-        val harVedlegg = digitalFørstegangssøknad && journalpost.dokumenter.size > 1
-
         val scannetFørstegangssøknad =  journalpost.kanal == "SKAN_IM" &&
                 journalpost.dokumenter.any { dokument ->
                     dokument.brevkode == "NAV 12-06.05" || dokument.brevkode == "NAVp 12-06.05"
                 }
 
-        meterRegistry.counter("ufore_dokument_tittel", "tittel", tillattTittel).increment()
-        logger.info(teamLogsMarker) { "Hentet journalpost: $responseBody, status: ${response.status}" }
-        return responseBody
-    }
+        val harVedlegg = journalpost.dokumenter.size > 1
 
+        val kategori = when {
+            digitalFørstegangssøknad -> SøknadsKategori.DIGITAL
+            scannetFørstegangssøknad -> SøknadsKategori.SKANNET
+            else -> SøknadsKategori.UKJENT
+        }
+        meterRegistry.counter("ufore_journalpost_mottatt", "kategori", kategori.name, "har_vedlegg", harVedlegg.toString()).increment()
+    }
+}
+
+enum class SøknadsKategori {
+    DIGITAL, SKANNET, UKJENT
 }
 
 @Serializable
