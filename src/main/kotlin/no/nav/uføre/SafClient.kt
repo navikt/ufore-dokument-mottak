@@ -19,7 +19,10 @@ private val logger = KotlinLogging.logger {}
 class SafClient(private val httpClient: HttpClient, private val tokenClient: TokenClient, private val meterRegistry: MeterRegistry) {
 
     private val url = System.getenv("SAF_URL") ?: "en lokal URL"
-    private val json = Json { ignoreUnknownKeys = true }
+    private val json = Json {
+        ignoreUnknownKeys = true
+        explicitNulls = false
+    }
     private val tillatteTitler = listOf("Søknad om uføretrygd", "NAV 12-06.05 Søknad om uføretrygd", "Ettersendelse til søknad om uføretrygd", "Ettersendelse til klage", "Klage", "Anke", "Tittel mangler")
     private val teamLogsMarker = object : Marker {
         override fun getName(): String = "TEAM_LOGS"
@@ -113,7 +116,7 @@ data class Journalpost(
     val journalpostId: String,
     val kanal: String,
     val dokumenter: List<Dokument>,
-    val sak: Sak
+    val sak: Sak?
 )
 
 @Serializable
