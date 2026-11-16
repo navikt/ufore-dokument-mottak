@@ -2,8 +2,11 @@
   "data": {
     "journalpost": {
       "journalpostId": "771888888",
-      "behandlingstema": "foo",
-      "behandlingstemanavn": "bar",
+      "kanal": "NAV_NO",
+      "sak": {
+        "fagsakId": "123",
+        "fagsaksystem": "PSAK"
+      },
       "dokumenter": [
         {
           "dokumentInfoId": "810878888",

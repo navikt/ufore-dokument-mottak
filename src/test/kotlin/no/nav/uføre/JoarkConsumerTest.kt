@@ -27,8 +27,8 @@ class JoarkConsumerTest {
 
     private val topicPartition = TopicPartition("topic", 1)
     private val journalpostId = "123"
-    private val journalpost = Journalpost(journalpostId, "", "", emptyList())
-    private val joarkHendelse = lagJoarkHendelse(journalpostId.toLong(), "UFO", "JournalpostMottatt", "kanal")
+    private val journalpost = Journalpost(journalpostId, "", emptyList(), Sak("foo", "bar"))
+    private val joarkHendelse = lagJoarkHendelse(journalpostId.toLong(), "UFO", "JournalpostMottatt", "NAV_NO")
 
     @BeforeEach
     fun setup() {
