@@ -29,8 +29,11 @@ class SafClient(private val httpClient: HttpClient, private val tokenClient: Tok
         val body = """query {
           journalpost(journalpostId: "$journalpostId") {
             journalpostId
-            behandlingstema
-            behandlingstemanavn
+            kanal
+            sak {
+              fagsakId
+              fagsaksystem  
+            }
             dokumenter {
               dokumentInfoId
               tittel
@@ -53,6 +56,28 @@ class SafClient(private val httpClient: HttpClient, private val tokenClient: Tok
         val responseBody = json.decodeFromString<SafResponse>(response.bodyAsText())
         val dokumentTittel = responseBody.journalpost.dokumenter.firstOrNull()?.tittel ?: "Tittel mangler"
         val tillattTittel = if (dokumentTittel in tillatteTitler) dokumentTittel else "Annet dokument"
+
+        // {kanal="SKAN_IM", skjema="NAVp 12-06.05"}
+        // {kanal="SKAN_IM", skjema="NAV 12-06.05"}
+
+
+        // {kanal="NAV_NO", skjema="NAV 12-06.05"}
+        val journalpost = responseBody.journalpost
+        val digitalFørstegangssøknad = journalpost.kanal == "NAV_NO" &&
+                journalpost.dokumenter.any { dokument ->
+                    dokument.brevkode == "NAV 12-06.05" &&
+                            dokument.dokumentvarianter.any { variant ->
+                                variant.variantformat == Variantformat.ORIGINAL
+                            }
+                }
+
+        val harVedlegg = digitalFørstegangssøknad && journalpost.dokumenter.size > 1
+
+        val scannetFørstegangssøknad =  journalpost.kanal == "SKAN_IM" &&
+                journalpost.dokumenter.any { dokument ->
+                    dokument.brevkode == "NAV 12-06.05" || dokument.brevkode == "NAVp 12-06.05"
+                }
+
         meterRegistry.counter("ufore_dokument_tittel", "tittel", tillattTittel).increment()
         logger.info(teamLogsMarker) { "Hentet journalpost: $responseBody, status: ${response.status}" }
         return responseBody
@@ -77,9 +102,15 @@ object JournalpostFromDataSerializer :
 @Serializable
 data class Journalpost(
     val journalpostId: String,
-    val behandlingstema: String?,
-    val behandlingstemanavn: String?,
+    val kanal: String,
     val dokumenter: List<Dokument>,
+    val sak: Sak
+)
+
+@Serializable
+data class Sak(
+    val fagsakId: String,
+    val fagsaksystem: String,
 )
 
 @Serializable
