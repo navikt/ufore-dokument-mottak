@@ -28,7 +28,7 @@ dependencies {
     implementation("io.ktor:ktor-client-cio:$ktorVersjon")
     implementation("io.ktor:ktor-server-metrics-micrometer:$ktorVersjon")
     implementation("io.micrometer:micrometer-registry-prometheus:1.17.2")
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.12.0")
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.13.0")
     runtimeOnly("ch.qos.logback:logback-classic:1.6.7")
     runtimeOnly("net.logstash.logback:logstash-logback-encoder:9.0")
 }
