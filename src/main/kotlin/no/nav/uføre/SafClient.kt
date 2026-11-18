@@ -21,7 +21,6 @@ class SafClient(private val httpClient: HttpClient, private val tokenClient: Tok
     private val url = System.getenv("SAF_URL") ?: "en lokal URL"
     private val json = Json {
         ignoreUnknownKeys = true
-        explicitNulls = false
     }
     private val tillatteTitler = listOf("Søknad om uføretrygd", "NAV 12-06.05 Søknad om uføretrygd", "Ettersendelse til søknad om uføretrygd", "Ettersendelse til klage", "Klage", "Anke", "Tittel mangler")
     private val teamLogsMarker = object : Marker {
@@ -33,10 +32,6 @@ class SafClient(private val httpClient: HttpClient, private val tokenClient: Tok
           journalpost(journalpostId: "$journalpostId") {
             journalpostId
             kanal
-            sak {
-              fagsakId
-              fagsaksystem  
-            }
             dokumenter {
               dokumentInfoId
               tittel
@@ -114,15 +109,8 @@ object JournalpostFromDataSerializer :
 @Serializable
 data class Journalpost(
     val journalpostId: String,
-    val kanal: String,
+    val kanal: String?,
     val dokumenter: List<Dokument>,
-    val sak: Sak?
-)
-
-@Serializable
-data class Sak(
-    val fagsakId: String,
-    val fagsaksystem: String,
 )
 
 @Serializable

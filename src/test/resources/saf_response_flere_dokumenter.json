@@ -3,10 +3,6 @@
     "journalpost": {
       "journalpostId": "771888888",
       "kanal": "NAV_NO",
-      "sak": {
-        "fagsakId": "123",
-        "fagsaksystem": "PSAK"
-      },
       "dokumenter": [
         {
           "dokumentInfoId": "810878888",

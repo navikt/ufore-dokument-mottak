@@ -54,7 +54,7 @@ class JoarkConsumer(private val consumer: Consumer<String, GenericRecord>, priva
             }
 
         } catch (e: Exception) {
-            logger.error(e) { "Feil ved håndtering av medling" }
+            logger.error(e) { "Feil ved håndtering av melding" }
             offsets.forEach { (partition, offset) -> consumer.seek(partition, offset) }
             throw e
         } finally {
