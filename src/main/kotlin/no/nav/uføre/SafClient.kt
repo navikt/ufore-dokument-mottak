@@ -28,7 +28,7 @@ class SafClient(private val httpClient: HttpClient, private val tokenClient: Tok
     }
 
     suspend fun hentJournalpost(journalpostId: String): SafResponse {
-        val body = """uery {
+        val body = """query {
           journalpost(journalpostId: "$journalpostId") {
             journalpostId
             kanal
