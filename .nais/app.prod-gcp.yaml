@@ -12,7 +12,7 @@ spec:
     pool: nav-prod
   env:
     - name: SAF_URL
-      value: "https://saf.prod-fss-pub.nais.io/graphql"
+      value: "https://saf.prod-fss-pub.nais.io"
     - name: SAF_SCOPE
       value: "api://prod-fss.teamdokumenthandtering.saf/.default"
   accessPolicy:

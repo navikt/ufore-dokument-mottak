@@ -13,6 +13,8 @@ import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.JsonTransformingSerializer
 import kotlinx.serialization.json.jsonObject
+import no.nav.uføre.Variantformat.ORIGINAL
+import no.nav.uføre.søknad.Søknad
 
 private val logger = KotlinLogging.logger {}
 
@@ -45,7 +47,7 @@ class SafClient(private val httpClient: HttpClient, private val tokenClient: Tok
           }
         }""".trimIndent()
 
-        val response: HttpResponse = httpClient.post(url) {
+        val response: HttpResponse = httpClient.post("$url/graphql") {
             contentType(ContentType.Application.Json)
             header(HttpHeaders.Authorization, "Bearer ${tokenClient.hentM2mToken()}")
             setBody(json.encodeToString(mapOf("query" to body)))
@@ -53,6 +55,10 @@ class SafClient(private val httpClient: HttpClient, private val tokenClient: Tok
 
         val responseBody = json.decodeFromString<SafResponse>(response.bodyAsText())
         kategoriserSøknad(responseBody)
+
+        if (responseBody.journalpost.dokumenter.any { it.dokumentvarianter.any { variant -> variant.variantformat == ORIGINAL } }) {
+            hentSelveDokumentet(journalpostId, responseBody)
+        }
 
         val dokumentTittel = responseBody.journalpost.dokumenter.firstOrNull()?.tittel ?: "Tittel mangler"
         val tillattTittel = if (dokumentTittel in tillatteTitler) dokumentTittel else "Annet dokument"
@@ -62,13 +68,28 @@ class SafClient(private val httpClient: HttpClient, private val tokenClient: Tok
         return responseBody
     }
 
+    private suspend fun hentSelveDokumentet(journalpostId: String, responseBody: SafResponse) {
+        val response: HttpResponse =
+            httpClient.post("$url/rest/hentdokument/$journalpostId/${responseBody.journalpost.dokumenter.first().dokumentInfoId}/${ORIGINAL}") {
+                contentType(ContentType.Application.Json)
+                header(HttpHeaders.Authorization, "Bearer ${tokenClient.hentM2mToken()}")
+            }
+
+        if (response.status == HttpStatusCode.OK) {
+            val søknad = json.decodeFromString<Søknad>(response.bodyAsText())
+            logger.info(teamLogsMarker) { "Hentet journalpost $journalpostId med sivilstatus ${søknad.data.data.hvaErDinSivilstatus}" }
+        } else {
+            logger.warn(teamLogsMarker) { "JournalpostId ${journalpostId}, status: ${response.status}" }
+        }
+    }
+
     private fun kategoriserSøknad(safResponse: SafResponse) {
         val journalpost = safResponse.journalpost
         val digitalFørstegangssøknad = journalpost.kanal == "NAV_NO" &&
                 journalpost.dokumenter.any { dokument ->
                     dokument.brevkode == "NAV 12-06.05" &&
                             dokument.dokumentvarianter.any { variant ->
-                                variant.variantformat == Variantformat.ORIGINAL
+                                variant.variantformat == ORIGINAL
                             }
                 }
 

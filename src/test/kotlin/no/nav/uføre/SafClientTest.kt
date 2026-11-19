@@ -27,12 +27,17 @@ class SafClientTest {
     suspend fun `henter ett dokument fra Saf og klarer å deserialisere dette`() {
         // given
         val mockEngine = MockEngine { request ->
-            respond(
-                content = javaClass.getResource("/saf_response_ett_dokument.json")!!.readText(),
-                status = HttpStatusCode.OK,
-                headers = headersOf(HttpHeaders.ContentType, "application/json")
-            )
+            when {
+                request.url.encodedPath.endsWith("/graphql") -> respondOk(
+                    content = javaClass.getResource("/saf_response_ett_dokument.json")!!.readText(),
+                )
+                request.url.encodedPath.endsWith("/rest/hentdokument/1/810899999/ORIGINAL") ->
+                    respondError(HttpStatusCode.BadRequest)
+
+                else -> error("Unhandled ${request.url}")
+            }
         }
+
         val safClient = SafClient(HttpClient(mockEngine), tokenClient, meterRegistry)
 
         // when
@@ -46,12 +51,17 @@ class SafClientTest {
     suspend fun `henter flere dokumenter fra Saf og klarer å deserialisere disse`() {
         // given
         val mockEngine = MockEngine { request ->
-            respond(
-                content = javaClass.getResource("/saf_response_flere_dokumenter.json")!!.readText(),
-                status = HttpStatusCode.OK,
-                headers = headersOf(HttpHeaders.ContentType, "application/json")
-            )
+            when {
+                request.url.encodedPath.endsWith("/graphql") -> respondOk(
+                    content = javaClass.getResource("/saf_response_flere_dokumenter.json")!!.readText(),
+                )
+                request.url.encodedPath.endsWith("/rest/hentdokument/1/810878888/ORIGINAL") ->
+                    respondError(HttpStatusCode.BadRequest)
+
+                else -> error("Unhandled ${request.url}")
+            }
         }
+
         val safClient = SafClient(HttpClient(mockEngine), tokenClient, meterRegistry)
 
         // when
