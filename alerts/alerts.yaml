@@ -24,3 +24,18 @@ spec:
             namespace: ufore
             ufore_alerts: slack
             alert_type: custom
+        - alert: "Mange omstarter av containere"
+          expr: |
+            sum(
+              changes(
+                kube_pod_container_status_restarts_total{namespace="ufore", k8s_cluster_name="prod"}[5m]
+              )
+            ) by (container, namespace) > 5
+          for: 5m
+          annotations:
+            message: "*{{ $labels.container }}* har hatt mer enn 5 omstarter de siste 5 minuttene."
+          labels:
+            severity: error
+            namespace: ufore
+            ufore_alerts: slack
+            alert_type: custom
