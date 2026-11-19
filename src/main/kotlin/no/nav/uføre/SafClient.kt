@@ -70,7 +70,7 @@ class SafClient(private val httpClient: HttpClient, private val tokenClient: Tok
 
     private suspend fun hentSelveDokumentet(journalpostId: String, responseBody: SafResponse) {
         val response: HttpResponse =
-            httpClient.post("$url/rest/hentdokument/$journalpostId/${responseBody.journalpost.dokumenter.first().dokumentInfoId}/${ORIGINAL}") {
+            httpClient.get("$url/rest/hentdokument/$journalpostId/${responseBody.journalpost.dokumenter.first().dokumentInfoId}/${ORIGINAL}") {
                 contentType(ContentType.Application.Json)
                 header(HttpHeaders.Authorization, "Bearer ${tokenClient.hentM2mToken()}")
             }
