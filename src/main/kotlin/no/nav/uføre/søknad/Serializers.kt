@@ -2,12 +2,14 @@ package no.nav.uføre.søknad
 
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.builtins.ListSerializer
 import kotlinx.serialization.descriptors.PrimitiveKind
 import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
 import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.descriptors.nullable
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
+import kotlinx.serialization.json.JsonArray
 import kotlinx.serialization.json.JsonDecoder
 import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.JsonNull
@@ -48,4 +50,10 @@ object VedleggSerializer : JsonTransformingSerializer<Vedlegg>(Vedlegg.serialize
             JsonObject(element - "key" + ("value" to element.getValue("key")))
         else -> element
     }
+}
+
+/** Normaliserer enkeltvedlegg til en liste. Serialisering bruker alltid listeformen. */
+object VedleggslisteSerializer : JsonTransformingSerializer<List<Vedlegg>>(ListSerializer(VedleggSerializer)) {
+    override fun transformDeserialize(element: JsonElement): JsonElement =
+        if (element is JsonArray) element else JsonArray(listOf(element))
 }

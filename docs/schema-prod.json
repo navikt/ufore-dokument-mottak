@@ -1,0 +1,3306 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://skjemabygging.nav.no/forms/nav120605/spec?revision=76",
+  "title": "Søknad om uføretrygd",
+  "type": "object",
+  "properties": {
+    "language": {
+      "type": "string"
+    },
+    "data": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "object",
+          "properties": {
+            "erDuIArbeidNa": {
+              "type": "string",
+              "title": "Skal du jobbe ved siden av uføretrygden?  ",
+              "enum": [
+                "ja",
+                "nei"
+              ]
+            },
+            "oppgiForventetInntektPerManed": {
+              "type": "number",
+              "title": "Oppgi forventet månedsinntekt (før skatt) som arbeidstaker"
+            },
+            "erDuNaeringsdrivende": {
+              "type": "string",
+              "title": "Har du eget firma?",
+              "enum": [
+                "ja",
+                "nei"
+              ]
+            },
+            "skalArbeide": {
+              "title": "har firma",
+              "type": "object",
+              "properties": {
+                "informasjonOmFirma": {
+                  "type": "string",
+                  "title": "Informasjon om firma"
+                },
+                "jegOnskerALeggeVedOpplysningerOmArbeidsforholdSomEgetVedlegg": {
+                  "type": "boolean",
+                  "title": "Jeg ønsker å legge ved opplysninger om arbeidsforhold som eget vedlegg"
+                }
+              },
+              "additionalProperties": false
+            },
+            "firmaetsOrganisasjonsnummer": {
+              "type": "string",
+              "title": "Firmaets organisasjonsnummer"
+            },
+            "firmaetsNavn1": {
+              "type": "string",
+              "title": "Firmaets navn"
+            },
+            "driverDuGardsbruk": {
+              "type": "string",
+              "title": "Driver du gårdsbruk?",
+              "enum": [
+                "ja",
+                "nei"
+              ]
+            },
+            "dineOpplysninger": {
+              "title": "Dine opplysninger",
+              "type": "object",
+              "properties": {
+                "fornavn": {
+                  "type": "string",
+                  "title": "Fornavn"
+                },
+                "etternavn": {
+                  "type": "string",
+                  "title": "Etternavn"
+                },
+                "identitet": {
+                  "title": "Identitet",
+                  "type": "object",
+                  "properties": {
+                    "harDuFodselsnummer": {
+                      "type": "string",
+                      "title": "Do you have identity number"
+                    },
+                    "identitetsnummer": {
+                      "type": "string",
+                      "title": "Identity number"
+                    },
+                    "fodselsdato": {
+                      "type": "string",
+                      "title": "Birth date"
+                    }
+                  },
+                  "additionalProperties": false
+                },
+                "adresse": {
+                  "title": "Adresse",
+                  "type": "object",
+                  "properties": {},
+                  "additionalProperties": true,
+                  "$comment": "Address shape may vary by address subtype and is intentionally permissive."
+                },
+                "adresseVarighet": {
+                  "title": "Adresse varighet",
+                  "type": "object",
+                  "properties": {
+                    "gyldigFraOgMed": {
+                      "type": "string",
+                      "format": "date"
+                    },
+                    "gyldigTilOgMed": {
+                      "anyOf": [
+                        {
+                          "type": "string",
+                          "format": "date"
+                        },
+                        {
+                          "const": "",
+                          "type": "string"
+                        }
+                      ]
+                    }
+                  },
+                  "required": [
+                    "gyldigFraOgMed"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "required": [
+                "fornavn",
+                "etternavn",
+                "identitet"
+              ],
+              "additionalProperties": false
+            },
+            "hvaErDinSivilstatus": {
+              "type": "string",
+              "title": "Hva er din sivilstatus?",
+              "enum": [
+                "enslig",
+                "giftEllerPartner",
+                "samboer",
+                "skilt",
+                "separert",
+                "enkeEllerEnkemann"
+              ]
+            },
+            "fornavn": {
+              "type": "string",
+              "title": "Fornavn"
+            },
+            "etternavn": {
+              "type": "string",
+              "title": "Etternavn"
+            },
+            "harDinEktefelleEllerPartnerNorskFodselsnummerEllerDNummer": {
+              "type": "string",
+              "title": "Har din ektefelle eller partner norsk fødselsnummer eller d-nummer?",
+              "enum": [
+                "ja",
+                "nei"
+              ]
+            },
+            "ektefelleEllerPartnersFodselsnummerEllerDNummer": {
+              "type": "string",
+              "title": "Ektefelle eller partners fødselsnummer eller d-nummer"
+            },
+            "ektefelleEllerPartnersFodselsdatoDdMmAaaa": {
+              "type": "string",
+              "title": "Ektefelle eller partners fødselsdato (dd.mm.åååå)",
+              "format": "date"
+            },
+            "erDinEktefelleEllerPartnerUtenlandskStatsborger": {
+              "type": "string",
+              "title": "Er din ektefelle eller partner utenlandsk statsborger?",
+              "enum": [
+                "ja",
+                "nei"
+              ]
+            },
+            "hvaErDinEktefelleEllerPartnersStatsborgerskap": {
+              "type": "string",
+              "title": "Hva er din ektefelle eller partners statsborgerskap?"
+            },
+            "haddeDinEktefelleEllerPartnerEtAnnetNavnForDereGiftetDere": {
+              "type": "string",
+              "title": "Hadde din ektefelle eller partner et annet navn før dere giftet dere?",
+              "enum": [
+                "ja",
+                "nei"
+              ]
+            },
+            "ektefellesEllerPartnersTidligereNavn": {
+              "type": "string",
+              "title": "Ektefelles eller partners tidligere navn"
+            },
+            "erDereBosattPaSammeAdresse": {
+              "type": "string",
+              "title": "Er dere bosatt på samme adresse?",
+              "enum": [
+                "ja",
+                "nei"
+              ]
+            },
+            "fornavn1": {
+              "type": "string",
+              "title": "Fornavn"
+            },
+            "etternavn1": {
+              "type": "string",
+              "title": "Etternavn"
+            },
+            "harDinSamboerNorskFodselsnummerEllerDNummer": {
+              "type": "string",
+              "title": "Har din samboer norsk fødselsnummer eller d-nummer?",
+              "enum": [
+                "ja",
+                "nei"
+              ]
+            },
+            "samboersFodselsnummerEllerDNummer": {
+              "type": "string",
+              "title": "Samboers fødselsnummer eller d-nummer"
+            },
+            "samboersFodselsdatoDdMmAaaa": {
+              "type": "string",
+              "title": "Samboers fødselsdato (dd.mm.åååå)",
+              "format": "date"
+            },
+            "erDinSamboerUtenlandskStatsborger": {
+              "type": "string",
+              "title": "Er din samboer utenlandsk statsborger?",
+              "enum": [
+                "ja",
+                "nei"
+              ]
+            },
+            "hvaErDinSamboersStatsborgerskap": {
+              "type": "string",
+              "title": "Hva er din samboers statsborgerskap?"
+            },
+            "erDuOgDinSamboerBosattPaSammeAdresse": {
+              "type": "string",
+              "title": "Er du og din samboer bosatt på samme adresse?",
+              "enum": [
+                "ja",
+                "nei"
+              ]
+            },
+            "narBleDereSamboereManedOgAr": {
+              "type": "string",
+              "title": "Når ble dere samboere (måned og år)?"
+            },
+            "harDuOgDinSamboerFellesBarn": {
+              "type": "string",
+              "title": "Har du og din samboer felles barn?",
+              "enum": [
+                "ja",
+                "nei"
+              ]
+            },
+            "arbeidIDag": {
+              "title": "Arbeid i dag",
+              "type": "object",
+              "properties": {
+                "mottarDuFostergodtgjorelseEllerOmsorgslonn": {
+                  "type": "string",
+                  "title": "Mottar du fostergodtgjørelse eller omsorgslønn?",
+                  "enum": [
+                    "ja",
+                    "nei"
+                  ]
+                },
+                "mottarDuEllerVilDuFaEtterlonnEllerAnnetSluttoppgjorFraArbeidsgiver": {
+                  "type": "string",
+                  "title": "Mottar du eller vil du få etterlønn eller annet sluttoppgjør fra arbeidsgiver?",
+                  "enum": [
+                    "ja",
+                    "nei"
+                  ]
+                }
+              },
+              "additionalProperties": false
+            },
+            "naeringsdrivende": {
+              "title": "næringsdrivende",
+              "type": "object",
+              "properties": {
+                "erDuAnsattIEgenBedriftAksjeselskap": {
+                  "type": "string",
+                  "title": "Er du ansatt i egen bedrift/aksjeselskap?",
+                  "enum": [
+                    "ja",
+                    "nei"
+                  ]
+                },
+                "mottarDuStyrehonorarOgEllerGodtgjorelserIForbindelseMedVerv": {
+                  "type": "string",
+                  "title": "Mottar du styrehonorar og/eller godtgjørelser i forbindelse med verv?",
+                  "enum": [
+                    "ja",
+                    "nei"
+                  ]
+                }
+              },
+              "additionalProperties": false
+            },
+            "varDuArbeidstakerDaDuBleSyk": {
+              "type": "string",
+              "title": "Var du arbeidstaker da du ble syk?",
+              "enum": [
+                "ja",
+                "nei"
+              ]
+            },
+            "arbeidsgiversNavn": {
+              "type": "array",
+              "title": "Arbeidsgivere",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "arbeidsgiversNavn1": {
+                    "type": "string",
+                    "title": "Arbeidsgivers navn"
+                  },
+                  "stillingsprosent": {
+                    "type": "number",
+                    "title": "Stillingsprosent",
+                    "minimum": 0,
+                    "maximum": 100
+                  }
+                },
+                "additionalProperties": false
+              }
+            },
+            "varDuNaeringsdrivendeEllerGardbrukerDaDuBleSyk": {
+              "type": "string",
+              "title": "Var du næringsdrivende eller gårdbruker da du ble syk?",
+              "enum": [
+                "ja",
+                "nei"
+              ]
+            },
+            "harDuAvsluttetNaeringsvirksomheten": {
+              "type": "string",
+              "title": "Har du avsluttet næringsvirksomheten?",
+              "enum": [
+                "ja",
+                "nei"
+              ]
+            },
+            "harDuAvtjentMilitaerEllerSivilForstegangstjeneste": {
+              "type": "string",
+              "title": "Har du avtjent militær eller sivil førstegangstjeneste?",
+              "enum": [
+                "ja",
+                "nei"
+              ]
+            },
+            "hvilketArstallAvtjenteDuMilitaerEllerSivilForstegangstjeneste": {
+              "type": "integer",
+              "title": "Hvilket årstall avtjente du militær eller sivil førstegangstjeneste?",
+              "minimum": 1000,
+              "maximum": 9999
+            },
+            "harDuBoddOgEllerArbeidetUtenforNorgeEtterAtDuFylte16Ar": {
+              "type": "string",
+              "title": "Har du bodd og/eller arbeidet utenfor Norge etter at du fylte 16 år?",
+              "enum": [
+                "ja",
+                "nei"
+              ]
+            },
+            "opplysningerOmArbeidOgOppholdIUtlandet": {
+              "type": "array",
+              "title": "Opplysninger om arbeid og opphold i utlandet",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "oppholdsland": {
+                    "title": "Oppholdsland",
+                    "type": "object",
+                    "properties": {
+                      "value": {
+                        "type": "string",
+                        "title": "Country code"
+                      },
+                      "label": {
+                        "type": "string",
+                        "title": "Country label"
+                      }
+                    },
+                    "required": [
+                      "value",
+                      "label"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "oppholdFraManedOgAr1": {
+                    "type": "string",
+                    "title": "Opphold fra (måned og år)"
+                  },
+                  "oppholdTilManedOgAr1": {
+                    "type": "string",
+                    "title": "Opphold til (måned og år)"
+                  },
+                  "boddEllerArbeidet": {
+                    "type": "object",
+                    "title": "Har du bodd eller arbeidet i oppholdslandet?",
+                    "properties": {
+                      "bodd": {
+                        "type": "boolean",
+                        "title": "Bodd"
+                      },
+                      "arbeidet": {
+                        "type": "boolean",
+                        "title": "Arbeidet"
+                      }
+                    },
+                    "additionalProperties": false
+                  }
+                },
+                "additionalProperties": false
+              }
+            },
+            "erDuNorskStatsborger": {
+              "type": "string",
+              "title": "Er du norsk statsborger?",
+              "enum": [
+                "ja",
+                "nei"
+              ]
+            },
+            "statsborgerskap": {
+              "type": "string",
+              "title": "Statsborgerskap"
+            },
+            "mottarDuPensjonFraUtlandet": {
+              "type": "string",
+              "title": "Mottar du pensjon fra utlandet?",
+              "enum": [
+                "ja",
+                "nei"
+              ]
+            },
+            "opplysningerOmPensjonFraUtlandet": {
+              "type": "array",
+              "title": "Opplysninger om pensjon fra utlandet",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "landDuMottarPensjonFra": {
+                    "title": "Land du mottar pensjon fra",
+                    "type": "object",
+                    "properties": {
+                      "value": {
+                        "type": "string",
+                        "title": "Country code"
+                      },
+                      "label": {
+                        "type": "string",
+                        "title": "Country label"
+                      }
+                    },
+                    "required": [
+                      "value",
+                      "label"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "typePensjon": {
+                    "type": "string",
+                    "title": "Type pensjon"
+                  },
+                  "belopPerArForSkatt": {
+                    "type": "number",
+                    "title": "Beløp per år før skatt"
+                  }
+                },
+                "additionalProperties": false
+              }
+            },
+            "harDuEnGodkjentYrkesskadeEllerYrkessykdomSomErArsakTilAtDuSokerOmUforetrygd": {
+              "type": "string",
+              "title": "Har du en godkjent yrkesskade eller yrkessykdom, som er årsak til at du søker om uføretrygd? ",
+              "enum": [
+                "ja",
+                "nei"
+              ]
+            },
+            "harDuBarnUnder18Ar": {
+              "type": "string",
+              "title": "Har du barn under 18 år?",
+              "enum": [
+                "ja",
+                "nei"
+              ]
+            },
+            "erDinSamboerForelderTilBarnetDuSokerBarnetilleggFor": {
+              "type": "string",
+              "title": "Er din samboer forelder til barnet du søker barnetillegg for?",
+              "enum": [
+                "ja",
+                "nei"
+              ]
+            },
+            "erDinEktefelleEllerPartnerForelderTilBarnetDuSokerBarnetilleggFor": {
+              "type": "string",
+              "title": "Er din ektefelle eller partner forelder til barnet du søker barnetillegg for?",
+              "enum": [
+                "ja",
+                "nei"
+              ]
+            },
+            "opplysningerOmBarnUnder18Ar": {
+              "type": "array",
+              "title": "Opplysninger om barn under 18 år",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "personalia": {
+                    "title": "Personalia",
+                    "type": "object",
+                    "properties": {
+                      "fornavn": {
+                        "type": "string",
+                        "title": "Fornavn"
+                      },
+                      "etternavn": {
+                        "type": "string",
+                        "title": "Etternavn"
+                      },
+                      "harDetteBarnetNorskFodselsnummerEllerDNummer": {
+                        "type": "string",
+                        "title": "Har dette barnet norsk fødselsnummer eller D-nummer?",
+                        "enum": [
+                          "ja",
+                          "nei"
+                        ]
+                      },
+                      "fodselsnummerDNummer": {
+                        "type": "string",
+                        "title": "Fødselsnummer / D-nummer"
+                      },
+                      "fodselsdatoDdMmAaaa": {
+                        "type": "string",
+                        "title": "Fødselsdato (dd.mm.åååå)",
+                        "format": "date"
+                      },
+                      "harBarnetEllerBarnaLegitimasjonMedBilde": {
+                        "type": "string",
+                        "title": "Har barnet eller barna legitimasjon med bilde?",
+                        "enum": [
+                          "ja",
+                          "nei"
+                        ]
+                      }
+                    },
+                    "additionalProperties": false
+                  },
+                  "borBarnetOgBeggeForeldrenePaSammeAdresse": {
+                    "type": "string",
+                    "title": "Bor barnet og begge foreldrene på samme adresse?",
+                    "enum": [
+                      "ja",
+                      "nei"
+                    ]
+                  },
+                  "harDereAvtaleOmDeltBostedEtterBarneloven36": {
+                    "type": "string",
+                    "title": "Har dere avtale om delt bosted etter barneloven § 36?",
+                    "enum": [
+                      "ja",
+                      "nei"
+                    ]
+                  },
+                  "borBarnetMedDeg": {
+                    "type": "string",
+                    "title": "Bor barnet med deg?",
+                    "enum": [
+                      "ja",
+                      "nei"
+                    ]
+                  },
+                  "forsorgerDuBarnet": {
+                    "type": "string",
+                    "title": "Forsørger du barnet?",
+                    "enum": [
+                      "ja",
+                      "nei"
+                    ]
+                  },
+                  "betalesDetBidragForBarnetViaNav": {
+                    "type": "string",
+                    "title": "Betales det bidrag for barnet via Nav?",
+                    "enum": [
+                      "ja",
+                      "nei"
+                    ]
+                  },
+                  "erBarnetDittFosterbarn": {
+                    "type": "string",
+                    "title": "Er barnet ditt fosterbarn?",
+                    "enum": [
+                      "ja",
+                      "nei"
+                    ]
+                  }
+                },
+                "additionalProperties": false
+              }
+            },
+            "aretInntektsopplysningeneGjelderFor": {
+              "type": "integer",
+              "title": "Året inntektsopplysningene gjelder for",
+              "minimum": 2015,
+              "maximum": 2050
+            },
+            "harDuEllerForventerDuAFaArbeidsinntekt": {
+              "type": "string",
+              "title": "Har du eller forventer du å få arbeidsinntekt?",
+              "enum": [
+                "ja",
+                "nei"
+              ]
+            },
+            "arligBruttoArbeidsinntekt": {
+              "type": "number",
+              "title": "Årlig brutto arbeidsinntekt"
+            },
+            "mottarDuEnEllerFlerePensjonsgivendeYtelserFraNav": {
+              "type": "string",
+              "title": "Mottar du en eller flere pensjonsgivende ytelser fra Nav?",
+              "enum": [
+                "ja",
+                "nei"
+              ]
+            },
+            "forventetBruttoArligPensjonsgivendeYtelser": {
+              "type": "number",
+              "title": "Forventet brutto årlig pensjonsgivende ytelser"
+            },
+            "harDuEllerForventerDuAFaNaeringsinntekt": {
+              "type": "string",
+              "title": "Har du eller forventer du å få næringsinntekt?",
+              "enum": [
+                "ja",
+                "nei"
+              ]
+            },
+            "bruttoArligNaeringsinntekt": {
+              "type": "number",
+              "title": "Brutto årlig næringsinntekt"
+            },
+            "harDuEllerForventerDuAFaInntektFraUtlandet": {
+              "type": "string",
+              "title": "Har du eller forventer du å få inntekt fra utlandet?",
+              "enum": [
+                "ja",
+                "nei"
+              ]
+            },
+            "bruttoArsinntektFraUtlandet": {
+              "type": "number",
+              "title": "Brutto årsinntekt fra utlandet."
+            },
+            "mottarDuPensjonFraAndreEnnNavOffentligEllerPrivat": {
+              "type": "string",
+              "title": "Mottar du pensjon fra andre enn Nav (offentlig eller privat)?",
+              "enum": [
+                "ja",
+                "nei"
+              ]
+            },
+            "bruttoArligPensjonFraAndreEnnNav": {
+              "type": "number",
+              "title": "Brutto årlig pensjon fra andre enn Nav"
+            },
+            "mottarDuFamiliepleieytelseOgEllerKrigspensjonFraNav": {
+              "type": "string",
+              "title": "Mottar du  familiepleieytelse og/eller krigspensjon fra Nav?",
+              "enum": [
+                "ja",
+                "nei"
+              ]
+            },
+            "bruttoArligFamiliepleieytelseOgKrigspensjonFraNav": {
+              "type": "number",
+              "title": "Brutto årlig  familiepleieytelse og krigspensjon fra Nav"
+            },
+            "mottarDuPensjonFraUtlandet1": {
+              "type": "string",
+              "title": "Mottar du pensjon fra utlandet?",
+              "enum": [
+                "ja",
+                "nei"
+              ]
+            },
+            "bruttoArligPensjonFraUtlandet": {
+              "type": "number",
+              "title": "Brutto årlig pensjon fra utlandet"
+            },
+            "harDinEktefelleEllerPartnerArbeidsinntekt": {
+              "type": "string",
+              "title": "Har din ektefelle eller partner arbeidsinntekt?",
+              "enum": [
+                "ja",
+                "nei"
+              ]
+            },
+            "belopArligBruttoArbeidsinntekt": {
+              "type": "number",
+              "title": "Beløp årlig brutto arbeidsinntekt"
+            },
+            "mottarDinEktefelleEllerPartnerEnEllerFlerePensjonsgivendeYtelserFraNav": {
+              "type": "string",
+              "title": "Mottar din ektefelle eller partner en eller flere pensjonsgivende ytelser fra Nav?",
+              "enum": [
+                "ja",
+                "nei"
+              ]
+            },
+            "forventetBruttoArligPensjonsgivendeYtelser2": {
+              "type": "number",
+              "title": "Forventet brutto årlig pensjonsgivende ytelser"
+            },
+            "harDinEktefelleEllerPartnerNaeringsinntekt": {
+              "type": "string",
+              "title": "Har din ektefelle eller partner næringsinntekt?",
+              "enum": [
+                "ja",
+                "nei"
+              ]
+            },
+            "bruttoArligNaeringsinntekt1": {
+              "type": "number",
+              "title": "Brutto årlig næringsinntekt"
+            },
+            "harDinEktefelleEllerPartnerInntektFraUtlandet": {
+              "type": "string",
+              "title": "Har din ektefelle eller partner inntekt fra utlandet?",
+              "enum": [
+                "ja",
+                "nei"
+              ]
+            },
+            "bruttoArsinntektFraUtlandet2": {
+              "type": "number",
+              "title": "Brutto årsinntekt fra utlandet."
+            },
+            "mottarDinEktefelleEllerPartnerPensjonFraAndreEnnNavOffentligEllerPrivat": {
+              "type": "string",
+              "title": "Mottar din ektefelle eller partner pensjon fra andre enn Nav (offentlig eller privat)?",
+              "enum": [
+                "ja",
+                "nei"
+              ]
+            },
+            "bruttoArligPensjonFraAndreEnnNav2": {
+              "type": "number",
+              "title": "Brutto årlig pensjon fra andre enn Nav"
+            },
+            "mottarDinEktefelleEllerPartnerIntroduksjonsstonadSupplerendeStonadEllerKrigspensjonFraNav": {
+              "type": "string",
+              "title": "Mottar din ektefelle eller partner introduksjonsstønad, supplerende stønad eller krigspensjon fra Nav?",
+              "enum": [
+                "ja",
+                "nei"
+              ]
+            },
+            "bruttoArligIntroduksjonsstonadSupplerendeStonadOgKrigspensjonFraNav": {
+              "type": "number",
+              "title": "Brutto årlig introduksjonsstønad, supplerende stønad og krigspensjon fra Nav"
+            },
+            "mottarEktefelleEllerPartnerPensjonFraUtlandet": {
+              "type": "string",
+              "title": "Mottar ektefelle eller partner pensjon fra utlandet?",
+              "enum": [
+                "ja",
+                "nei"
+              ]
+            },
+            "bruttoArligPensjonFraUtlandet2": {
+              "type": "number",
+              "title": "Brutto årlig pensjon fra utlandet"
+            },
+            "harDinSamboerPartnerArbeidsinntekt": {
+              "type": "string",
+              "title": "Har din samboer arbeidsinntekt?",
+              "enum": [
+                "ja",
+                "nei"
+              ]
+            },
+            "belopArligBruttoArbeidsinntekt1": {
+              "type": "number",
+              "title": "Beløp årlig brutto arbeidsinntekt"
+            },
+            "mottarDinSamboerEnEllerFlerePensjonsgivendeYtelserFraNav": {
+              "type": "string",
+              "title": "Mottar din samboer én eller flere pensjonsgivende ytelser fra Nav?",
+              "enum": [
+                "ja",
+                "nei"
+              ]
+            },
+            "forventetBruttoArligPensjonsgivendeYtelser3": {
+              "type": "number",
+              "title": "Forventet brutto årlig pensjonsgivende ytelser"
+            },
+            "harDinSamboerNaeringsinntekt": {
+              "type": "string",
+              "title": "Har din samboer næringsinntekt?",
+              "enum": [
+                "ja",
+                "nei"
+              ]
+            },
+            "bruttoArligNaeringsinntekt2": {
+              "type": "number",
+              "title": "Brutto årlig næringsinntekt"
+            },
+            "harDinSamboerInntektFraUtlandet": {
+              "type": "string",
+              "title": "Har din samboer inntekt fra utlandet?",
+              "enum": [
+                "ja",
+                "nei"
+              ]
+            },
+            "bruttoArsinntektFraUtlandet3": {
+              "type": "number",
+              "title": "Brutto årsinntekt fra utlandet."
+            },
+            "mottarDinSamboerPensjonFraAndreEnnNavOffentligEllerPrivat": {
+              "type": "string",
+              "title": "Mottar din samboer pensjon fra andre enn Nav (offentlig eller privat)?",
+              "enum": [
+                "ja",
+                "nei"
+              ]
+            },
+            "bruttoArligPensjonFraAndreEnnNav3": {
+              "type": "number",
+              "title": "Brutto årlig pensjon fra andre enn Nav"
+            },
+            "mottarSamboerenDinIntroduksjonsstonadSupplerendeStonadEllerKrigspensjonFraNav": {
+              "type": "string",
+              "title": "Mottar samboeren din introduksjonsstønad, supplerende stønad eller krigspensjon fra Nav?",
+              "enum": [
+                "ja",
+                "nei"
+              ]
+            },
+            "bruttoArligIntroduksjonsstonadSupplerendeStonadOgKrigspensjonFraNav2": {
+              "type": "number",
+              "title": "Brutto årlig  introduksjonsstønad, supplerende stønad og krigspensjon fra Nav"
+            },
+            "mottarSamboerenDinPensjonFraUtlandet": {
+              "type": "string",
+              "title": "Mottar samboeren din pensjon fra utlandet?",
+              "enum": [
+                "ja",
+                "nei"
+              ]
+            },
+            "bruttoArligPensjonFraUtlandet3": {
+              "type": "number",
+              "title": "Brutto årlig pensjon fra utlandet"
+            },
+            "borDuUtenforNorgeEllerEos": {
+              "type": "string",
+              "title": "Bor du utenfor Norge eller EØS?",
+              "enum": [
+                "ja",
+                "nei"
+              ]
+            },
+            "harDuHattOppholdINorge": {
+              "type": "string",
+              "title": "Har du hatt opphold i Norge?",
+              "enum": [
+                "ja",
+                "nei"
+              ]
+            },
+            "periodeneDuHarBoddINorge": {
+              "type": "array",
+              "title": "Periodene du har bodd i Norge",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "oppholdINorgeFraManedOgAr1": {
+                    "type": "string",
+                    "title": "Opphold i Norge fra (måned og år)"
+                  },
+                  "oppholdINorgeTilManedOgAr1": {
+                    "type": "string",
+                    "title": "Opphold i Norge til (måned og år)"
+                  }
+                },
+                "additionalProperties": false
+              }
+            },
+            "erDuIArbeidNa1": {
+              "type": "string",
+              "title": "Er du i arbeid nå?",
+              "enum": [
+                "ja",
+                "nei"
+              ]
+            },
+            "narSluttetDuAArbeideManedOgAr": {
+              "type": "string",
+              "title": "Når sluttet du å arbeide (måned og år)?"
+            },
+            "harDuUtdanning": {
+              "type": "string",
+              "title": "Har du utdanning?",
+              "enum": [
+                "ja",
+                "nei"
+              ]
+            },
+            "utdanningenDin": {
+              "type": "array",
+              "title": "Utdanningen din",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "skoleKurs": {
+                    "type": "string",
+                    "title": "Skole/kurs"
+                  },
+                  "utdanningFraManedOgAr": {
+                    "type": "string",
+                    "title": "Utdanning fra (måned og år)"
+                  },
+                  "utdanningTilManedOgAr": {
+                    "type": "string",
+                    "title": "Utdanning til (måned og år)"
+                  },
+                  "gradTittel": {
+                    "type": "string",
+                    "title": "Grad/tittel "
+                  }
+                },
+                "additionalProperties": false
+              }
+            },
+            "harDuArbeidsforhold": {
+              "type": "string",
+              "title": "Har du arbeidsforhold?",
+              "enum": [
+                "ja",
+                "nei"
+              ]
+            },
+            "arbeidsforholdeneDine": {
+              "type": "array",
+              "title": "Arbeidsforholdene dine",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "arbeidsgiver": {
+                    "type": "string",
+                    "title": "Arbeidsgiver"
+                  },
+                  "stilling": {
+                    "type": "string",
+                    "title": "Stilling"
+                  },
+                  "stillingsprosent": {
+                    "type": "number",
+                    "title": "Stillingsprosent",
+                    "minimum": 0,
+                    "maximum": 100
+                  },
+                  "ansattFraManedOgAr1": {
+                    "type": "string",
+                    "title": "Ansatt fra (måned og år)"
+                  },
+                  "ansattTilManedOgAr1": {
+                    "type": "string",
+                    "title": "Ansatt til (måned og år)"
+                  }
+                },
+                "additionalProperties": false
+              }
+            },
+            "harDuAvtaltMedNavAtDuSkalSendeMerDokumentasjon": {
+              "type": "string",
+              "title": "Har du avtalt med Nav at du skal sende mer dokumentasjon?",
+              "enum": [
+                "ja",
+                "nei"
+              ]
+            },
+            "hvilkenDokumentasjonHarDuAvtaltMedNavDuSkalSende": {
+              "type": "string",
+              "title": "Hvilken dokumentasjon har du avtalt med Nav du skal  sende?"
+            },
+            "jegErKjentMedAtNavKanInnhenteDeOpplysningeneSomErNodvendigForAAvgjoreSoknadenMinOpplysningeneErGittEtterBesteSkjonnOgOverbevisningOgErSaFullstendigeSomMuligErklaeringenOgUnderskriftenGjelderHeleSoknadenOmUforetrygd": {
+              "type": "boolean",
+              "title": "Jeg er kjent med at Nav kan innhente de opplysningene som er nødvendig for å avgjøre søknaden min. Opplysningene er gitt etter beste skjønn og overbevisning og er så fullstendige som mulig. Erklæringen og underskriften gjelder hele søknaden om uføretrygd."
+            },
+            "kopiAvFodselsattest": {
+              "title": "Kopi av fødselsattest",
+              "anyOf": [
+                {
+                  "type": "object",
+                  "title": "Kopi av fødselsattest",
+                  "properties": {
+                    "attachmentId": {
+                      "type": "string"
+                    },
+                    "navId": {
+                      "type": "string",
+                      "enum": [
+                        "eedb2dr"
+                      ]
+                    },
+                    "type": {
+                      "type": "string",
+                      "enum": [
+                        "default"
+                      ]
+                    },
+                    "value": {
+                      "type": "string",
+                      "title": "Kopi av fødselsattest",
+                      "enum": [
+                        "ettersender",
+                        "leggerVedNaa",
+                        "levertTidligere"
+                      ]
+                    },
+                    "title": {
+                      "type": "string"
+                    },
+                    "additionalDocumentation": {
+                      "type": "string"
+                    },
+                    "files": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "fileId": {
+                            "type": "string"
+                          },
+                          "attachmentId": {
+                            "type": "string"
+                          },
+                          "innsendingId": {
+                            "type": "string"
+                          },
+                          "fileName": {
+                            "type": "string"
+                          },
+                          "size": {
+                            "type": "number"
+                          }
+                        },
+                        "required": [
+                          "fileId",
+                          "attachmentId",
+                          "innsendingId",
+                          "fileName",
+                          "size"
+                        ],
+                        "additionalProperties": false
+                      }
+                    }
+                  },
+                  "required": [
+                    "attachmentId",
+                    "navId",
+                    "type"
+                  ],
+                  "additionalProperties": false
+                },
+                {
+                  "type": "object",
+                  "title": "Kopi av fødselsattest",
+                  "properties": {
+                    "key": {
+                      "type": "string",
+                      "title": "Kopi av fødselsattest",
+                      "enum": [
+                        "ettersender",
+                        "leggerVedNaa",
+                        "levertTidligere"
+                      ]
+                    },
+                    "additionalDocumentation": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "key"
+                  ],
+                  "additionalProperties": false
+                },
+                {
+                  "type": "string",
+                  "title": "Kopi av fødselsattest",
+                  "enum": [
+                    "ettersender",
+                    "leggerVedNaa",
+                    "levertTidligere"
+                  ]
+                }
+              ]
+            },
+            "kopiAvBarnetsLegitimasjon": {
+              "title": "Kopi av barnets legitimasjon",
+              "anyOf": [
+                {
+                  "type": "object",
+                  "title": "Kopi av barnets legitimasjon",
+                  "properties": {
+                    "attachmentId": {
+                      "type": "string"
+                    },
+                    "navId": {
+                      "type": "string",
+                      "enum": [
+                        "e2aljka"
+                      ]
+                    },
+                    "type": {
+                      "type": "string",
+                      "enum": [
+                        "default"
+                      ]
+                    },
+                    "value": {
+                      "type": "string",
+                      "title": "Kopi av barnets legitimasjon",
+                      "enum": [
+                        "ettersender",
+                        "leggerVedNaa",
+                        "levertTidligere"
+                      ]
+                    },
+                    "title": {
+                      "type": "string"
+                    },
+                    "additionalDocumentation": {
+                      "type": "string"
+                    },
+                    "files": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "fileId": {
+                            "type": "string"
+                          },
+                          "attachmentId": {
+                            "type": "string"
+                          },
+                          "innsendingId": {
+                            "type": "string"
+                          },
+                          "fileName": {
+                            "type": "string"
+                          },
+                          "size": {
+                            "type": "number"
+                          }
+                        },
+                        "required": [
+                          "fileId",
+                          "attachmentId",
+                          "innsendingId",
+                          "fileName",
+                          "size"
+                        ],
+                        "additionalProperties": false
+                      }
+                    }
+                  },
+                  "required": [
+                    "attachmentId",
+                    "navId",
+                    "type"
+                  ],
+                  "additionalProperties": false
+                },
+                {
+                  "type": "object",
+                  "title": "Kopi av barnets legitimasjon",
+                  "properties": {
+                    "key": {
+                      "type": "string",
+                      "title": "Kopi av barnets legitimasjon",
+                      "enum": [
+                        "ettersender",
+                        "leggerVedNaa",
+                        "levertTidligere"
+                      ]
+                    },
+                    "additionalDocumentation": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "key"
+                  ],
+                  "additionalProperties": false
+                },
+                {
+                  "type": "string",
+                  "title": "Kopi av barnets legitimasjon",
+                  "enum": [
+                    "ettersender",
+                    "leggerVedNaa",
+                    "levertTidligere"
+                  ]
+                }
+              ]
+            },
+            "forsorgelsesEllerSamvaersavtale": {
+              "title": "Forsørgelses- eller samværsavtale",
+              "anyOf": [
+                {
+                  "type": "object",
+                  "title": "Forsørgelses- eller samværsavtale",
+                  "properties": {
+                    "attachmentId": {
+                      "type": "string"
+                    },
+                    "navId": {
+                      "type": "string",
+                      "enum": [
+                        "eu5lub4"
+                      ]
+                    },
+                    "type": {
+                      "type": "string",
+                      "enum": [
+                        "default"
+                      ]
+                    },
+                    "value": {
+                      "type": "string",
+                      "title": "Forsørgelses- eller samværsavtale",
+                      "enum": [
+                        "ettersender",
+                        "leggerVedNaa",
+                        "levertTidligere"
+                      ]
+                    },
+                    "title": {
+                      "type": "string"
+                    },
+                    "additionalDocumentation": {
+                      "type": "string"
+                    },
+                    "files": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "fileId": {
+                            "type": "string"
+                          },
+                          "attachmentId": {
+                            "type": "string"
+                          },
+                          "innsendingId": {
+                            "type": "string"
+                          },
+                          "fileName": {
+                            "type": "string"
+                          },
+                          "size": {
+                            "type": "number"
+                          }
+                        },
+                        "required": [
+                          "fileId",
+                          "attachmentId",
+                          "innsendingId",
+                          "fileName",
+                          "size"
+                        ],
+                        "additionalProperties": false
+                      }
+                    }
+                  },
+                  "required": [
+                    "attachmentId",
+                    "navId",
+                    "type"
+                  ],
+                  "additionalProperties": false
+                },
+                {
+                  "type": "object",
+                  "title": "Forsørgelses- eller samværsavtale",
+                  "properties": {
+                    "key": {
+                      "type": "string",
+                      "title": "Forsørgelses- eller samværsavtale",
+                      "enum": [
+                        "ettersender",
+                        "leggerVedNaa",
+                        "levertTidligere"
+                      ]
+                    },
+                    "additionalDocumentation": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "key"
+                  ],
+                  "additionalProperties": false
+                },
+                {
+                  "type": "string",
+                  "title": "Forsørgelses- eller samværsavtale",
+                  "enum": [
+                    "ettersender",
+                    "leggerVedNaa",
+                    "levertTidligere"
+                  ]
+                }
+              ]
+            },
+            "passEllerVigselsattestTilDinEktefelleEllerPartner": {
+              "title": "Pass eller vigselsattest til din ektefelle eller partner",
+              "anyOf": [
+                {
+                  "type": "object",
+                  "title": "Pass eller vigselsattest til din ektefelle eller partner",
+                  "properties": {
+                    "attachmentId": {
+                      "type": "string"
+                    },
+                    "navId": {
+                      "type": "string",
+                      "enum": [
+                        "ezi4et"
+                      ]
+                    },
+                    "type": {
+                      "type": "string",
+                      "enum": [
+                        "default"
+                      ]
+                    },
+                    "value": {
+                      "type": "string",
+                      "title": "Pass eller vigselsattest til din ektefelle eller partner",
+                      "enum": [
+                        "ettersender",
+                        "leggerVedNaa",
+                        "levertTidligere"
+                      ]
+                    },
+                    "title": {
+                      "type": "string"
+                    },
+                    "additionalDocumentation": {
+                      "type": "string"
+                    },
+                    "files": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "fileId": {
+                            "type": "string"
+                          },
+                          "attachmentId": {
+                            "type": "string"
+                          },
+                          "innsendingId": {
+                            "type": "string"
+                          },
+                          "fileName": {
+                            "type": "string"
+                          },
+                          "size": {
+                            "type": "number"
+                          }
+                        },
+                        "required": [
+                          "fileId",
+                          "attachmentId",
+                          "innsendingId",
+                          "fileName",
+                          "size"
+                        ],
+                        "additionalProperties": false
+                      }
+                    }
+                  },
+                  "required": [
+                    "attachmentId",
+                    "navId",
+                    "type"
+                  ],
+                  "additionalProperties": false
+                },
+                {
+                  "type": "object",
+                  "title": "Pass eller vigselsattest til din ektefelle eller partner",
+                  "properties": {
+                    "key": {
+                      "type": "string",
+                      "title": "Pass eller vigselsattest til din ektefelle eller partner",
+                      "enum": [
+                        "ettersender",
+                        "leggerVedNaa",
+                        "levertTidligere"
+                      ]
+                    },
+                    "additionalDocumentation": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "key"
+                  ],
+                  "additionalProperties": false
+                },
+                {
+                  "type": "string",
+                  "title": "Pass eller vigselsattest til din ektefelle eller partner",
+                  "enum": [
+                    "ettersender",
+                    "leggerVedNaa",
+                    "levertTidligere"
+                  ]
+                }
+              ]
+            },
+            "passTilDinSamboer": {
+              "title": "Pass til din samboer",
+              "anyOf": [
+                {
+                  "type": "object",
+                  "title": "Pass til din samboer",
+                  "properties": {
+                    "attachmentId": {
+                      "type": "string"
+                    },
+                    "navId": {
+                      "type": "string",
+                      "enum": [
+                        "etmxikb"
+                      ]
+                    },
+                    "type": {
+                      "type": "string",
+                      "enum": [
+                        "default"
+                      ]
+                    },
+                    "value": {
+                      "type": "string",
+                      "title": "Pass til din samboer",
+                      "enum": [
+                        "ettersender",
+                        "leggerVedNaa",
+                        "levertTidligere"
+                      ]
+                    },
+                    "title": {
+                      "type": "string"
+                    },
+                    "additionalDocumentation": {
+                      "type": "string"
+                    },
+                    "files": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "fileId": {
+                            "type": "string"
+                          },
+                          "attachmentId": {
+                            "type": "string"
+                          },
+                          "innsendingId": {
+                            "type": "string"
+                          },
+                          "fileName": {
+                            "type": "string"
+                          },
+                          "size": {
+                            "type": "number"
+                          }
+                        },
+                        "required": [
+                          "fileId",
+                          "attachmentId",
+                          "innsendingId",
+                          "fileName",
+                          "size"
+                        ],
+                        "additionalProperties": false
+                      }
+                    }
+                  },
+                  "required": [
+                    "attachmentId",
+                    "navId",
+                    "type"
+                  ],
+                  "additionalProperties": false
+                },
+                {
+                  "type": "object",
+                  "title": "Pass til din samboer",
+                  "properties": {
+                    "key": {
+                      "type": "string",
+                      "title": "Pass til din samboer",
+                      "enum": [
+                        "ettersender",
+                        "leggerVedNaa",
+                        "levertTidligere"
+                      ]
+                    },
+                    "additionalDocumentation": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "key"
+                  ],
+                  "additionalProperties": false
+                },
+                {
+                  "type": "string",
+                  "title": "Pass til din samboer",
+                  "enum": [
+                    "ettersender",
+                    "leggerVedNaa",
+                    "levertTidligere"
+                  ]
+                }
+              ]
+            },
+            "kopiAvSisteLonnslipp": {
+              "title": "Kopi av siste lønnslipp",
+              "anyOf": [
+                {
+                  "type": "object",
+                  "title": "Kopi av siste lønnslipp",
+                  "properties": {
+                    "attachmentId": {
+                      "type": "string"
+                    },
+                    "navId": {
+                      "type": "string",
+                      "enum": [
+                        "e3xgf9"
+                      ]
+                    },
+                    "type": {
+                      "type": "string",
+                      "enum": [
+                        "default"
+                      ]
+                    },
+                    "value": {
+                      "type": "string",
+                      "title": "Kopi av siste lønnslipp",
+                      "enum": [
+                        "ettersender",
+                        "leggerVedNaa",
+                        "levertTidligere"
+                      ]
+                    },
+                    "title": {
+                      "type": "string"
+                    },
+                    "additionalDocumentation": {
+                      "type": "string"
+                    },
+                    "files": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "fileId": {
+                            "type": "string"
+                          },
+                          "attachmentId": {
+                            "type": "string"
+                          },
+                          "innsendingId": {
+                            "type": "string"
+                          },
+                          "fileName": {
+                            "type": "string"
+                          },
+                          "size": {
+                            "type": "number"
+                          }
+                        },
+                        "required": [
+                          "fileId",
+                          "attachmentId",
+                          "innsendingId",
+                          "fileName",
+                          "size"
+                        ],
+                        "additionalProperties": false
+                      }
+                    }
+                  },
+                  "required": [
+                    "attachmentId",
+                    "navId",
+                    "type"
+                  ],
+                  "additionalProperties": false
+                },
+                {
+                  "type": "object",
+                  "title": "Kopi av siste lønnslipp",
+                  "properties": {
+                    "key": {
+                      "type": "string",
+                      "title": "Kopi av siste lønnslipp",
+                      "enum": [
+                        "ettersender",
+                        "leggerVedNaa",
+                        "levertTidligere"
+                      ]
+                    },
+                    "additionalDocumentation": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "key"
+                  ],
+                  "additionalProperties": false
+                },
+                {
+                  "type": "string",
+                  "title": "Kopi av siste lønnslipp",
+                  "enum": [
+                    "ettersender",
+                    "leggerVedNaa",
+                    "levertTidligere"
+                  ]
+                }
+              ]
+            },
+            "dokumentasjonPaArbeidsforhold": {
+              "title": "Informasjon om firma og arbeidsforhold",
+              "anyOf": [
+                {
+                  "type": "object",
+                  "title": "Informasjon om firma og arbeidsforhold",
+                  "properties": {
+                    "attachmentId": {
+                      "type": "string"
+                    },
+                    "navId": {
+                      "type": "string",
+                      "enum": [
+                        "eyhopej"
+                      ]
+                    },
+                    "type": {
+                      "type": "string",
+                      "enum": [
+                        "default"
+                      ]
+                    },
+                    "value": {
+                      "type": "string",
+                      "title": "Informasjon om firma og arbeidsforhold",
+                      "enum": [
+                        "ettersender",
+                        "leggerVedNaa"
+                      ]
+                    },
+                    "title": {
+                      "type": "string"
+                    },
+                    "additionalDocumentation": {
+                      "type": "string"
+                    },
+                    "files": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "fileId": {
+                            "type": "string"
+                          },
+                          "attachmentId": {
+                            "type": "string"
+                          },
+                          "innsendingId": {
+                            "type": "string"
+                          },
+                          "fileName": {
+                            "type": "string"
+                          },
+                          "size": {
+                            "type": "number"
+                          }
+                        },
+                        "required": [
+                          "fileId",
+                          "attachmentId",
+                          "innsendingId",
+                          "fileName",
+                          "size"
+                        ],
+                        "additionalProperties": false
+                      }
+                    }
+                  },
+                  "required": [
+                    "attachmentId",
+                    "navId",
+                    "type"
+                  ],
+                  "additionalProperties": false
+                },
+                {
+                  "type": "object",
+                  "title": "Informasjon om firma og arbeidsforhold",
+                  "properties": {
+                    "key": {
+                      "type": "string",
+                      "title": "Informasjon om firma og arbeidsforhold",
+                      "enum": [
+                        "ettersender",
+                        "leggerVedNaa"
+                      ]
+                    },
+                    "additionalDocumentation": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "key"
+                  ],
+                  "additionalProperties": false
+                },
+                {
+                  "type": "string",
+                  "title": "Informasjon om firma og arbeidsforhold",
+                  "enum": [
+                    "ettersender",
+                    "leggerVedNaa"
+                  ]
+                }
+              ]
+            },
+            "inntektsskjemaForGardbrukereUforetrygdNav120609": {
+              "title": "Inntektsskjema for gårdbrukere - uføretrygd, NAV 12-06.09",
+              "anyOf": [
+                {
+                  "type": "object",
+                  "title": "Inntektsskjema for gårdbrukere - uføretrygd, NAV 12-06.09",
+                  "properties": {
+                    "attachmentId": {
+                      "type": "string"
+                    },
+                    "navId": {
+                      "type": "string",
+                      "enum": [
+                        "e5nvfqc"
+                      ]
+                    },
+                    "type": {
+                      "type": "string",
+                      "enum": [
+                        "default"
+                      ]
+                    },
+                    "value": {
+                      "type": "string",
+                      "title": "Inntektsskjema for gårdbrukere - uføretrygd, NAV 12-06.09",
+                      "enum": [
+                        "ettersender",
+                        "leggerVedNaa",
+                        "levertTidligere"
+                      ]
+                    },
+                    "title": {
+                      "type": "string"
+                    },
+                    "additionalDocumentation": {
+                      "type": "string"
+                    },
+                    "files": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "fileId": {
+                            "type": "string"
+                          },
+                          "attachmentId": {
+                            "type": "string"
+                          },
+                          "innsendingId": {
+                            "type": "string"
+                          },
+                          "fileName": {
+                            "type": "string"
+                          },
+                          "size": {
+                            "type": "number"
+                          }
+                        },
+                        "required": [
+                          "fileId",
+                          "attachmentId",
+                          "innsendingId",
+                          "fileName",
+                          "size"
+                        ],
+                        "additionalProperties": false
+                      }
+                    }
+                  },
+                  "required": [
+                    "attachmentId",
+                    "navId",
+                    "type"
+                  ],
+                  "additionalProperties": false
+                },
+                {
+                  "type": "object",
+                  "title": "Inntektsskjema for gårdbrukere - uføretrygd, NAV 12-06.09",
+                  "properties": {
+                    "key": {
+                      "type": "string",
+                      "title": "Inntektsskjema for gårdbrukere - uføretrygd, NAV 12-06.09",
+                      "enum": [
+                        "ettersender",
+                        "leggerVedNaa",
+                        "levertTidligere"
+                      ]
+                    },
+                    "additionalDocumentation": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "key"
+                  ],
+                  "additionalProperties": false
+                },
+                {
+                  "type": "string",
+                  "title": "Inntektsskjema for gårdbrukere - uføretrygd, NAV 12-06.09",
+                  "enum": [
+                    "ettersender",
+                    "leggerVedNaa",
+                    "levertTidligere"
+                  ]
+                }
+              ]
+            },
+            "inntektsskjemaForNaeringsdrivendeOgAnsattIEgetAksjeselskapUforetrygdNav120607": {
+              "title": "Inntektsskjema for næringsdrivende og ansatt i eget aksjeselskap - uføretrygd, NAV 12-06.07",
+              "anyOf": [
+                {
+                  "type": "object",
+                  "title": "Inntektsskjema for næringsdrivende og ansatt i eget aksjeselskap - uføretrygd, NAV 12-06.07",
+                  "properties": {
+                    "attachmentId": {
+                      "type": "string"
+                    },
+                    "navId": {
+                      "type": "string",
+                      "enum": [
+                        "ef9rynp"
+                      ]
+                    },
+                    "type": {
+                      "type": "string",
+                      "enum": [
+                        "default"
+                      ]
+                    },
+                    "value": {
+                      "type": "string",
+                      "title": "Inntektsskjema for næringsdrivende og ansatt i eget aksjeselskap - uføretrygd, NAV 12-06.07",
+                      "enum": [
+                        "ettersender",
+                        "leggerVedNaa",
+                        "levertTidligere"
+                      ]
+                    },
+                    "title": {
+                      "type": "string"
+                    },
+                    "additionalDocumentation": {
+                      "type": "string"
+                    },
+                    "files": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "fileId": {
+                            "type": "string"
+                          },
+                          "attachmentId": {
+                            "type": "string"
+                          },
+                          "innsendingId": {
+                            "type": "string"
+                          },
+                          "fileName": {
+                            "type": "string"
+                          },
+                          "size": {
+                            "type": "number"
+                          }
+                        },
+                        "required": [
+                          "fileId",
+                          "attachmentId",
+                          "innsendingId",
+                          "fileName",
+                          "size"
+                        ],
+                        "additionalProperties": false
+                      }
+                    }
+                  },
+                  "required": [
+                    "attachmentId",
+                    "navId",
+                    "type"
+                  ],
+                  "additionalProperties": false
+                },
+                {
+                  "type": "object",
+                  "title": "Inntektsskjema for næringsdrivende og ansatt i eget aksjeselskap - uføretrygd, NAV 12-06.07",
+                  "properties": {
+                    "key": {
+                      "type": "string",
+                      "title": "Inntektsskjema for næringsdrivende og ansatt i eget aksjeselskap - uføretrygd, NAV 12-06.07",
+                      "enum": [
+                        "ettersender",
+                        "leggerVedNaa",
+                        "levertTidligere"
+                      ]
+                    },
+                    "additionalDocumentation": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "key"
+                  ],
+                  "additionalProperties": false
+                },
+                {
+                  "type": "string",
+                  "title": "Inntektsskjema for næringsdrivende og ansatt i eget aksjeselskap - uføretrygd, NAV 12-06.07",
+                  "enum": [
+                    "ettersender",
+                    "leggerVedNaa",
+                    "levertTidligere"
+                  ]
+                }
+              ]
+            },
+            "dokumentasjonPaAvsluttetNaeringsvirksomhet": {
+              "title": "Dokumentasjon på avsluttet næringsvirksomhet",
+              "anyOf": [
+                {
+                  "type": "object",
+                  "title": "Dokumentasjon på avsluttet næringsvirksomhet",
+                  "properties": {
+                    "attachmentId": {
+                      "type": "string"
+                    },
+                    "navId": {
+                      "type": "string",
+                      "enum": [
+                        "e1uiq5c"
+                      ]
+                    },
+                    "type": {
+                      "type": "string",
+                      "enum": [
+                        "default"
+                      ]
+                    },
+                    "value": {
+                      "type": "string",
+                      "title": "Dokumentasjon på avsluttet næringsvirksomhet",
+                      "enum": [
+                        "ettersender",
+                        "leggerVedNaa",
+                        "levertTidligere"
+                      ]
+                    },
+                    "title": {
+                      "type": "string"
+                    },
+                    "additionalDocumentation": {
+                      "type": "string"
+                    },
+                    "files": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "fileId": {
+                            "type": "string"
+                          },
+                          "attachmentId": {
+                            "type": "string"
+                          },
+                          "innsendingId": {
+                            "type": "string"
+                          },
+                          "fileName": {
+                            "type": "string"
+                          },
+                          "size": {
+                            "type": "number"
+                          }
+                        },
+                        "required": [
+                          "fileId",
+                          "attachmentId",
+                          "innsendingId",
+                          "fileName",
+                          "size"
+                        ],
+                        "additionalProperties": false
+                      }
+                    }
+                  },
+                  "required": [
+                    "attachmentId",
+                    "navId",
+                    "type"
+                  ],
+                  "additionalProperties": false
+                },
+                {
+                  "type": "object",
+                  "title": "Dokumentasjon på avsluttet næringsvirksomhet",
+                  "properties": {
+                    "key": {
+                      "type": "string",
+                      "title": "Dokumentasjon på avsluttet næringsvirksomhet",
+                      "enum": [
+                        "ettersender",
+                        "leggerVedNaa",
+                        "levertTidligere"
+                      ]
+                    },
+                    "additionalDocumentation": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "key"
+                  ],
+                  "additionalProperties": false
+                },
+                {
+                  "type": "string",
+                  "title": "Dokumentasjon på avsluttet næringsvirksomhet",
+                  "enum": [
+                    "ettersender",
+                    "leggerVedNaa",
+                    "levertTidligere"
+                  ]
+                }
+              ]
+            },
+            "dokumentasjonSomErAvtaltMedNav": {
+              "title": "Dokumentasjon som er avtalt med Nav",
+              "anyOf": [
+                {
+                  "type": "object",
+                  "title": "Dokumentasjon som er avtalt med Nav",
+                  "properties": {
+                    "attachmentId": {
+                      "type": "string"
+                    },
+                    "navId": {
+                      "type": "string",
+                      "enum": [
+                        "ejsf1l7"
+                      ]
+                    },
+                    "type": {
+                      "type": "string",
+                      "enum": [
+                        "default"
+                      ]
+                    },
+                    "value": {
+                      "type": "string",
+                      "title": "Dokumentasjon som er avtalt med Nav",
+                      "enum": [
+                        "ettersender",
+                        "leggerVedNaa",
+                        "levertTidligere"
+                      ]
+                    },
+                    "title": {
+                      "type": "string"
+                    },
+                    "additionalDocumentation": {
+                      "type": "string"
+                    },
+                    "files": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "fileId": {
+                            "type": "string"
+                          },
+                          "attachmentId": {
+                            "type": "string"
+                          },
+                          "innsendingId": {
+                            "type": "string"
+                          },
+                          "fileName": {
+                            "type": "string"
+                          },
+                          "size": {
+                            "type": "number"
+                          }
+                        },
+                        "required": [
+                          "fileId",
+                          "attachmentId",
+                          "innsendingId",
+                          "fileName",
+                          "size"
+                        ],
+                        "additionalProperties": false
+                      }
+                    }
+                  },
+                  "required": [
+                    "attachmentId",
+                    "navId",
+                    "type"
+                  ],
+                  "additionalProperties": false
+                },
+                {
+                  "type": "object",
+                  "title": "Dokumentasjon som er avtalt med Nav",
+                  "properties": {
+                    "key": {
+                      "type": "string",
+                      "title": "Dokumentasjon som er avtalt med Nav",
+                      "enum": [
+                        "ettersender",
+                        "leggerVedNaa",
+                        "levertTidligere"
+                      ]
+                    },
+                    "additionalDocumentation": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "key"
+                  ],
+                  "additionalProperties": false
+                },
+                {
+                  "type": "string",
+                  "title": "Dokumentasjon som er avtalt med Nav",
+                  "enum": [
+                    "ettersender",
+                    "leggerVedNaa",
+                    "levertTidligere"
+                  ]
+                }
+              ]
+            },
+            "annenDokumentasjon": {
+              "title": "Annen dokumentasjon",
+              "anyOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "title": "Annen dokumentasjon",
+                    "properties": {
+                      "attachmentId": {
+                        "type": "string"
+                      },
+                      "navId": {
+                        "type": "string",
+                        "enum": [
+                          "eudyccn"
+                        ]
+                      },
+                      "type": {
+                        "type": "string",
+                        "enum": [
+                          "other"
+                        ]
+                      },
+                      "value": {
+                        "type": "string",
+                        "title": "Annen dokumentasjon",
+                        "enum": [
+                          "nei",
+                          "leggerVedNaa"
+                        ]
+                      },
+                      "title": {
+                        "type": "string"
+                      },
+                      "additionalDocumentation": {
+                        "type": "string"
+                      },
+                      "files": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "fileId": {
+                              "type": "string"
+                            },
+                            "attachmentId": {
+                              "type": "string"
+                            },
+                            "innsendingId": {
+                              "type": "string"
+                            },
+                            "fileName": {
+                              "type": "string"
+                            },
+                            "size": {
+                              "type": "number"
+                            }
+                          },
+                          "required": [
+                            "fileId",
+                            "attachmentId",
+                            "innsendingId",
+                            "fileName",
+                            "size"
+                          ],
+                          "additionalProperties": false
+                        }
+                      }
+                    },
+                    "required": [
+                      "attachmentId",
+                      "navId",
+                      "type"
+                    ],
+                    "additionalProperties": false
+                  }
+                },
+                {
+                  "type": "object",
+                  "title": "Annen dokumentasjon",
+                  "properties": {
+                    "attachmentId": {
+                      "type": "string"
+                    },
+                    "navId": {
+                      "type": "string",
+                      "enum": [
+                        "eudyccn"
+                      ]
+                    },
+                    "type": {
+                      "type": "string",
+                      "enum": [
+                        "other"
+                      ]
+                    },
+                    "value": {
+                      "type": "string",
+                      "title": "Annen dokumentasjon",
+                      "enum": [
+                        "nei",
+                        "leggerVedNaa"
+                      ]
+                    },
+                    "title": {
+                      "type": "string"
+                    },
+                    "additionalDocumentation": {
+                      "type": "string"
+                    },
+                    "files": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "fileId": {
+                            "type": "string"
+                          },
+                          "attachmentId": {
+                            "type": "string"
+                          },
+                          "innsendingId": {
+                            "type": "string"
+                          },
+                          "fileName": {
+                            "type": "string"
+                          },
+                          "size": {
+                            "type": "number"
+                          }
+                        },
+                        "required": [
+                          "fileId",
+                          "attachmentId",
+                          "innsendingId",
+                          "fileName",
+                          "size"
+                        ],
+                        "additionalProperties": false
+                      }
+                    }
+                  },
+                  "required": [
+                    "attachmentId",
+                    "navId",
+                    "type"
+                  ],
+                  "additionalProperties": false
+                },
+                {
+                  "type": "object",
+                  "title": "Annen dokumentasjon",
+                  "properties": {
+                    "key": {
+                      "type": "string",
+                      "title": "Annen dokumentasjon",
+                      "enum": [
+                        "nei",
+                        "leggerVedNaa"
+                      ]
+                    },
+                    "additionalDocumentation": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "key"
+                  ],
+                  "additionalProperties": false
+                },
+                {
+                  "type": "string",
+                  "title": "Annen dokumentasjon",
+                  "enum": [
+                    "nei",
+                    "leggerVedNaa"
+                  ]
+                }
+              ]
+            }
+          },
+          "required": [
+            "erDuIArbeidNa",
+            "erDuNaeringsdrivende",
+            "driverDuGardsbruk",
+            "hvaErDinSivilstatus",
+            "varDuArbeidstakerDaDuBleSyk",
+            "varDuNaeringsdrivendeEllerGardbrukerDaDuBleSyk",
+            "harDuAvtjentMilitaerEllerSivilForstegangstjeneste",
+            "harDuBoddOgEllerArbeidetUtenforNorgeEtterAtDuFylte16Ar",
+            "erDuNorskStatsborger",
+            "mottarDuPensjonFraUtlandet",
+            "harDuEnGodkjentYrkesskadeEllerYrkessykdomSomErArsakTilAtDuSokerOmUforetrygd",
+            "harDuBarnUnder18Ar",
+            "borDuUtenforNorgeEllerEos",
+            "harDuAvtaltMedNavAtDuSkalSendeMerDokumentasjon",
+            "jegErKjentMedAtNavKanInnhenteDeOpplysningeneSomErNodvendigForAAvgjoreSoknadenMinOpplysningeneErGittEtterBesteSkjonnOgOverbevisningOgErSaFullstendigeSomMuligErklaeringenOgUnderskriftenGjelderHeleSoknadenOmUforetrygd"
+          ],
+          "additionalProperties": false
+        },
+        "attachments": {
+          "type": "array",
+          "title": "Attachments",
+          "items": {
+            "anyOf": [
+              {
+                "type": "object",
+                "title": "Kopi av fødselsattest",
+                "properties": {
+                  "attachmentId": {
+                    "type": "string"
+                  },
+                  "navId": {
+                    "type": "string",
+                    "enum": [
+                      "eedb2dr"
+                    ]
+                  },
+                  "type": {
+                    "type": "string",
+                    "enum": [
+                      "default"
+                    ]
+                  },
+                  "value": {
+                    "type": "string",
+                    "title": "Kopi av fødselsattest",
+                    "enum": [
+                      "ettersender",
+                      "leggerVedNaa",
+                      "levertTidligere"
+                    ]
+                  },
+                  "title": {
+                    "type": "string"
+                  },
+                  "additionalDocumentation": {
+                    "type": "string"
+                  },
+                  "files": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "fileId": {
+                          "type": "string"
+                        },
+                        "attachmentId": {
+                          "type": "string"
+                        },
+                        "innsendingId": {
+                          "type": "string"
+                        },
+                        "fileName": {
+                          "type": "string"
+                        },
+                        "size": {
+                          "type": "number"
+                        }
+                      },
+                      "required": [
+                        "fileId",
+                        "attachmentId",
+                        "innsendingId",
+                        "fileName",
+                        "size"
+                      ],
+                      "additionalProperties": false
+                    }
+                  }
+                },
+                "required": [
+                  "attachmentId",
+                  "navId",
+                  "type"
+                ],
+                "additionalProperties": false
+              },
+              {
+                "type": "object",
+                "title": "Kopi av barnets legitimasjon",
+                "properties": {
+                  "attachmentId": {
+                    "type": "string"
+                  },
+                  "navId": {
+                    "type": "string",
+                    "enum": [
+                      "e2aljka"
+                    ]
+                  },
+                  "type": {
+                    "type": "string",
+                    "enum": [
+                      "default"
+                    ]
+                  },
+                  "value": {
+                    "type": "string",
+                    "title": "Kopi av barnets legitimasjon",
+                    "enum": [
+                      "ettersender",
+                      "leggerVedNaa",
+                      "levertTidligere"
+                    ]
+                  },
+                  "title": {
+                    "type": "string"
+                  },
+                  "additionalDocumentation": {
+                    "type": "string"
+                  },
+                  "files": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "fileId": {
+                          "type": "string"
+                        },
+                        "attachmentId": {
+                          "type": "string"
+                        },
+                        "innsendingId": {
+                          "type": "string"
+                        },
+                        "fileName": {
+                          "type": "string"
+                        },
+                        "size": {
+                          "type": "number"
+                        }
+                      },
+                      "required": [
+                        "fileId",
+                        "attachmentId",
+                        "innsendingId",
+                        "fileName",
+                        "size"
+                      ],
+                      "additionalProperties": false
+                    }
+                  }
+                },
+                "required": [
+                  "attachmentId",
+                  "navId",
+                  "type"
+                ],
+                "additionalProperties": false
+              },
+              {
+                "type": "object",
+                "title": "Forsørgelses- eller samværsavtale",
+                "properties": {
+                  "attachmentId": {
+                    "type": "string"
+                  },
+                  "navId": {
+                    "type": "string",
+                    "enum": [
+                      "eu5lub4"
+                    ]
+                  },
+                  "type": {
+                    "type": "string",
+                    "enum": [
+                      "default"
+                    ]
+                  },
+                  "value": {
+                    "type": "string",
+                    "title": "Forsørgelses- eller samværsavtale",
+                    "enum": [
+                      "ettersender",
+                      "leggerVedNaa",
+                      "levertTidligere"
+                    ]
+                  },
+                  "title": {
+                    "type": "string"
+                  },
+                  "additionalDocumentation": {
+                    "type": "string"
+                  },
+                  "files": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "fileId": {
+                          "type": "string"
+                        },
+                        "attachmentId": {
+                          "type": "string"
+                        },
+                        "innsendingId": {
+                          "type": "string"
+                        },
+                        "fileName": {
+                          "type": "string"
+                        },
+                        "size": {
+                          "type": "number"
+                        }
+                      },
+                      "required": [
+                        "fileId",
+                        "attachmentId",
+                        "innsendingId",
+                        "fileName",
+                        "size"
+                      ],
+                      "additionalProperties": false
+                    }
+                  }
+                },
+                "required": [
+                  "attachmentId",
+                  "navId",
+                  "type"
+                ],
+                "additionalProperties": false
+              },
+              {
+                "type": "object",
+                "title": "Pass eller vigselsattest til din ektefelle eller partner",
+                "properties": {
+                  "attachmentId": {
+                    "type": "string"
+                  },
+                  "navId": {
+                    "type": "string",
+                    "enum": [
+                      "ezi4et"
+                    ]
+                  },
+                  "type": {
+                    "type": "string",
+                    "enum": [
+                      "default"
+                    ]
+                  },
+                  "value": {
+                    "type": "string",
+                    "title": "Pass eller vigselsattest til din ektefelle eller partner",
+                    "enum": [
+                      "ettersender",
+                      "leggerVedNaa",
+                      "levertTidligere"
+                    ]
+                  },
+                  "title": {
+                    "type": "string"
+                  },
+                  "additionalDocumentation": {
+                    "type": "string"
+                  },
+                  "files": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "fileId": {
+                          "type": "string"
+                        },
+                        "attachmentId": {
+                          "type": "string"
+                        },
+                        "innsendingId": {
+                          "type": "string"
+                        },
+                        "fileName": {
+                          "type": "string"
+                        },
+                        "size": {
+                          "type": "number"
+                        }
+                      },
+                      "required": [
+                        "fileId",
+                        "attachmentId",
+                        "innsendingId",
+                        "fileName",
+                        "size"
+                      ],
+                      "additionalProperties": false
+                    }
+                  }
+                },
+                "required": [
+                  "attachmentId",
+                  "navId",
+                  "type"
+                ],
+                "additionalProperties": false
+              },
+              {
+                "type": "object",
+                "title": "Pass til din samboer",
+                "properties": {
+                  "attachmentId": {
+                    "type": "string"
+                  },
+                  "navId": {
+                    "type": "string",
+                    "enum": [
+                      "etmxikb"
+                    ]
+                  },
+                  "type": {
+                    "type": "string",
+                    "enum": [
+                      "default"
+                    ]
+                  },
+                  "value": {
+                    "type": "string",
+                    "title": "Pass til din samboer",
+                    "enum": [
+                      "ettersender",
+                      "leggerVedNaa",
+                      "levertTidligere"
+                    ]
+                  },
+                  "title": {
+                    "type": "string"
+                  },
+                  "additionalDocumentation": {
+                    "type": "string"
+                  },
+                  "files": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "fileId": {
+                          "type": "string"
+                        },
+                        "attachmentId": {
+                          "type": "string"
+                        },
+                        "innsendingId": {
+                          "type": "string"
+                        },
+                        "fileName": {
+                          "type": "string"
+                        },
+                        "size": {
+                          "type": "number"
+                        }
+                      },
+                      "required": [
+                        "fileId",
+                        "attachmentId",
+                        "innsendingId",
+                        "fileName",
+                        "size"
+                      ],
+                      "additionalProperties": false
+                    }
+                  }
+                },
+                "required": [
+                  "attachmentId",
+                  "navId",
+                  "type"
+                ],
+                "additionalProperties": false
+              },
+              {
+                "type": "object",
+                "title": "Kopi av siste lønnslipp",
+                "properties": {
+                  "attachmentId": {
+                    "type": "string"
+                  },
+                  "navId": {
+                    "type": "string",
+                    "enum": [
+                      "e3xgf9"
+                    ]
+                  },
+                  "type": {
+                    "type": "string",
+                    "enum": [
+                      "default"
+                    ]
+                  },
+                  "value": {
+                    "type": "string",
+                    "title": "Kopi av siste lønnslipp",
+                    "enum": [
+                      "ettersender",
+                      "leggerVedNaa",
+                      "levertTidligere"
+                    ]
+                  },
+                  "title": {
+                    "type": "string"
+                  },
+                  "additionalDocumentation": {
+                    "type": "string"
+                  },
+                  "files": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "fileId": {
+                          "type": "string"
+                        },
+                        "attachmentId": {
+                          "type": "string"
+                        },
+                        "innsendingId": {
+                          "type": "string"
+                        },
+                        "fileName": {
+                          "type": "string"
+                        },
+                        "size": {
+                          "type": "number"
+                        }
+                      },
+                      "required": [
+                        "fileId",
+                        "attachmentId",
+                        "innsendingId",
+                        "fileName",
+                        "size"
+                      ],
+                      "additionalProperties": false
+                    }
+                  }
+                },
+                "required": [
+                  "attachmentId",
+                  "navId",
+                  "type"
+                ],
+                "additionalProperties": false
+              },
+              {
+                "type": "object",
+                "title": "Informasjon om firma og arbeidsforhold",
+                "properties": {
+                  "attachmentId": {
+                    "type": "string"
+                  },
+                  "navId": {
+                    "type": "string",
+                    "enum": [
+                      "eyhopej"
+                    ]
+                  },
+                  "type": {
+                    "type": "string",
+                    "enum": [
+                      "default"
+                    ]
+                  },
+                  "value": {
+                    "type": "string",
+                    "title": "Informasjon om firma og arbeidsforhold",
+                    "enum": [
+                      "ettersender",
+                      "leggerVedNaa"
+                    ]
+                  },
+                  "title": {
+                    "type": "string"
+                  },
+                  "additionalDocumentation": {
+                    "type": "string"
+                  },
+                  "files": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "fileId": {
+                          "type": "string"
+                        },
+                        "attachmentId": {
+                          "type": "string"
+                        },
+                        "innsendingId": {
+                          "type": "string"
+                        },
+                        "fileName": {
+                          "type": "string"
+                        },
+                        "size": {
+                          "type": "number"
+                        }
+                      },
+                      "required": [
+                        "fileId",
+                        "attachmentId",
+                        "innsendingId",
+                        "fileName",
+                        "size"
+                      ],
+                      "additionalProperties": false
+                    }
+                  }
+                },
+                "required": [
+                  "attachmentId",
+                  "navId",
+                  "type"
+                ],
+                "additionalProperties": false
+              },
+              {
+                "type": "object",
+                "title": "Inntektsskjema for gårdbrukere - uføretrygd, NAV 12-06.09",
+                "properties": {
+                  "attachmentId": {
+                    "type": "string"
+                  },
+                  "navId": {
+                    "type": "string",
+                    "enum": [
+                      "e5nvfqc"
+                    ]
+                  },
+                  "type": {
+                    "type": "string",
+                    "enum": [
+                      "default"
+                    ]
+                  },
+                  "value": {
+                    "type": "string",
+                    "title": "Inntektsskjema for gårdbrukere - uføretrygd, NAV 12-06.09",
+                    "enum": [
+                      "ettersender",
+                      "leggerVedNaa",
+                      "levertTidligere"
+                    ]
+                  },
+                  "title": {
+                    "type": "string"
+                  },
+                  "additionalDocumentation": {
+                    "type": "string"
+                  },
+                  "files": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "fileId": {
+                          "type": "string"
+                        },
+                        "attachmentId": {
+                          "type": "string"
+                        },
+                        "innsendingId": {
+                          "type": "string"
+                        },
+                        "fileName": {
+                          "type": "string"
+                        },
+                        "size": {
+                          "type": "number"
+                        }
+                      },
+                      "required": [
+                        "fileId",
+                        "attachmentId",
+                        "innsendingId",
+                        "fileName",
+                        "size"
+                      ],
+                      "additionalProperties": false
+                    }
+                  }
+                },
+                "required": [
+                  "attachmentId",
+                  "navId",
+                  "type"
+                ],
+                "additionalProperties": false
+              },
+              {
+                "type": "object",
+                "title": "Inntektsskjema for næringsdrivende og ansatt i eget aksjeselskap - uføretrygd, NAV 12-06.07",
+                "properties": {
+                  "attachmentId": {
+                    "type": "string"
+                  },
+                  "navId": {
+                    "type": "string",
+                    "enum": [
+                      "ef9rynp"
+                    ]
+                  },
+                  "type": {
+                    "type": "string",
+                    "enum": [
+                      "default"
+                    ]
+                  },
+                  "value": {
+                    "type": "string",
+                    "title": "Inntektsskjema for næringsdrivende og ansatt i eget aksjeselskap - uføretrygd, NAV 12-06.07",
+                    "enum": [
+                      "ettersender",
+                      "leggerVedNaa",
+                      "levertTidligere"
+                    ]
+                  },
+                  "title": {
+                    "type": "string"
+                  },
+                  "additionalDocumentation": {
+                    "type": "string"
+                  },
+                  "files": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "fileId": {
+                          "type": "string"
+                        },
+                        "attachmentId": {
+                          "type": "string"
+                        },
+                        "innsendingId": {
+                          "type": "string"
+                        },
+                        "fileName": {
+                          "type": "string"
+                        },
+                        "size": {
+                          "type": "number"
+                        }
+                      },
+                      "required": [
+                        "fileId",
+                        "attachmentId",
+                        "innsendingId",
+                        "fileName",
+                        "size"
+                      ],
+                      "additionalProperties": false
+                    }
+                  }
+                },
+                "required": [
+                  "attachmentId",
+                  "navId",
+                  "type"
+                ],
+                "additionalProperties": false
+              },
+              {
+                "type": "object",
+                "title": "Dokumentasjon på avsluttet næringsvirksomhet",
+                "properties": {
+                  "attachmentId": {
+                    "type": "string"
+                  },
+                  "navId": {
+                    "type": "string",
+                    "enum": [
+                      "e1uiq5c"
+                    ]
+                  },
+                  "type": {
+                    "type": "string",
+                    "enum": [
+                      "default"
+                    ]
+                  },
+                  "value": {
+                    "type": "string",
+                    "title": "Dokumentasjon på avsluttet næringsvirksomhet",
+                    "enum": [
+                      "ettersender",
+                      "leggerVedNaa",
+                      "levertTidligere"
+                    ]
+                  },
+                  "title": {
+                    "type": "string"
+                  },
+                  "additionalDocumentation": {
+                    "type": "string"
+                  },
+                  "files": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "fileId": {
+                          "type": "string"
+                        },
+                        "attachmentId": {
+                          "type": "string"
+                        },
+                        "innsendingId": {
+                          "type": "string"
+                        },
+                        "fileName": {
+                          "type": "string"
+                        },
+                        "size": {
+                          "type": "number"
+                        }
+                      },
+                      "required": [
+                        "fileId",
+                        "attachmentId",
+                        "innsendingId",
+                        "fileName",
+                        "size"
+                      ],
+                      "additionalProperties": false
+                    }
+                  }
+                },
+                "required": [
+                  "attachmentId",
+                  "navId",
+                  "type"
+                ],
+                "additionalProperties": false
+              },
+              {
+                "type": "object",
+                "title": "Dokumentasjon som er avtalt med Nav",
+                "properties": {
+                  "attachmentId": {
+                    "type": "string"
+                  },
+                  "navId": {
+                    "type": "string",
+                    "enum": [
+                      "ejsf1l7"
+                    ]
+                  },
+                  "type": {
+                    "type": "string",
+                    "enum": [
+                      "default"
+                    ]
+                  },
+                  "value": {
+                    "type": "string",
+                    "title": "Dokumentasjon som er avtalt med Nav",
+                    "enum": [
+                      "ettersender",
+                      "leggerVedNaa",
+                      "levertTidligere"
+                    ]
+                  },
+                  "title": {
+                    "type": "string"
+                  },
+                  "additionalDocumentation": {
+                    "type": "string"
+                  },
+                  "files": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "fileId": {
+                          "type": "string"
+                        },
+                        "attachmentId": {
+                          "type": "string"
+                        },
+                        "innsendingId": {
+                          "type": "string"
+                        },
+                        "fileName": {
+                          "type": "string"
+                        },
+                        "size": {
+                          "type": "number"
+                        }
+                      },
+                      "required": [
+                        "fileId",
+                        "attachmentId",
+                        "innsendingId",
+                        "fileName",
+                        "size"
+                      ],
+                      "additionalProperties": false
+                    }
+                  }
+                },
+                "required": [
+                  "attachmentId",
+                  "navId",
+                  "type"
+                ],
+                "additionalProperties": false
+              },
+              {
+                "type": "object",
+                "title": "Annen dokumentasjon",
+                "properties": {
+                  "attachmentId": {
+                    "type": "string"
+                  },
+                  "navId": {
+                    "type": "string",
+                    "enum": [
+                      "eudyccn"
+                    ]
+                  },
+                  "type": {
+                    "type": "string",
+                    "enum": [
+                      "other"
+                    ]
+                  },
+                  "value": {
+                    "type": "string",
+                    "title": "Annen dokumentasjon",
+                    "enum": [
+                      "nei",
+                      "leggerVedNaa"
+                    ]
+                  },
+                  "title": {
+                    "type": "string"
+                  },
+                  "additionalDocumentation": {
+                    "type": "string"
+                  },
+                  "files": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "fileId": {
+                          "type": "string"
+                        },
+                        "attachmentId": {
+                          "type": "string"
+                        },
+                        "innsendingId": {
+                          "type": "string"
+                        },
+                        "fileName": {
+                          "type": "string"
+                        },
+                        "size": {
+                          "type": "number"
+                        }
+                      },
+                      "required": [
+                        "fileId",
+                        "attachmentId",
+                        "innsendingId",
+                        "fileName",
+                        "size"
+                      ],
+                      "additionalProperties": false
+                    }
+                  }
+                },
+                "required": [
+                  "attachmentId",
+                  "navId",
+                  "type"
+                ],
+                "additionalProperties": false
+              }
+            ]
+          }
+        },
+        "selfDeclaration": {
+          "const": true,
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "data",
+        "selfDeclaration"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "language",
+    "data"
+  ],
+  "additionalProperties": false
+}

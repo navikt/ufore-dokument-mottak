@@ -69,6 +69,13 @@ class SafClient(private val httpClient: HttpClient, private val tokenClient: Tok
     }
 
     private suspend fun hentSelveDokumentet(journalpostId: String, responseBody: SafResponse) {
+        val søknadDokumentId = responseBody.journalpost.dokumenter.find { it.tittel == "Søknad om uføretrygd" }?.dokumentInfoId
+
+        if (søknadDokumentId == null) {
+            logger.warn(teamLogsMarker) { "JournalpostId $journalpostId, søknad mangler" }
+            return
+        }
+
         val response: HttpResponse =
             httpClient.get("$url/rest/hentdokument/$journalpostId/${responseBody.journalpost.dokumenter.first().dokumentInfoId}/${ORIGINAL}") {
                 contentType(ContentType.Application.Json)

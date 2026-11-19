@@ -7,7 +7,7 @@ import java.time.LocalDate
 
 /**
  * Domenemodell for «Søknad om uføretrygd» (NAV 12-06.05), generert fra JSON Schema
- * `https://skjemabygging.nav.no/forms/nav120605/spec?revision=1` (schema.json).
+ * `https://skjemabygging.nav.no/forms/nav120605/spec?revision=76` (docs/schema-prod.json).
  *
  * Feltnavn følger JSON-nøklene. Nummererte eller tvetydige nøkler (f.eks. `fornavn1`,
  * `bruttoArligNaeringsinntekt2`) har fått lesbare navn, med opprinnelig nøkkel i `@SerialName`.
@@ -169,7 +169,8 @@ data class Søknadsdata(
     val inntektsskjemaForNaeringsdrivendeOgAnsattIEgetAksjeselskapUforetrygdNav120607: VedleggFelt? = null,
     val dokumentasjonPaAvsluttetNaeringsvirksomhet: VedleggFelt? = null,
     val dokumentasjonSomErAvtaltMedNav: VedleggFelt? = null,
-    val annenDokumentasjon: VedleggFelt? = null,
+    @Serializable(with = VedleggslisteSerializer::class)
+    val annenDokumentasjon: List<VedleggFelt>? = null,
 )
 
 @Serializable
@@ -346,5 +347,5 @@ data class Vedleggsfil(
     val attachmentId: String,
     val innsendingId: String,
     val fileName: String,
-    val size: Long,
+    val size: Double,
 )

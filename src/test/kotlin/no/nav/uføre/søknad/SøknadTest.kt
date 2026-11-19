@@ -69,8 +69,10 @@ class SøknadTest {
 
         data.kopiAvSisteLonnslipp!!.valg shouldBe Vedleggsvalg.ETTERSENDER
         data.passTilDinSamboer!!.valg shouldBe Vedleggsvalg.LEVERT_TIDLIGERE
-        data.annenDokumentasjon!!.type shouldBe Vedleggstype.OTHER
-        data.annenDokumentasjon.filer shouldHaveSize 1
+        val dokumentasjon = requireNotNull(data.annenDokumentasjon).single()
+        dokumentasjon.type shouldBe Vedleggstype.OTHER
+        dokumentasjon.filer shouldHaveSize 1
+        dokumentasjon.filer.single().size shouldBe 1024.0
         søknad.data.attachments.single().valg shouldBe Vedleggsvalg.LEGGER_VED_NAA
     }
 
