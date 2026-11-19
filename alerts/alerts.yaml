@@ -22,16 +22,20 @@ spec:
             namespace: ufore
             ufore_alerts: slack
             alert_type: custom
-        - alert: "Mange omstarter av containere"
+        - alert: "Container i CrashLoopBackOff"
           expr: |
-            sum(
-              changes(
-                kube_pod_container_status_restarts_total{namespace="ufore", k8s_cluster_name="prod"}[5m]
+            max by (container) (
+              max_over_time(
+                kube_pod_container_status_waiting_reason{
+                  namespace="ufore",
+                  k8s_cluster_name="prod",
+                  reason="CrashLoopBackOff",
+                  container="ufore-dokument-mottak"
+                }[5m]
               )
-            ) by (container, namespace) > 5
-          for: 5m
+            ) > 0
           annotations:
-            message: "*{{ $labels.container }}* har hatt mer enn 5 omstarter de siste 5 minuttene."
+            message: "*{{ $labels.container }}* har vært i CrashLoopBackOff de siste 5 minuttene."
           labels:
             severity: error
             namespace: ufore
