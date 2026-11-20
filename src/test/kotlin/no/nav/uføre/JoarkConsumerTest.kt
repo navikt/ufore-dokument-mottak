@@ -1,7 +1,9 @@
 package no.nav.uføre
 
 import io.kotest.assertions.nondeterministic.eventually
+import io.mockk.Runs
 import io.mockk.coEvery
+import io.mockk.just
 import io.mockk.mockk
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.runBlocking
@@ -23,11 +25,10 @@ import kotlin.time.Duration.Companion.seconds
 class JoarkConsumerTest {
     private lateinit var joarkConsumer: JoarkConsumer
     private lateinit var mockConsumer: MockConsumer<String, GenericRecord>
-    private val safClient = mockk<SafClient>()
+    private val søknadService = mockk<SøknadService>()
 
     private val topicPartition = TopicPartition("topic", 1)
     private val journalpostId = "123"
-    private val journalpost = Journalpost(journalpostId, "", emptyList())
     private val joarkHendelse = lagJoarkHendelse(journalpostId.toLong(), "UFO", "JournalpostMottatt", "NAV_NO")
 
     @BeforeEach
@@ -36,7 +37,7 @@ class JoarkConsumerTest {
             updateBeginningOffsets(mapOf(topicPartition to 1))
             assign(listOf(topicPartition))
         }
-        joarkConsumer = JoarkConsumer(mockConsumer, safClient)
+        joarkConsumer = JoarkConsumer(mockConsumer, søknadService)
     }
 
     @AfterEach
@@ -46,12 +47,12 @@ class JoarkConsumerTest {
 
     @Test
     fun `hvis meldingshåndtering kjører uten feil så skal vi committe neste offset`() {
-        // given
-        coEvery { safClient.hentJournalpost(journalpostId) } returns SafResponse(journalpost)
+        val record: ConsumerRecord<String, GenericRecord> = ConsumerRecord("topic", 1, 1, journalpostId, joarkHendelse)
+        coEvery { søknadService.mottaDokument(record) } just Runs
 
         // when
         joarkConsumer.start()
-        mockConsumer.addRecord(ConsumerRecord("topic", 1, 1, journalpostId, joarkHendelse))
+        mockConsumer.addRecord(record)
 
         runBlocking { delay(500.milliseconds) }
 
@@ -62,9 +63,6 @@ class JoarkConsumerTest {
 
     @Test
     fun `hvis meldingshåndtering kaster feil så skal vi ikke oppdatere offset`() {
-        // given
-        coEvery { safClient.hentJournalpost(journalpostId) } throws Exception("Feil")
-
         // when
         mockConsumer.addRecord(ConsumerRecord("topic", 1, 1, journalpostId, joarkHendelse))
 
@@ -83,7 +81,7 @@ class JoarkConsumerTest {
     @Test
     fun `hvis meldingshåndtering kaster feil så skal jobben bli stoppet`() {
         // given
-        coEvery { safClient.hentJournalpost(journalpostId) } throws Exception("Feil")
+        coEvery { søknadService.mottaDokument(any()) } throws Exception("Feil")
 
         // when
         mockConsumer.addRecord(ConsumerRecord("topic", 1, 1, journalpostId, joarkHendelse))

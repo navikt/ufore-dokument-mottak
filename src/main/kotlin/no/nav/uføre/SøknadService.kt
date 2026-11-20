@@ -8,25 +8,23 @@ import org.apache.kafka.clients.consumer.ConsumerRecord
 
 private val logger = KotlinLogging.logger {}
 
-// denne kaller saf ved behov
 class SøknadService(private val safClient: SafClient, private val målinger: Målinger) {
     private val teamLogsMarker = object : Marker {
         override fun getName(): String = "TEAM_LOGS"
     }
 
-    suspend fun mottaDokument(melding: ConsumerRecord<String, GenericRecord>){
-        // hente fra sag
+    suspend fun mottaDokument(melding: ConsumerRecord<String, GenericRecord>) {
         val journalpost = safClient.hentJournalpost(melding.key())
 
         målinger.kategoriserSøknad(journalpost)
-
-        if (journalpost.dokumenter.any { it.dokumentvarianter.any { variant -> variant.variantformat == ORIGINAL } }) {
-            hentSelveDokumentet(journalpost)
-        }
-
         målinger.tellTitler(journalpost)
 
-        logger.info(teamLogsMarker) { "Hentet journalpost: $journalpost, status: ${response.status}" }
+        if (journalpost.erDigitalSøknad()) {
+            val søknad = safClient.hentJsonDokument(journalpost)
+            logger.info(teamLogsMarker) { "Hentet journalpost ${journalpost.journalpostId} med sivilstatus ${søknad.data.data.hvaErDinSivilstatus}" }
+        } else {
+            // TODO: Opprett oppgave
+        }
     }
 
 

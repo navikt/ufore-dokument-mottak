@@ -18,7 +18,6 @@ import no.nav.uføre.søknad.Søknad
 
 private val logger = KotlinLogging.logger {}
 
-// hente journalposter og dokumenter
 class SafClient(private val httpClient: HttpClient, private val tokenClient: TokenClient, private val meterRegistry: MeterRegistry) {
 
     private val url = System.getenv("SAF_URL") ?: "en lokal URL"
@@ -54,37 +53,35 @@ class SafClient(private val httpClient: HttpClient, private val tokenClient: Tok
         }
 
         val responseBody = json.decodeFromString<SafResponse>(response.bodyAsText())
-
         return responseBody.journalpost
     }
 
-    private suspend fun hentSelveDokumentet(journalpostId: String, responseBody: SafResponse) {
-        val søknadDokumentId = responseBody.journalpost.dokumenter.find { it.harJsonSøknad() }?.dokumentInfoId
+    suspend fun hentJsonDokument(journalpost: Journalpost): Søknad {
+        val journalpostId = journalpost.journalpostId
+        val dokumentInfoId = journalpost.dokumenter.find { it.harJsonSøknad() }?.dokumentInfoId
 
-        if (søknadDokumentId == null) {
-            logger.warn(teamLogsMarker) { "JournalpostId $journalpostId, søknad mangler" }
-            return
+        if (dokumentInfoId == null) {
+            throw ManglerJsonDokumentException(journalpostId)
         }
 
         val response: HttpResponse =
-            httpClient.get("$url/rest/hentdokument/$journalpostId/${søknadDokumentId}/${ORIGINAL}") {
+            httpClient.get("$url/rest/hentdokument/$journalpostId/${dokumentInfoId}/${ORIGINAL}") {
                 contentType(ContentType.Application.Json)
                 header(HttpHeaders.Authorization, "Bearer ${tokenClient.hentM2mToken()}")
             }
 
+
         if (response.status == HttpStatusCode.OK) {
             val søknad = json.decodeFromString<Søknad>(response.bodyAsText())
-            logger.info(teamLogsMarker) { "Hentet journalpost $journalpostId med sivilstatus ${søknad.data.data.hvaErDinSivilstatus}" }
+            return søknad
         } else {
-            logger.warn(teamLogsMarker) { "JournalpostId ${journalpostId}, status: ${response.status}" }
+           throw KlientFeil("Kunne ikke hente JSON-dokument fra Saf. Status: ${response.status}, body: ${response.bodyAsText()}")
         }
     }
-
-
-
-
-
 }
+
+class ManglerJsonDokumentException(journalpostId: String) : RuntimeException("Mangler JSON-dokument for journalpostId $journalpostId")
+class KlientFeil(melding: String) : RuntimeException(melding)
 
 enum class SøknadsKategori {
     DIGITAL, SKANNET, UKJENT
@@ -111,8 +108,8 @@ data class Journalpost(
     val dokumenter: List<Dokument>,
 ) {
     // todo: dobbeltsjekke
-    private fun erDigitalSøknad() = kanal == "NAV_NO" && dokumenter.any { it.harJsonSøknad() }
-    private fun erSkannetSøknad() = kanal == "SKAN_IM" && dokumenter.any { it.erSøknad() }
+    fun erDigitalSøknad() = kanal == "NAV_NO" && dokumenter.any { it.harJsonSøknad() }
+    fun erSkannetSøknad() = kanal == "SKAN_IM" && dokumenter.any { it.erSøknad() }
 
     fun kategoriser() = when {
         erDigitalSøknad() -> SøknadsKategori.DIGITAL

@@ -20,7 +20,9 @@ fun main() {
     val safClient = SafClient(HttpClient(CIO), TokenClient(), meterRegistry)
     val consumer = KafkaConfig.aivenConsumer()
 
-    val joarkConsumer = JoarkConsumer(consumer, safClient)
+    val målinger = Målinger(meterRegistry)
+    val søknadService = SøknadService(safClient, målinger)
+    val joarkConsumer = JoarkConsumer(consumer, søknadService)
 
     joarkConsumer.start()
 

@@ -41,10 +41,10 @@ class SafClientTest {
         val safClient = SafClient(HttpClient(mockEngine), tokenClient, meterRegistry)
 
         // when
-        val response: SafResponse = safClient.hentJournalpost("1")
+        val journalpost = safClient.hentJournalpost("1")
 
         // then
-        assertEquals("Søknad om uføretrygd", response.journalpost.dokumenter.first().tittel)
+        assertEquals("Søknad om uføretrygd", journalpost.dokumenter.first().tittel)
     }
 
     @Test
@@ -65,9 +65,9 @@ class SafClientTest {
         val safClient = SafClient(HttpClient(mockEngine), tokenClient, meterRegistry)
 
         // when
-        val response: SafResponse = safClient.hentJournalpost("1")
+        val journalpost = safClient.hentJournalpost("1")
 
         // then
-        assertEquals(3, response.journalpost.dokumenter.size)
+        assertEquals(3, journalpost.dokumenter.size)
     }
 }
