@@ -18,18 +18,18 @@ import no.nav.uføre.søknad.Søknad
 
 private val logger = KotlinLogging.logger {}
 
+// hente journalposter og dokumenter
 class SafClient(private val httpClient: HttpClient, private val tokenClient: TokenClient, private val meterRegistry: MeterRegistry) {
 
     private val url = System.getenv("SAF_URL") ?: "en lokal URL"
     private val json = Json {
         ignoreUnknownKeys = true
     }
-    private val tillatteTitler = listOf("Søknad om uføretrygd", "NAV 12-06.05 Søknad om uføretrygd", "Ettersendelse til søknad om uføretrygd", "Ettersendelse til klage", "Klage", "Anke", "Tittel mangler")
     private val teamLogsMarker = object : Marker {
         override fun getName(): String = "TEAM_LOGS"
     }
 
-    suspend fun hentJournalpost(journalpostId: String): SafResponse {
+    suspend fun hentJournalpost(journalpostId: String): Journalpost {
         val body = """query {
           journalpost(journalpostId: "$journalpostId") {
             journalpostId
@@ -54,22 +54,12 @@ class SafClient(private val httpClient: HttpClient, private val tokenClient: Tok
         }
 
         val responseBody = json.decodeFromString<SafResponse>(response.bodyAsText())
-        kategoriserSøknad(responseBody)
 
-        if (responseBody.journalpost.dokumenter.any { it.dokumentvarianter.any { variant -> variant.variantformat == ORIGINAL } }) {
-            hentSelveDokumentet(journalpostId, responseBody)
-        }
-
-        val dokumentTittel = responseBody.journalpost.dokumenter.firstOrNull()?.tittel ?: "Tittel mangler"
-        val tillattTittel = if (dokumentTittel in tillatteTitler) dokumentTittel else "Annet dokument"
-        meterRegistry.counter("ufore_dokument_tittel", "tittel", tillattTittel).increment()
-
-        logger.info(teamLogsMarker) { "Hentet journalpost: $responseBody, status: ${response.status}" }
-        return responseBody
+        return responseBody.journalpost
     }
 
     private suspend fun hentSelveDokumentet(journalpostId: String, responseBody: SafResponse) {
-        val søknadDokumentId = responseBody.journalpost.dokumenter.find { erDokumentDigitalSøknad(it) }?.dokumentInfoId
+        val søknadDokumentId = responseBody.journalpost.dokumenter.find { it.harJsonSøknad() }?.dokumentInfoId
 
         if (søknadDokumentId == null) {
             logger.warn(teamLogsMarker) { "JournalpostId $journalpostId, søknad mangler" }
@@ -90,33 +80,9 @@ class SafClient(private val httpClient: HttpClient, private val tokenClient: Tok
         }
     }
 
-    private fun kategoriserSøknad(safResponse: SafResponse) {
-        val journalpost = safResponse.journalpost
-        val digitalFørstegangssøknad = journalpost.kanal == "NAV_NO" &&
-                journalpost.dokumenter.any { dokument ->
-                    erDokumentDigitalSøknad(dokument)
-                }
 
-        val scannetFørstegangssøknad =  journalpost.kanal == "SKAN_IM" &&
-                journalpost.dokumenter.any { dokument ->
-                    dokument.brevkode == "NAV 12-06.05" || dokument.brevkode == "NAVp 12-06.05"
-                }
 
-        val harVedlegg = journalpost.dokumenter.size > 1
 
-        val kategori = when {
-            digitalFørstegangssøknad -> SøknadsKategori.DIGITAL
-            scannetFørstegangssøknad -> SøknadsKategori.SKANNET
-            else -> SøknadsKategori.UKJENT
-        }
-        meterRegistry.counter("ufore_journalpost_mottatt", "kategori", kategori.name, "har_vedlegg", harVedlegg.toString()).increment()
-    }
-
-    private fun erDokumentDigitalSøknad(dokument: Dokument) =
-        dokument.brevkode == "NAV 12-06.05" &&
-                dokument.dokumentvarianter.any { variant ->
-                    variant.variantformat == ORIGINAL
-                }
 
 }
 
@@ -143,7 +109,17 @@ data class Journalpost(
     val journalpostId: String,
     val kanal: String?,
     val dokumenter: List<Dokument>,
-)
+) {
+    // todo: dobbeltsjekke
+    private fun erDigitalSøknad() = kanal == "NAV_NO" && dokumenter.any { it.harJsonSøknad() }
+    private fun erSkannetSøknad() = kanal == "SKAN_IM" && dokumenter.any { it.erSøknad() }
+
+    fun kategoriser() = when {
+        erDigitalSøknad() -> SøknadsKategori.DIGITAL
+        erSkannetSøknad() -> SøknadsKategori.SKANNET
+        else -> SøknadsKategori.UKJENT
+    }
+}
 
 @Serializable
 data class Dokument(
@@ -151,7 +127,15 @@ data class Dokument(
     val tittel: String?,
     val brevkode: String?,
     val dokumentvarianter: List<Dokumentvariant>,
-)
+) {
+    fun harJsonSøknad() = brevkode == "NAV 12-06.05" &&
+            dokumentvarianter.any { variant ->
+                variant.variantformat == ORIGINAL
+            }
+
+    fun erSøknad() = brevkode == "NAV 12-06.05" || brevkode == "NAVp 12-06.05"
+}
+
 
 // TODO: slå opp i kodeverk istedenfor hardkoding https://kodeverk.ansatt.nav.no/kodeverk/Variantformater
 enum class Variantformat {

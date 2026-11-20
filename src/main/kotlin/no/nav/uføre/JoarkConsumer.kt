@@ -15,7 +15,7 @@ import java.time.Duration
 
 private val logger = KotlinLogging.logger {}
 
-class JoarkConsumer(private val consumer: Consumer<String, GenericRecord>, private val safClient: SafClient) {
+class JoarkConsumer(private val consumer: Consumer<String, GenericRecord>, private val søknadService: SøknadService) {
 
     private val job = Job()
 
@@ -48,7 +48,8 @@ class JoarkConsumer(private val consumer: Consumer<String, GenericRecord>, priva
                 if (skalBehandle(melding)) {
                     logger.info { "Fikk melding med nøkkel: ${melding.key()}" }
 
-                    safClient.hentJournalpost(melding.key())
+                    // skal du behandle - hva skal du?
+                    søknadService.mottaDokument(melding)
                 }
                 offsets[TopicPartition(melding.topic(), melding.partition())] = melding.offset() + 1
             }
