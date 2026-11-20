@@ -69,7 +69,7 @@ class SafClient(private val httpClient: HttpClient, private val tokenClient: Tok
     }
 
     private suspend fun hentSelveDokumentet(journalpostId: String, responseBody: SafResponse) {
-        val søknadDokumentId = responseBody.journalpost.dokumenter.find { it.tittel == "Søknad om uføretrygd" }?.dokumentInfoId
+        val søknadDokumentId = responseBody.journalpost.dokumenter.find { erDokumentDigitalSøknad(it) }?.dokumentInfoId
 
         if (søknadDokumentId == null) {
             logger.warn(teamLogsMarker) { "JournalpostId $journalpostId, søknad mangler" }
@@ -77,7 +77,7 @@ class SafClient(private val httpClient: HttpClient, private val tokenClient: Tok
         }
 
         val response: HttpResponse =
-            httpClient.get("$url/rest/hentdokument/$journalpostId/${responseBody.journalpost.dokumenter.first().dokumentInfoId}/${ORIGINAL}") {
+            httpClient.get("$url/rest/hentdokument/$journalpostId/${søknadDokumentId}/${ORIGINAL}") {
                 contentType(ContentType.Application.Json)
                 header(HttpHeaders.Authorization, "Bearer ${tokenClient.hentM2mToken()}")
             }
@@ -94,10 +94,7 @@ class SafClient(private val httpClient: HttpClient, private val tokenClient: Tok
         val journalpost = safResponse.journalpost
         val digitalFørstegangssøknad = journalpost.kanal == "NAV_NO" &&
                 journalpost.dokumenter.any { dokument ->
-                    dokument.brevkode == "NAV 12-06.05" &&
-                            dokument.dokumentvarianter.any { variant ->
-                                variant.variantformat == ORIGINAL
-                            }
+                    erDokumentDigitalSøknad(dokument)
                 }
 
         val scannetFørstegangssøknad =  journalpost.kanal == "SKAN_IM" &&
@@ -114,6 +111,13 @@ class SafClient(private val httpClient: HttpClient, private val tokenClient: Tok
         }
         meterRegistry.counter("ufore_journalpost_mottatt", "kategori", kategori.name, "har_vedlegg", harVedlegg.toString()).increment()
     }
+
+    private fun erDokumentDigitalSøknad(dokument: Dokument) =
+        dokument.brevkode == "NAV 12-06.05" &&
+                dokument.dokumentvarianter.any { variant ->
+                    variant.variantformat == ORIGINAL
+                }
+
 }
 
 enum class SøknadsKategori {
