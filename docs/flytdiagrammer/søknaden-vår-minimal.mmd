@@ -1,0 +1,19 @@
+flowchart LR
+    %% Korteste illustrerte søknadsflyt fra søknaden-vår.json, revisjon 74.
+    %% Eksempelsvarene minimerer oppfølgingsspørsmål. Søkeren må svare ut fra sin situasjon.
+    %% Identitetskomponentens interne felt er ikke definert i JSON-filen.
+    %% Ingen betingede sider eller vedlegg utløses av eksempelsvarene.
+
+    Start(["Søknad om uføretrygd"])
+    Start --> Situasjon["1. Din situasjon<br/>Jobbe ved siden av uføretrygden: nei<br/>Eget firma: nei<br/>Driver gårdsbruk: nei"]
+    Situasjon --> Person["2. Dine opplysninger<br/>Fornavn, etternavn og identitet<br/>Har norsk fødselsnummer: ja"]
+    Person --> Status["3. Sivilstatus<br/>Enslig"]
+    Status --> Arbeid["6. Arbeid<br/>Arbeidstaker da du ble syk: nei<br/>Næringsdrivende/gårdbruker da du ble syk: nei<br/>Avtjent førstegangstjeneste: nei"]
+    Arbeid --> Utland["7. Utenlandsopphold<br/>Bodd/arbeidet utenfor Norge etter fylte 16 år: nei<br/>Norsk statsborger: ja<br/>Pensjon fra utlandet: nei"]
+    Utland --> Skade["8. Yrkesskade og yrkessykdom<br/>Godkjent yrkesskade/yrkessykdom som årsak til søknaden: nei"]
+    Skade --> Barn["9. Barn under 18 år<br/>Nei"]
+    Barn --> Bosted["13. Bor utenfor Norge og EØS<br/>Bor utenfor Norge eller EØS: nei"]
+    Bosted --> Ekstra["14. Ekstra dokumentasjon til Nav<br/>Avtalt å sende mer dokumentasjon: nei"]
+    Ekstra --> Erklaering["15. Erklæring<br/>Bekreft erklæringen"]
+    Erklaering --> Vedlegg["16. Vedlegg<br/>Annen dokumentasjon: nei"]
+    Vedlegg --> Slutt(["Slutt på skjemadefinisjonen"])

@@ -1,0 +1,72 @@
+flowchart LR
+    %% Kilde: søknaden-vår.json, revisjon 74.
+    %% Minimumsflyt utenom barn, med alle felt og svargrener på barnesiden.
+    %% Sivilstatus er enslig. De to foreldrespørsmålene for andre sivilstatuser
+    %% er vist som referanse med stiplede piler, men inngår ikke i denne eksempelruten.
+    %% Stiplede piler viser også vedleggsvilkår, ikke navigasjon.
+    %% Eksempelsvar må erstattes med søkerens faktiske svar.
+
+    Start(["Søknad om uføretrygd"])
+    Start --> Situasjon["1. Din situasjon<br/>Jobbe ved siden av uføretrygden: nei<br/>Eget firma: nei<br/>Driver gårdsbruk: nei"]
+    Situasjon --> Person["2. Dine opplysninger<br/>Fornavn, etternavn og identitet<br/>Har norsk fødselsnummer: ja"]
+    Person --> Status["3. Sivilstatus<br/>Enslig"]
+    Status --> Arbeid["6. Arbeid<br/>Arbeidstaker da du ble syk: nei<br/>Næringsdrivende/gårdbruker da du ble syk: nei<br/>Avtjent førstegangstjeneste: nei"]
+    Arbeid --> Utland["7. Utenlandsopphold<br/>Bodd/arbeidet utenfor Norge etter fylte 16 år: nei<br/>Norsk statsborger: ja<br/>Pensjon fra utlandet: nei"]
+    Utland --> Skade["8. Yrkesskade og yrkessykdom<br/>Godkjent yrkesskade/yrkessykdom som årsak til søknaden: nei"]
+    Skade --> HarBarn
+
+    subgraph Barneside["9. Barn under 18 år: alle spørsmål og felt"]
+        HarBarn["Har du barn under 18 år?<br/>Ja"]
+        HarBarn --> Fornavn["Barnets fornavn"]
+        Fornavn --> Etternavn["Barnets etternavn"]
+        Etternavn --> Identitet{"Har dette barnet norsk fødselsnummer eller d-nummer?"}
+        Identitet -->|Ja| Nummer["Fødselsnummer/d-nummer"]
+        Identitet -->|Nei| Dato["Fødselsdato"]
+        Dato --> Bilde{"Har barnet eller barna legitimasjon med bilde?"}
+        Nummer --> Adresse
+        Bilde -->|Ja| Adresse
+        Bilde -->|Nei| Adresse
+        Adresse{"Bor barnet og begge foreldrene på samme adresse?"}
+        Adresse -->|Ja| Foster
+        Adresse -->|Nei| Delt{"Har dere avtale om delt bosted etter barneloven § 36?"}
+        Delt -->|Ja| Foster
+        Delt -->|Nei| BorMedDeg{"Bor barnet med deg?"}
+        BorMedDeg -->|Ja| Foster
+        BorMedDeg -->|Nei| Forsoerger{"Forsørger du barnet?"}
+        Forsoerger -->|Nei| Foster
+        Forsoerger -->|Ja| Bidrag{"Betales det bidrag for barnet via Nav?"}
+        Bidrag -->|Ja| Foster
+        Bidrag -->|Nei| Informasjon["Vis informasjon om forsørgelses- eller samværsavtale"]
+        Informasjon --> Foster{"Er barnet ditt fosterbarn?"}
+        Foster -->|Ja| Flere
+        Foster -->|Nei| Flere
+        Flere{"Flere barn å registrere?"}
+        Flere -->|Ja| Fornavn
+        %% Flere barn illustrerer gjentatte datagrid-rader, ikke et eget skjemafelt.
+
+        HarBarn -.->|Kun ved sivilstatus samboer| SamboerForelder{"Er din samboer forelder til barnet du søker barnetillegg for?<br/>Ja/nei, vises ikke i eksempelruten"}
+        HarBarn -.->|Kun ved sivilstatus gift eller partner| EktefelleForelder{"Er din ektefelle eller partner forelder til barnet du søker barnetillegg for?<br/>Ja/nei, vises ikke i eksempelruten"}
+    end
+
+    Flere -->|Nei| Inntekt["10. Egen inntekt<br/>Oppgi året inntektsopplysningene gjelder for<br/>Har eller forventer arbeidsinntekt: nei<br/>Mottar pensjonsgivende ytelser fra Nav: nei<br/>Har eller forventer næringsinntekt: nei<br/>Har eller forventer inntekt fra utlandet: nei<br/>Mottar pensjon fra andre enn Nav: nei<br/>Mottar familiepleieytelse/krigspensjon fra Nav: nei"]
+    %% Egen inntekt vises fordi harDuBarnUnder18Ar er ja.
+    %% Pensjon fra utlandet på side 10 skjules fordi svaret på side 7 er nei.
+    %% Side 11 og 12 skjules i eksempelruten med sivilstatus enslig.
+    Inntekt --> Bosted["13. Bor utenfor Norge og EØS<br/>Bor utenfor Norge eller EØS: nei"]
+    Bosted --> Ekstra["14. Ekstra dokumentasjon til Nav<br/>Avtalt å sende mer dokumentasjon: nei"]
+    Ekstra --> Erklaering["15. Erklæring<br/>Bekreft erklæringen"]
+    Erklaering --> Vedlegg["16. Vedlegg<br/>Håndter vedlegg som barnesvarene utløser"]
+    Vedlegg --> Annet["Annen dokumentasjon: nei"]
+    Annet --> Slutt(["Slutt på skjemadefinisjonen"])
+
+    subgraph Barnevedlegg["Betingede vedlegg på side 16"]
+        Attest["Kopi av fødselsattest"]
+        Legitimasjon["Kopi av barnets legitimasjon"]
+        Avtale["Forsørgelses- eller samværsavtale"]
+        Attest --> Vedleggsvalg["For hvert synlig vedlegg:<br/>legg ved nå, ettersend eller levert tidligere"]
+        Legitimasjon --> Vedleggsvalg
+        Avtale --> Vedleggsvalg
+    end
+    Identitet -.->|Nei for minst ett barn| Attest
+    Bilde -.->|Ja for minst ett barn| Legitimasjon
+    Bidrag -.->|Nei for minst ett barn| Avtale
