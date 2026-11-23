@@ -1,0 +1,51 @@
+{
+  "language": "nb",
+  "formRevision": 74,
+  "data": {
+    "data": {
+      "dineOpplysninger": {
+        "fornavn": "FASCINERENDE",
+        "etternavn": "ABONNENT",
+        "identitet": {
+          "identitetsnummer": "28855796610"
+        },
+        "adresse": {
+          "gyldigFraOgMed": "2022-03-16",
+          "adresse": "Vassdalsveien / Áravuomebállgis 141",
+          "postnummer": "8530",
+          "bySted": "BJERKVIK",
+          "landkode": "NOR",
+          "land": {
+            "label": "Norge",
+            "value": "NO"
+          }
+        }
+      },
+      "jegErKjentMedAtNavKanInnhenteDeOpplysningeneSomErNodvendigForAAvgjoreSoknadenMinOpplysningeneErGittEtterBesteSkjonnOgOverbevisningOgErSaFullstendigeSomMuligErklaeringenOgUnderskriftenGjelderHeleSoknadenOmUforetrygd": true,
+      "erDuIArbeidNa": "nei",
+      "erDuNaeringsdrivende": "nei",
+      "driverDuGardsbruk": "nei",
+      "hvaErDinSivilstatus": "enslig",
+      "varDuArbeidstakerDaDuBleSyk": "nei",
+      "varDuNaeringsdrivendeEllerGardbrukerDaDuBleSyk": "nei",
+      "harDuAvtjentMilitaerEllerSivilForstegangstjeneste": "nei",
+      "harDuBoddOgEllerArbeidetUtenforNorgeEtterAtDuFylte16Ar": "nei",
+      "erDuNorskStatsborger": "ja",
+      "mottarDuPensjonFraUtlandet": "nei",
+      "harDuEnGodkjentYrkesskadeEllerYrkessykdomSomErArsakTilAtDuSokerOmUforetrygd": "nei",
+      "harDuBarnUnder18Ar": "nei",
+      "borDuUtenforNorgeEllerEos": "nei",
+      "harDuAvtaltMedNavAtDuSkalSendeMerDokumentasjon": "nei"
+    },
+    "selfDeclaration": true,
+    "attachments": [
+      {
+        "attachmentId": "eudyccn",
+        "navId": "eudyccn",
+        "type": "other",
+        "value": "nei",
+        "files": []
+      }
+    ]
+  }
+}

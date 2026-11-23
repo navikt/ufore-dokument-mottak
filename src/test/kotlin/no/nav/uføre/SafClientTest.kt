@@ -6,6 +6,7 @@ import io.ktor.http.*
 import io.micrometer.core.instrument.simple.SimpleMeterRegistry
 import io.mockk.coEvery
 import io.mockk.mockk
+import no.nav.uføre.søknad.Sivilstatus
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Test
@@ -69,5 +70,26 @@ class SafClientTest {
 
         // then
         assertEquals(3, journalpost.dokumenter.size)
+    }
+
+    @Test
+    suspend fun `henter søknad fra Saf og klarer å deserialisere dette`() {
+        // given
+        val mockEngine = MockEngine {
+            respond(
+                content = javaClass.getResource("/saf_søknad.json")!!.readText(),
+                status = HttpStatusCode.OK,
+                headers = headersOf(HttpHeaders.ContentType, ContentType.Application.Json.toString())
+            )
+        }
+        val safClient = SafClient(HttpClient(mockEngine), tokenClient, meterRegistry)
+        val dokumenter = listOf(Dokument("2", "foo", "NAV 12-06.05", listOf(Dokumentvariant("Søknad om uføretrygd", Filtype.JSON, Variantformat.ORIGINAL))))
+        val journalpost = Journalpost("1", "NAV_NO", dokumenter)
+
+        // when
+        val søknad = safClient.hentJsonDokument(journalpost)
+
+        // then
+        assertEquals(Sivilstatus.ENSLIG, søknad.data.data.hvaErDinSivilstatus)
     }
 }
