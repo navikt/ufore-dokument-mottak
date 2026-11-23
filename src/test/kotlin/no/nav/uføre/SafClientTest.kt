@@ -73,7 +73,7 @@ class SafClientTest {
     }
 
     @Test
-    suspend fun `henter søknad fra Saf og klarer å deserialisere dette`() {
+    suspend fun `henter søknad fra Saf og klarer å deserialisere denne`() {
         // given
         val mockEngine = MockEngine {
             respond(
