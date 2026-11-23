@@ -1,19 +1,19 @@
 {
   "language": "nb",
-  "formRevision": 74,
+  "formRevision": 76,
   "data": {
     "data": {
       "dineOpplysninger": {
-        "fornavn": "FASCINERENDE",
-        "etternavn": "ABONNENT",
+        "fornavn": "NESNØDD",
+        "etternavn": "GITARHALS",
         "identitet": {
-          "identitetsnummer": "28855796610"
+          "identitetsnummer": "01458803273"
         },
         "adresse": {
-          "gyldigFraOgMed": "2022-03-16",
-          "adresse": "Vassdalsveien / Áravuomebállgis 141",
-          "postnummer": "8530",
-          "bySted": "BJERKVIK",
+          "gyldigFraOgMed": "1988-05-01",
+          "adresse": "Kigeveien 123",
+          "postnummer": "4516",
+          "bySted": "MANDAL",
           "landkode": "NOR",
           "land": {
             "label": "Norge",
@@ -26,7 +26,13 @@
       "erDuNaeringsdrivende": "nei",
       "driverDuGardsbruk": "nei",
       "hvaErDinSivilstatus": "enslig",
-      "varDuArbeidstakerDaDuBleSyk": "nei",
+      "varDuArbeidstakerDaDuBleSyk": "ja",
+      "arbeidsgiversNavn": [
+        {
+          "arbeidsgiversNavn1": "Acme Inc",
+          "stillingsprosent": 100
+        }
+      ],
       "varDuNaeringsdrivendeEllerGardbrukerDaDuBleSyk": "nei",
       "harDuAvtjentMilitaerEllerSivilForstegangstjeneste": "nei",
       "harDuBoddOgEllerArbeidetUtenforNorgeEtterAtDuFylte16Ar": "nei",
