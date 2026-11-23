@@ -6,6 +6,7 @@ import io.ktor.http.*
 import io.micrometer.core.instrument.simple.SimpleMeterRegistry
 import io.mockk.coEvery
 import io.mockk.mockk
+import kotlinx.serialization.json.Json
 import no.nav.uføre.søknad.Sivilstatus
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeAll
@@ -83,11 +84,10 @@ class SafClientTest {
             )
         }
         val safClient = SafClient(HttpClient(mockEngine), tokenClient, meterRegistry)
-        val dokumenter = listOf(Dokument("2", "foo", "NAV 12-06.05", listOf(Dokumentvariant("Søknad om uføretrygd", Filtype.JSON, Variantformat.ORIGINAL))))
-        val journalpost = Journalpost("1", "NAV_NO", dokumenter)
+        val safResponse = Json.decodeFromString<SafResponse>(javaClass.getResource("/saf_response_ett_dokument.json")!!.readText())
 
         // when
-        val søknad = safClient.hentJsonDokument(journalpost)
+        val søknad = safClient.hentJsonDokument(safResponse.journalpost)
 
         // then
         assertEquals(Sivilstatus.ENSLIG, søknad.data.data.hvaErDinSivilstatus)
