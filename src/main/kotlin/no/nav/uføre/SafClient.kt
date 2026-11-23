@@ -1,7 +1,6 @@
 package no.nav.uføre
 
 import io.github.oshai.kotlinlogging.KotlinLogging
-import io.github.oshai.kotlinlogging.Marker
 import io.ktor.client.*
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
@@ -19,13 +18,9 @@ import no.nav.uføre.søknad.Søknad
 private val logger = KotlinLogging.logger {}
 
 class SafClient(private val httpClient: HttpClient, private val tokenClient: TokenClient, private val meterRegistry: MeterRegistry) {
-
     private val url = System.getenv("SAF_URL") ?: "en lokal URL"
     private val json = Json {
         ignoreUnknownKeys = true
-    }
-    private val teamLogsMarker = object : Marker {
-        override fun getName(): String = "TEAM_LOGS"
     }
 
     suspend fun hentJournalpost(journalpostId: String): Journalpost {
@@ -59,17 +54,16 @@ class SafClient(private val httpClient: HttpClient, private val tokenClient: Tok
     suspend fun hentJsonDokument(journalpost: Journalpost): Søknad {
         val journalpostId = journalpost.journalpostId
         val dokumentInfoId = journalpost.dokumenter.find { it.harJsonSøknad() }?.dokumentInfoId
-
         if (dokumentInfoId == null) {
             throw ManglerJsonDokumentException(journalpostId)
         }
+        logger.info { "Henter dokument for journalpost $journalpostId og dokumentInfoId $dokumentInfoId" }
 
         val response: HttpResponse =
             httpClient.get("$url/rest/hentdokument/$journalpostId/${dokumentInfoId}/${ORIGINAL}") {
                 contentType(ContentType.Application.Json)
                 header(HttpHeaders.Authorization, "Bearer ${tokenClient.hentM2mToken()}")
             }
-
 
         if (response.status == HttpStatusCode.OK) {
             val søknad = json.decodeFromString<Søknad>(response.bodyAsText())
@@ -109,6 +103,7 @@ data class Journalpost(
 ) {
     // todo: dobbeltsjekke
     fun erDigitalSøknad() = kanal == "NAV_NO" && dokumenter.any { it.harJsonSøknad() }
+
     fun erSkannetSøknad() = kanal == "SKAN_IM" && dokumenter.any { it.erSøknad() }
 
     fun kategoriser() = when {
