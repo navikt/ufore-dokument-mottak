@@ -29,9 +29,15 @@ class OppgaveClient(private val httpClient: HttpClient, private val tokenClient:
         }
 
         val body = json.decodeFromString<OppgaveResponse>(response.bodyAsText())
-        return body.antallTreffTotalt > 0
+        return body.antallTreffTotalt > 0 && body.oppgaver.isNotEmpty()
     }
 }
 
 @Serializable
-data class OppgaveResponse(val antallTreffTotalt: Int)
+data class OppgaveResponse(
+    val antallTreffTotalt: Int,
+    val oppgaver: List<Oppgave>
+)
+
+@Serializable
+data class Oppgave(val id: Long)
