@@ -14,18 +14,20 @@ import io.micrometer.prometheusmetrics.PrometheusMeterRegistry
 
 private val logger = KotlinLogging.logger {}
 val teamLogsMarker = object : Marker {
-    override fun getName(): String = "TEAM_LOGS"
+    override fun getName() = "TEAM_LOGS"
 }
 
 fun main() {
     logger.info { "Starter server" }
 
-    val meterRegistry = PrometheusMeterRegistry(PrometheusConfig.DEFAULT)
-    val safClient = SafClient(HttpClient(CIO), TokenClient(), meterRegistry)
+    val httpClient = HttpClient(CIO)
+    val tokenClient = TokenClient()
+    val safClient = SafClient(httpClient, tokenClient)
+    val oppgaveClient = OppgaveClient(httpClient, tokenClient)
     val consumer = KafkaConfig.aivenConsumer()
-
+    val meterRegistry = PrometheusMeterRegistry(PrometheusConfig.DEFAULT)
     val målinger = Målinger(meterRegistry)
-    val søknadService = SøknadService(safClient, målinger)
+    val søknadService = SøknadService(safClient, oppgaveClient, målinger)
     val joarkConsumer = JoarkConsumer(consumer, søknadService)
 
     joarkConsumer.start()

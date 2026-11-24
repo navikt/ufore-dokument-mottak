@@ -15,7 +15,12 @@ spec:
       value: "https://saf.prod-fss-pub.nais.io"
     - name: SAF_SCOPE
       value: "api://prod-fss.teamdokumenthandtering.saf/.default"
+    - name: OPPGAVE_URL
+      value: "https://oppgave.prod-fss-pub.nais.io"
+    - name: OPPGAVE_SCOPE
+      value: "api://prod-fss.oppgavehandtering.oppgave/.default"
   accessPolicy:
     outbound:
       external:
         - host: saf.prod-fss-pub.nais.io
+        - host: oppgave.prod-fss-pub.nais.io

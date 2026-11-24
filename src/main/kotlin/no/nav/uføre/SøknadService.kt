@@ -6,7 +6,11 @@ import org.apache.kafka.clients.consumer.ConsumerRecord
 
 private val logger = KotlinLogging.logger {}
 
-class SøknadService(private val safClient: SafClient, private val målinger: Målinger) {
+class SøknadService(
+    private val safClient: SafClient,
+    private val oppgaveClient: OppgaveClient,
+    private val målinger: Målinger
+) {
 
     suspend fun mottaDokument(melding: ConsumerRecord<String, GenericRecord>) {
         val journalpost = safClient.hentJournalpost(melding.key())
@@ -20,5 +24,8 @@ class SøknadService(private val safClient: SafClient, private val målinger: M�
         } else {
             // TODO: Opprett oppgave
         }
+
+        oppgaveClient.sjekkOmJournalpostHarOppgave(journalpost.journalpostId)
+
     }
 }

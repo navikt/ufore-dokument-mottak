@@ -14,10 +14,10 @@ class TokenClient {
     private val restClient: HttpClient = HttpClient(CIO)
     private val json = Json { ignoreUnknownKeys = true }
 
-    suspend fun hentM2mToken(): String {
+    suspend fun hentM2mToken(target: String): String {
         val response = restClient.post(System.getenv("NAIS_TOKEN_ENDPOINT")) {
             contentType(ContentType.Application.Json)
-            setBody(Json.encodeToString(M2mRequest(System.getenv("SAF_SCOPE"), "entra_id")))
+            setBody(Json.encodeToString(M2mRequest(target, "entra_id")))
         }
         return json.decodeFromString<AccessToken>(response.bodyAsText()).access_token
     }

@@ -3,7 +3,6 @@ package no.nav.uføre
 import io.ktor.client.*
 import io.ktor.client.engine.mock.*
 import io.ktor.http.*
-import io.micrometer.core.instrument.simple.SimpleMeterRegistry
 import io.mockk.coEvery
 import io.mockk.mockk
 import kotlinx.serialization.json.Json
@@ -13,7 +12,6 @@ import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Test
 
 class SafClientTest {
-    private val meterRegistry = SimpleMeterRegistry()
 
     companion object {
         private val tokenClient = mockk<TokenClient>()
@@ -21,7 +19,7 @@ class SafClientTest {
         @BeforeAll
         @JvmStatic
         fun init() {
-            coEvery { tokenClient.hentM2mToken() } returns "token"
+            coEvery { tokenClient.hentM2mToken(any()) } returns "token"
         }
     }
 
@@ -36,7 +34,7 @@ class SafClientTest {
             )
         }
 
-        val safClient = SafClient(HttpClient(mockEngine), tokenClient, meterRegistry)
+        val safClient = SafClient(HttpClient(mockEngine), tokenClient)
 
         // when
         val journalpost = safClient.hentJournalpost("1")
@@ -56,7 +54,7 @@ class SafClientTest {
             )
         }
 
-        val safClient = SafClient(HttpClient(mockEngine), tokenClient, meterRegistry)
+        val safClient = SafClient(HttpClient(mockEngine), tokenClient)
 
         // when
         val journalpost = safClient.hentJournalpost("1")
@@ -75,7 +73,7 @@ class SafClientTest {
                 headers = headersOf(HttpHeaders.ContentType, ContentType.Application.Json.toString())
             )
         }
-        val safClient = SafClient(HttpClient(mockEngine), tokenClient, meterRegistry)
+        val safClient = SafClient(HttpClient(mockEngine), tokenClient)
         val journalpost = Json.decodeFromString<SafResponse>(javaClass.getResource("/saf_response_ett_dokument.json")!!.readText()).journalpost
 
         // when

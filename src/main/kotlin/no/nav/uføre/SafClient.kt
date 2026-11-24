@@ -5,7 +5,6 @@ import io.ktor.client.*
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
 import io.ktor.http.*
-import io.micrometer.core.instrument.MeterRegistry
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
@@ -17,7 +16,7 @@ import no.nav.uføre.søknad.Søknad
 
 private val logger = KotlinLogging.logger {}
 
-class SafClient(private val httpClient: HttpClient, private val tokenClient: TokenClient, private val meterRegistry: MeterRegistry) {
+class SafClient(private val httpClient: HttpClient, private val tokenClient: TokenClient) {
     private val url = System.getenv("SAF_URL") ?: "en lokal URL"
     private val json = Json {
         ignoreUnknownKeys = true
@@ -43,7 +42,7 @@ class SafClient(private val httpClient: HttpClient, private val tokenClient: Tok
 
         val response: HttpResponse = httpClient.post("$url/graphql") {
             contentType(ContentType.Application.Json)
-            header(HttpHeaders.Authorization, "Bearer ${tokenClient.hentM2mToken()}")
+            header(HttpHeaders.Authorization, "Bearer ${tokenClient.hentM2mToken(System.getenv("SAF_SCOPE"))}")
             setBody(json.encodeToString(mapOf("query" to body)))
         }
 
@@ -62,7 +61,7 @@ class SafClient(private val httpClient: HttpClient, private val tokenClient: Tok
         val response: HttpResponse =
             httpClient.get("$url/rest/hentdokument/$journalpostId/${dokumentInfoId}/${ORIGINAL}") {
                 contentType(ContentType.Application.Json)
-                header(HttpHeaders.Authorization, "Bearer ${tokenClient.hentM2mToken()}")
+                header(HttpHeaders.Authorization, "Bearer ${tokenClient.hentM2mToken(System.getenv("SAF_SCOPE"))}")
             }
 
         if (response.status == HttpStatusCode.OK) {
