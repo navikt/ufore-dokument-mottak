@@ -25,7 +25,8 @@ class SøknadService(
             // TODO: Opprett oppgave
         }
 
-        oppgaveClient.sjekkOmJournalpostHarOppgave(journalpost.journalpostId)
+        val harOppgave = oppgaveClient.harJournalpostOppgave(journalpost.journalpostId)
+        logger.info { "Har oppgave ${journalpost.journalpostId}: $harOppgave" }
 
     }
 }
