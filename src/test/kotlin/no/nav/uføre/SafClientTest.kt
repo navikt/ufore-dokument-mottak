@@ -28,16 +28,12 @@ class SafClientTest {
     @Test
     suspend fun `henter ett dokument fra Saf og klarer å deserialisere dette`() {
         // given
-        val mockEngine = MockEngine { request ->
-            when {
-                request.url.encodedPath.endsWith("/graphql") -> respondOk(
-                    content = javaClass.getResource("/saf_response_ett_dokument.json")!!.readText(),
-                )
-                request.url.encodedPath.endsWith("/rest/hentdokument/1/810899999/ORIGINAL") ->
-                    respondError(HttpStatusCode.BadRequest)
-
-                else -> error("Unhandled ${request.url}")
-            }
+        val mockEngine = MockEngine {
+            respond(
+                content = javaClass.getResource("/saf_response_ett_dokument.json")!!.readText(),
+                status = HttpStatusCode.OK,
+                headers = headersOf(HttpHeaders.ContentType, ContentType.Application.Json.toString())
+            )
         }
 
         val safClient = SafClient(HttpClient(mockEngine), tokenClient, meterRegistry)
@@ -52,16 +48,12 @@ class SafClientTest {
     @Test
     suspend fun `henter flere dokumenter fra Saf og klarer å deserialisere disse`() {
         // given
-        val mockEngine = MockEngine { request ->
-            when {
-                request.url.encodedPath.endsWith("/graphql") -> respondOk(
-                    content = javaClass.getResource("/saf_response_flere_dokumenter.json")!!.readText(),
-                )
-                request.url.encodedPath.endsWith("/rest/hentdokument/1/810878888/ORIGINAL") ->
-                    respondError(HttpStatusCode.BadRequest)
-
-                else -> error("Unhandled ${request.url}")
-            }
+        val mockEngine = MockEngine {
+            respond(
+                content = javaClass.getResource("/saf_response_flere_dokumenter.json")!!.readText(),
+                status = HttpStatusCode.OK,
+                headers = headersOf(HttpHeaders.ContentType, ContentType.Application.Json.toString())
+            )
         }
 
         val safClient = SafClient(HttpClient(mockEngine), tokenClient, meterRegistry)
@@ -84,12 +76,12 @@ class SafClientTest {
             )
         }
         val safClient = SafClient(HttpClient(mockEngine), tokenClient, meterRegistry)
-        val safResponse = Json.decodeFromString<SafResponse>(javaClass.getResource("/saf_response_ett_dokument.json")!!.readText())
+        val journalpost = Json.decodeFromString<SafResponse>(javaClass.getResource("/saf_response_ett_dokument.json")!!.readText()).journalpost
 
         // when
-        val søknad = safClient.hentJsonDokument(safResponse.journalpost)
+        val søknad = safClient.hentJsonDokument(journalpost)
 
         // then
-        assertEquals(Sivilstatus.ENSLIG, søknad.data.data.hvaErDinSivilstatus)
+        assertEquals(Sivilstatus.GIFT_ELLER_PARTNER, søknad.data.data.hvaErDinSivilstatus)
     }
 }

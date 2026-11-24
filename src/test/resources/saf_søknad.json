@@ -4,16 +4,16 @@
   "data": {
     "data": {
       "dineOpplysninger": {
-        "fornavn": "NESNØDD",
-        "etternavn": "GITARHALS",
+        "fornavn": "PLUTSELIG",
+        "etternavn": "FART",
         "identitet": {
-          "identitetsnummer": "01458803273"
+          "identitetsnummer": "06905297730"
         },
         "adresse": {
-          "gyldigFraOgMed": "1988-05-01",
-          "adresse": "Kigeveien 123",
-          "postnummer": "4516",
-          "bySted": "MANDAL",
+          "gyldigFraOgMed": "2022-03-18",
+          "adresse": "Forraveien 94",
+          "postnummer": "8533",
+          "bySted": "BOGEN I OFOTEN",
           "landkode": "NOR",
           "land": {
             "label": "Norge",
@@ -22,35 +22,204 @@
         }
       },
       "jegErKjentMedAtNavKanInnhenteDeOpplysningeneSomErNodvendigForAAvgjoreSoknadenMinOpplysningeneErGittEtterBesteSkjonnOgOverbevisningOgErSaFullstendigeSomMuligErklaeringenOgUnderskriftenGjelderHeleSoknadenOmUforetrygd": true,
-      "erDuIArbeidNa": "nei",
-      "erDuNaeringsdrivende": "nei",
-      "driverDuGardsbruk": "nei",
-      "hvaErDinSivilstatus": "enslig",
+      "erDuIArbeidNa": "ja",
+      "oppgiForventetInntektPerManed": 50000,
+      "arbeidIDag": {
+        "mottarDuFostergodtgjorelseEllerOmsorgslonn": "ja",
+        "mottarDuEllerVilDuFaEtterlonnEllerAnnetSluttoppgjorFraArbeidsgiver": "ja"
+      },
+      "erDuNaeringsdrivende": "ja",
+      "skalArbeide": {
+        "jegOnskerALeggeVedOpplysningerOmArbeidsforholdSomEgetVedlegg": false,
+        "informasjonOmFirma": "Lorem ipsum"
+      },
+      "firmaetsOrganisasjonsnummer": "1234567",
+      "firmaetsNavn1": "Navn på firma",
+      "naeringsdrivende": {
+        "erDuAnsattIEgenBedriftAksjeselskap": "ja",
+        "mottarDuStyrehonorarOgEllerGodtgjorelserIForbindelseMedVerv": "ja"
+      },
+      "driverDuGardsbruk": "ja",
+      "hvaErDinSivilstatus": "giftEllerPartner",
+      "fornavn": "Kari",
+      "etternavn": "Nordmann",
+      "harDinEktefelleEllerPartnerNorskFodselsnummerEllerDNummer": "ja",
+      "ektefelleEllerPartnersFodselsnummerEllerDNummer": "01084126647",
+      "erDinEktefelleEllerPartnerUtenlandskStatsborger": "ja",
+      "hvaErDinEktefelleEllerPartnersStatsborgerskap": "Sverige",
+      "haddeDinEktefelleEllerPartnerEtAnnetNavnForDereGiftetDere": "ja",
+      "ektefellesEllerPartnersTidligereNavn": "Svensk",
+      "erDereBosattPaSammeAdresse": "nei",
       "varDuArbeidstakerDaDuBleSyk": "ja",
       "arbeidsgiversNavn": [
         {
-          "arbeidsgiversNavn1": "Acme Inc",
-          "stillingsprosent": 100
+          "arbeidsgiversNavn1": "Arbeidsgivers navn 1 før sykdom",
+          "stillingsprosent": 50
+        },
+        {
+          "arbeidsgiversNavn1": "Arbeidsgivers navn 2 før sykdom",
+          "stillingsprosent": 10
         }
       ],
-      "varDuNaeringsdrivendeEllerGardbrukerDaDuBleSyk": "nei",
-      "harDuAvtjentMilitaerEllerSivilForstegangstjeneste": "nei",
-      "harDuBoddOgEllerArbeidetUtenforNorgeEtterAtDuFylte16Ar": "nei",
+      "varDuNaeringsdrivendeEllerGardbrukerDaDuBleSyk": "ja",
+      "harDuAvsluttetNaeringsvirksomheten": "nei",
+      "harDuAvtjentMilitaerEllerSivilForstegangstjeneste": "ja",
+      "hvilketArstallAvtjenteDuMilitaerEllerSivilForstegangstjeneste": 2000,
+      "harDuBoddOgEllerArbeidetUtenforNorgeEtterAtDuFylte16Ar": "ja",
+      "opplysningerOmArbeidOgOppholdIUtlandet": [
+        {
+          "oppholdsland": {
+            "value": "SE",
+            "label": "Sverige"
+          },
+          "oppholdFraManedOgAr1": "2019-01",
+          "oppholdTilManedOgAr1": "2020-01",
+          "boddEllerArbeidet": {
+            "bodd": true,
+            "arbeidet": true
+          }
+        },
+        {
+          "oppholdsland": {
+            "value": "DK",
+            "label": "Danmark"
+          },
+          "oppholdFraManedOgAr1": "2014-01",
+          "oppholdTilManedOgAr1": "2016-02",
+          "boddEllerArbeidet": {
+            "bodd": true,
+            "arbeidet": true
+          }
+        }
+      ],
       "erDuNorskStatsborger": "ja",
-      "mottarDuPensjonFraUtlandet": "nei",
-      "harDuEnGodkjentYrkesskadeEllerYrkessykdomSomErArsakTilAtDuSokerOmUforetrygd": "nei",
-      "harDuBarnUnder18Ar": "nei",
-      "borDuUtenforNorgeEllerEos": "nei",
+      "mottarDuPensjonFraUtlandet": "ja",
+      "opplysningerOmPensjonFraUtlandet": [
+        {
+          "typePensjon": "Svensk pensjon",
+          "belopPerArForSkatt": 20000,
+          "landDuMottarPensjonFra": {
+            "value": "SE",
+            "label": "Sverige"
+          }
+        }
+      ],
+      "harDuEnGodkjentYrkesskadeEllerYrkessykdomSomErArsakTilAtDuSokerOmUforetrygd": "ja",
+      "harDuBarnUnder18Ar": "ja",
+      "opplysningerOmBarnUnder18Ar": [
+        {
+          "personalia": {
+            "fornavn": "Ola",
+            "etternavn": "Nordmann",
+            "harDetteBarnetNorskFodselsnummerEllerDNummer": "ja",
+            "fodselsnummerDNummer": "21061387789"
+          },
+          "borBarnetOgBeggeForeldrenePaSammeAdresse": "ja",
+          "erBarnetDittFosterbarn": "ja"
+        }
+      ],
+      "erDinEktefelleEllerPartnerForelderTilBarnetDuSokerBarnetilleggFor": "ja",
+      "aretInntektsopplysningeneGjelderFor": 2026,
+      "harDuEllerForventerDuAFaArbeidsinntekt": "ja",
+      "arligBruttoArbeidsinntekt": 30000,
+      "mottarDuEnEllerFlerePensjonsgivendeYtelserFraNav": "ja",
+      "forventetBruttoArligPensjonsgivendeYtelser": 20000,
+      "harDuEllerForventerDuAFaNaeringsinntekt": "ja",
+      "bruttoArligNaeringsinntekt": 10000,
+      "harDuEllerForventerDuAFaInntektFraUtlandet": "ja",
+      "bruttoArsinntektFraUtlandet": 25000,
+      "mottarDuPensjonFraAndreEnnNavOffentligEllerPrivat": "ja",
+      "bruttoArligPensjonFraAndreEnnNav": 27000,
+      "mottarDuFamiliepleieytelseOgEllerKrigspensjonFraNav": "ja",
+      "bruttoArligFamiliepleieytelseOgKrigspensjonFraNav": 500,
+      "mottarDuPensjonFraUtlandet1": "ja",
+      "bruttoArligPensjonFraUtlandet": 7000,
+      "harDinEktefelleEllerPartnerArbeidsinntekt": "ja",
+      "belopArligBruttoArbeidsinntekt": 10000,
+      "mottarDinEktefelleEllerPartnerEnEllerFlerePensjonsgivendeYtelserFraNav": "ja",
+      "forventetBruttoArligPensjonsgivendeYtelser2": 5000,
+      "harDinEktefelleEllerPartnerNaeringsinntekt": "ja",
+      "bruttoArligNaeringsinntekt1": 7000,
+      "harDinEktefelleEllerPartnerInntektFraUtlandet": "ja",
+      "bruttoArsinntektFraUtlandet2": 6000,
+      "mottarDinEktefelleEllerPartnerPensjonFraAndreEnnNavOffentligEllerPrivat": "ja",
+      "bruttoArligPensjonFraAndreEnnNav2": 5000,
+      "mottarDinEktefelleEllerPartnerIntroduksjonsstonadSupplerendeStonadEllerKrigspensjonFraNav": "ja",
+      "bruttoArligIntroduksjonsstonadSupplerendeStonadOgKrigspensjonFraNav": 2000,
+      "mottarEktefelleEllerPartnerPensjonFraUtlandet": "ja",
+      "bruttoArligPensjonFraUtlandet2": 1000,
+      "borDuUtenforNorgeEllerEos": "ja",
+      "harDuHattOppholdINorge": "ja",
+      "periodeneDuHarBoddINorge": [
+        {
+          "oppholdINorgeFraManedOgAr1": "2023-01",
+          "oppholdINorgeTilManedOgAr1": "2026-01"
+        },
+        {
+          "oppholdINorgeFraManedOgAr1": "1994-01",
+          "oppholdINorgeTilManedOgAr1": "2004-01"
+        }
+      ],
+      "erDuIArbeidNa1": "ja",
+      "harDuUtdanning": "ja",
+      "utdanningenDin": [
+        {
+          "skoleKurs": "Skolen",
+          "gradTittel": "Valgfri grad/tittel",
+          "utdanningFraManedOgAr": "2000-01",
+          "utdanningTilManedOgAr": "2004-01"
+        }
+      ],
+      "harDuArbeidsforhold": "ja",
+      "arbeidsforholdeneDine": [
+        {
+          "arbeidsgiver": "Arbeidsgiveren",
+          "stilling": "Stilling",
+          "stillingsprosent": 40,
+          "ansattFraManedOgAr1": "2024-01",
+          "ansattTilManedOgAr1": "2026-04"
+        }
+      ],
       "harDuAvtaltMedNavAtDuSkalSendeMerDokumentasjon": "nei"
     },
     "selfDeclaration": true,
     "attachments": [
       {
+        "attachmentId": "e3xgf9",
+        "navId": "e3xgf9",
+        "type": "default",
+        "value": "ettersender",
+        "files": []
+      },
+      {
+        "attachmentId": "e5nvfqc",
+        "navId": "e5nvfqc",
+        "type": "default",
+        "value": "ettersender",
+        "files": []
+      },
+      {
+        "attachmentId": "ef9rynp",
+        "navId": "ef9rynp",
+        "type": "default",
+        "value": "levertTidligere",
+        "files": []
+      },
+      {
         "attachmentId": "eudyccn",
         "navId": "eudyccn",
         "type": "other",
-        "value": "nei",
-        "files": []
+        "value": "leggerVedNaa",
+        "files": [
+          {
+            "fileId": "76d50e68-6736-4225-935e-1840ef040d02",
+            "attachmentId": "eudyccn",
+            "innsendingId": "cd110aa7-3af7-403c-9ba8-1aa6358eb216",
+            "fileName": "Example.jpg",
+            "size": 26251
+          }
+        ],
+        "title": "et vedlegg"
       }
     ]
   }
