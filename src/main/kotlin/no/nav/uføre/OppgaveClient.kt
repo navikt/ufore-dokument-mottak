@@ -31,7 +31,63 @@ class OppgaveClient(private val httpClient: HttpClient, private val tokenClient:
         val body = json.decodeFromString<OppgaveResponse>(response.bodyAsText())
         return body.antallTreffTotalt > 0 && body.oppgaver.isNotEmpty()
     }
+
+    suspend fun opprettOppgave(journalpost: Journalpost) {
+        val request = OpprettOppgaveRequest(
+            beskrivelse = "En testoppgave fra Team Uføre",
+            kategorisering = Kategorisering(
+                tema = Kode("UFO"),
+                oppgavetype = Kode("JFR"),
+                behandlingstema = Kode("ab0194"), // https://kodeverk.ansatt.nav.no/kodeverk/Behandlingstema/5353
+                behandlingstype = Kode("ae0002") // se https://kodeverk.ansatt.nav.no/kodeverk/Behandlingstyper/14589
+            ),
+            bruker = Bruker(
+                ident = "", // TODO: hent ident fra journalpost
+                type = "PERSON"
+            ),
+            arkivreferanse = Arkivreferanse(journalpost.journalpostId)
+        )
+
+        val response: HttpResponse =
+            httpClient.post("$url/api/v2/oppgaver/") {
+                contentType(ContentType.Application.Json)
+                header(HttpHeaders.Authorization, "Bearer ${tokenClient.hentM2mToken(System.getenv("OPPGAVE_SCOPE"))}")
+                setBody(request)
+            }
+    }
 }
+
+@Serializable
+data class OpprettOppgaveRequest(
+    val beskrivelse: String,
+    val kategorisering: Kategorisering,
+    val bruker: Bruker,
+    val arkivreferanse: Arkivreferanse,
+)
+
+@Serializable
+data class Kategorisering(
+    val tema: Kode,
+    val oppgavetype: Kode,
+    val behandlingstema: Kode,
+    val behandlingstype: Kode,
+)
+
+@Serializable
+data class Kode(
+    val kode: String,
+)
+
+@Serializable
+data class Bruker(
+    val ident: String,
+    val type: String,
+)
+
+@Serializable
+data class Arkivreferanse(
+    val journalpostId: String,
+)
 
 @Serializable
 data class OppgaveResponse(
