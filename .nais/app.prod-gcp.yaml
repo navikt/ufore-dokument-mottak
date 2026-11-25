@@ -19,8 +19,13 @@ spec:
       value: "https://oppgave.prod-fss-pub.nais.io"
     - name: OPPGAVE_SCOPE
       value: "api://prod-fss.oppgavehandtering.oppgave/.default"
+    - name: KODEVERK_URL
+      value: "https://kodeverk-api.nav.no"
+    - name: KODEVERK_SCOPE
+      value: "api://dev-gcp.team-rocket.kodeverk-api/.default"
   accessPolicy:
     outbound:
       external:
         - host: saf.prod-fss-pub.nais.io
         - host: oppgave.prod-fss-pub.nais.io
+        - host: kodeverk-api.nav.no

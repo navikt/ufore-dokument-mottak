@@ -11,6 +11,7 @@ import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import io.micrometer.prometheusmetrics.PrometheusConfig
 import io.micrometer.prometheusmetrics.PrometheusMeterRegistry
+import kotlinx.coroutines.runBlocking
 
 private val logger = KotlinLogging.logger {}
 val teamLogsMarker = object : Marker {
@@ -22,6 +23,7 @@ fun main() {
 
     val httpClient = HttpClient(CIO)
     val tokenClient = TokenClient()
+    val kodeverkClient = KodeverkClient(httpClient, tokenClient)
     val safClient = SafClient(httpClient, tokenClient)
     val oppgaveClient = OppgaveClient(httpClient, tokenClient)
     val consumer = KafkaConfig.aivenConsumer()
@@ -29,6 +31,10 @@ fun main() {
     val målinger = Målinger(meterRegistry)
     val søknadService = SøknadService(safClient, oppgaveClient, målinger)
     val joarkConsumer = JoarkConsumer(consumer, søknadService)
+
+    runBlocking {
+        kodeverkClient.hentTemaSkjemaGjelder()
+    }
 
     joarkConsumer.start()
 
