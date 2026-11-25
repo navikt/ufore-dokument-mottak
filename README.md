@@ -8,7 +8,7 @@ Denne applikasjonen lytter på meldinger fra Joark som omhandler dokumenter for 
 - [Kotlin](https://kotlinlang.org/)
 - [Gradle](https://gradle.org/) brukes som byggeverktøy og er inkludert i oppsettet
 
-For hvilke versjoner som brukes, [se versjonsfilen](/gradle/libs.versions.toml)
+For hvilke versjoner som brukes, [se byggefilen](/build.gradle.kts)
 
 ### Bygging og denslags
 For å bygge artifaktene:
