@@ -38,8 +38,8 @@ class OppgaveClient(private val httpClient: HttpClient, private val tokenClient:
             kategorisering = Kategorisering(
                 tema = Kode("UFO"),
                 oppgavetype = Kode("JFR"),
-                behandlingstema = Kode("ab0194"), // https://kodeverk.ansatt.nav.no/kodeverk/Behandlingstema/5353
-                behandlingstype = Kode("ae0002") // se https://kodeverk.ansatt.nav.no/kodeverk/Behandlingstyper/14589
+                behandlingstema = avgjørBehandlingstema(journalpost),
+                behandlingstype = avgjørBehandlingstype(journalpost)
             ),
             bruker = Bruker(
                 ident = "", // TODO: hent ident fra journalpost
@@ -55,6 +55,21 @@ class OppgaveClient(private val httpClient: HttpClient, private val tokenClient:
                 setBody(request)
             }
     }
+
+    private fun avgjørBehandlingstema(journalpost: Journalpost) = Kode(
+        when {
+            !journalpost.behandlingstema.isNullOrEmpty() -> journalpost.behandlingstema
+            journalpost.dokumenter.firstOrNull()?.brevkode in listOf("NAVe 22-06.01", "NAV 22-06.01") -> "ab0150"
+            else -> ""
+        }
+    )
+
+    private fun avgjørBehandlingstype(journalpost: Journalpost) = Kode(
+        when {
+            journalpost.dokumenter.firstOrNull()?.brevkode in listOf("NAVe 90-00.08 K", "NAV 90-00.08 K") -> "ae0058"
+            else -> ""
+        }
+    )
 }
 
 @Serializable
