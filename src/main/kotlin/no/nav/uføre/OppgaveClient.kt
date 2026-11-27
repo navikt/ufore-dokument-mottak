@@ -59,14 +59,14 @@ class OppgaveClient(private val httpClient: HttpClient, private val tokenClient:
     private fun avgjørBehandlingstema(journalpost: Journalpost) = Kode(
         when {
             !journalpost.behandlingstema.isNullOrEmpty() -> journalpost.behandlingstema
-            journalpost.dokumenter.first().brevkode in listOf("NAVe 22-06.01", "NAV 22-06.01") -> "ab0150"
+            journalpost.dokumenter.firstOrNull()?.brevkode in listOf("NAVe 22-06.01", "NAV 22-06.01") -> "ab0150"
             else -> ""
         }
     )
 
     private fun avgjørBehandlingstype(journalpost: Journalpost) = Kode(
         when {
-            journalpost.dokumenter.first().brevkode in listOf("NAVe 90-00.08 K", "NAV 90-00.08 K") -> "ae0058"
+            journalpost.dokumenter.firstOrNull()?.brevkode in listOf("NAVe 90-00.08 K", "NAV 90-00.08 K") -> "ae0058"
             else -> ""
         }
     )
