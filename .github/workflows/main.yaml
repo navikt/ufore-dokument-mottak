@@ -42,7 +42,7 @@ jobs:
       id-token: write
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
-      - uses: nais/setup@fb8692f65df9c904e2cdac5d395630ac876abdcf
+      - uses: nais/setup@cc4e4226c3c8e819ded324ecd8608fd905347428
         with:
           team: ufore
       - name: Deploy to dev-gcp
