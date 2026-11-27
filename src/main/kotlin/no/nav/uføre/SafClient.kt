@@ -26,6 +26,7 @@ class SafClient(private val httpClient: HttpClient, private val tokenClient: Tok
         val body = """query {
           journalpost(journalpostId: "$journalpostId") {
             journalpostId
+            behandlingstema
             kanal
             dokumenter {
               dokumentInfoId
@@ -97,6 +98,7 @@ object JournalpostFromDataSerializer :
 @Serializable
 data class Journalpost(
     val journalpostId: String,
+    val behandlingstema: String? = null,
     val kanal: String?,
     val dokumenter: List<Dokument>,
 ) {
