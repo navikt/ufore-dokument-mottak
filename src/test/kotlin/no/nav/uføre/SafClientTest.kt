@@ -81,5 +81,6 @@ class SafClientTest {
 
         // then
         assertEquals(Sivilstatus.GIFT_ELLER_PARTNER, søknad.data.data.hvaErDinSivilstatus)
+        assertEquals(76, søknad.formRevision)
     }
 }

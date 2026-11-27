@@ -15,6 +15,7 @@ import java.time.LocalDate
 @Serializable
 data class Søknad(
     val language: String,
+    val formRevision: Int,
     val data: Søknadsinnsending,
 )
 

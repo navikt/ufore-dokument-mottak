@@ -8,7 +8,6 @@ import io.ktor.client.statement.bodyAsText
 import io.ktor.http.ContentType
 import io.ktor.http.HttpHeaders
 import io.ktor.http.contentType
-import no.nav.uføre.Variantformat.ORIGINAL
 
 private val logger = KotlinLogging.logger { }
 

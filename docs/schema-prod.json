@@ -7,6 +7,9 @@
     "language": {
       "type": "string"
     },
+    "formRevision": {
+      "type": "integer"
+    },
     "data": {
       "type": "object",
       "properties": {
@@ -3300,6 +3303,7 @@
   },
   "required": [
     "language",
+    "formRevision",
     "data"
   ],
   "additionalProperties": false

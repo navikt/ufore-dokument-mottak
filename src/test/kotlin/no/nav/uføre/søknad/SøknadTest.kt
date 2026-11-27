@@ -1,84 +1,42 @@
 package no.nav.uføre.søknad
 
-import io.kotest.matchers.collections.shouldHaveSize
-import io.kotest.matchers.nulls.shouldBeNull
-import io.kotest.matchers.shouldBe
 import kotlinx.serialization.json.Json
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertNull
+import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
-import java.time.LocalDate
 
 class SøknadTest {
 
     private val json = Json { ignoreUnknownKeys = true }
 
-    private val søknadJson = """
-        {
-          "language": "nb-NO",
-          "data": {
-            "data": {
-              "erDuIArbeidNa": "nei",
-              "erDuNaeringsdrivende": "nei",
-              "driverDuGardsbruk": "nei",
-              "dineOpplysninger": {
-                "fornavn": "Ola", "etternavn": "Nordmann",
-                "identitet": { "identitetsnummer": "12345678910" },
-                "adresse": { "adresse": "Gate 1", "postnummer": "0001" },
-                "adresseVarighet": { "gyldigFraOgMed": "2020-01-01", "gyldigTilOgMed": "" }
-              },
-              "hvaErDinSivilstatus": "samboer",
-              "fornavn1": "Kari",
-              "samboersFodselsdatoDdMmAaaa": "1980-05-17",
-              "varDuArbeidstakerDaDuBleSyk": "ja",
-              "arbeidsgiversNavn": [ { "arbeidsgiversNavn1": "Firma AS", "stillingsprosent": 80 } ],
-              "varDuNaeringsdrivendeEllerGardbrukerDaDuBleSyk": "nei",
-              "harDuAvtjentMilitaerEllerSivilForstegangstjeneste": "nei",
-              "harDuBoddOgEllerArbeidetUtenforNorgeEtterAtDuFylte16Ar": "nei",
-              "erDuNorskStatsborger": "ja",
-              "mottarDuPensjonFraUtlandet": "nei",
-              "harDuEnGodkjentYrkesskadeEllerYrkessykdomSomErArsakTilAtDuSokerOmUforetrygd": "nei",
-              "harDuBarnUnder18Ar": "nei",
-              "bruttoArligNaeringsinntekt2": 125000.5,
-              "borDuUtenforNorgeEllerEos": "nei",
-              "harDuAvtaltMedNavAtDuSkalSendeMerDokumentasjon": "nei",
-              "jegErKjentMedAtNavKanInnhenteDeOpplysningeneSomErNodvendigForAAvgjoreSoknadenMinOpplysningeneErGittEtterBesteSkjonnOgOverbevisningOgErSaFullstendigeSomMuligErklaeringenOgUnderskriftenGjelderHeleSoknadenOmUforetrygd": true,
-              "kopiAvSisteLonnslipp": "ettersender",
-              "passTilDinSamboer": { "key": "levertTidligere" },
-              "annenDokumentasjon": {
-                "attachmentId": "a1", "navId": "eudyccn", "type": "other", "value": "leggerVedNaa",
-                "files": [ { "fileId": "f1", "attachmentId": "a1", "innsendingId": "i1", "fileName": "x.pdf", "size": 1024 } ]
-              }
-            },
-            "attachments": [ { "attachmentId": "a1", "navId": "eudyccn", "type": "other", "value": "leggerVedNaa" } ],
-            "selfDeclaration": true
-          }
-        }
-    """.trimIndent()
-
     @Test
     fun `deserialiserer søknad med omdøpte felter, datoer og alle vedleggsformer`() {
-        val søknad = json.decodeFromString<Søknad>(søknadJson)
+        val søknad = json.decodeFromString<Søknad>(javaClass.getResource("/saf_søknad.json")!!.readText())
         val data = søknad.data.data
 
-        data.hvaErDinSivilstatus shouldBe Sivilstatus.SAMBOER
-        data.samboerFornavn shouldBe "Kari"
-        data.samboersFodselsdato shouldBe LocalDate.of(1980, 5, 17)
-        data.samboerBruttoArligNaeringsinntekt shouldBe 125000.5
-        data.arbeidsgivereDaDuBleSyk.single().arbeidsgiversNavn shouldBe "Firma AS"
-        data.dineOpplysninger!!.adresseVarighet!!.gyldigTilOgMed.shouldBeNull()
-        data.erKjentMedOpplysningspliktOgSamtykke shouldBe true
+        assertEquals(76, søknad.formRevision)
+        assertEquals(Sivilstatus.GIFT_ELLER_PARTNER, data.hvaErDinSivilstatus)
+        assertEquals("Kari", data.ektefelleFornavn)
+        assertEquals("Sverige", data.hvaErDinEktefelleEllerPartnersStatsborgerskap)
+        assertEquals(7000.0, data.ektefelleBruttoArligNaeringsinntekt)
+        assertEquals("Arbeidsgivers navn 1 før sykdom", data.arbeidsgivereDaDuBleSyk.first().arbeidsgiversNavn)
+        assertNull(data.dineOpplysninger!!.adresseVarighet)
+        assertTrue(data.erKjentMedOpplysningspliktOgSamtykke)
 
-        data.kopiAvSisteLonnslipp!!.valg shouldBe Vedleggsvalg.ETTERSENDER
-        data.passTilDinSamboer!!.valg shouldBe Vedleggsvalg.LEVERT_TIDLIGERE
-        val dokumentasjon = requireNotNull(data.annenDokumentasjon).single()
-        dokumentasjon.type shouldBe Vedleggstype.OTHER
-        dokumentasjon.filer shouldHaveSize 1
-        dokumentasjon.filer.single().size shouldBe 1024.0
-        søknad.data.attachments.single().valg shouldBe Vedleggsvalg.LEGGER_VED_NAA
+        assertEquals(4, søknad.data.attachments.size)
+        assertEquals(Vedleggsvalg.ETTERSENDER, søknad.data.attachments[0].valg)
+        assertEquals(Vedleggsvalg.LEVERT_TIDLIGERE, søknad.data.attachments[2].valg)
+        val dokumentasjon = søknad.data.attachments.last()
+        assertEquals(Vedleggstype.OTHER, dokumentasjon.type)
+        assertEquals(1, dokumentasjon.filer.size)
+        assertEquals(26251.0, dokumentasjon.filer.single().size)
+        assertEquals(Vedleggsvalg.LEGGER_VED_NAA, dokumentasjon.valg)
     }
 
     @Test
     fun `serialiserer og deserialiserer tilbake til samme modell`() {
-        val søknad = json.decodeFromString<Søknad>(søknadJson)
-        json.decodeFromString<Søknad>(json.encodeToString(søknad)) shouldBe søknad
+        val søknad = json.decodeFromString<Søknad>(javaClass.getResource("/saf_søknad.json")!!.readText())
+        assertEquals(søknad, json.decodeFromString<Søknad>(json.encodeToString(søknad)))
     }
 }
