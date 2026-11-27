@@ -1,0 +1,2155 @@
+{
+    "hierarkinivaaer": [
+        "Tema",
+        "TemaSkjemaGjelderverdier"
+    ],
+    "noder": {
+        "HJE": {
+            "kode": "HJE",
+            "termer": {
+                "nb": "Hjelpemidler"
+            },
+            "tekster": {
+                "nb": ""
+            },
+            "undernoder": {
+                "NAV 10-07.14": {
+                    "kode": "NAV 10-07.14",
+                    "termer": {
+                        "nb": "ab0427;"
+                    },
+                    "tekster": {
+                        "nb": "ab0427;"
+                    }
+                },
+                "NAV 10-07.15": {
+                    "kode": "NAV 10-07.15",
+                    "termer": {
+                        "nb": "ab0317;"
+                    },
+                    "tekster": {
+                        "nb": "ab0317;"
+                    }
+                },
+                "NAV 10-07.18": {
+                    "kode": "NAV 10-07.18",
+                    "termer": {
+                        "nb": "ab0210;"
+                    },
+                    "tekster": {
+                        "nb": "ab0210;"
+                    }
+                },
+                "NAV 10-07.50": {
+                    "kode": "NAV 10-07.50",
+                    "termer": {
+                        "nb": "ab0046;"
+                    },
+                    "tekster": {
+                        "nb": "ab0046;"
+                    }
+                },
+                "NAV 10-07.51": {
+                    "kode": "NAV 10-07.51",
+                    "termer": {
+                        "nb": "ab0046;"
+                    },
+                    "tekster": {
+                        "nb": "ab0046;"
+                    }
+                },
+                "NAV 10-07.52": {
+                    "kode": "NAV 10-07.52",
+                    "termer": {
+                        "nb": "ab0046;"
+                    },
+                    "tekster": {
+                        "nb": "ab0046;"
+                    }
+                },
+                "NAV 10-07.53": {
+                    "kode": "NAV 10-07.53",
+                    "termer": {
+                        "nb": "ab0046;"
+                    },
+                    "tekster": {
+                        "nb": "ab0046;"
+                    }
+                },
+                "NAV 10-07.54": {
+                    "kode": "NAV 10-07.54",
+                    "termer": {
+                        "nb": "ab0332;"
+                    },
+                    "tekster": {
+                        "nb": "ab0332;"
+                    }
+                },
+                "NAV 10-07.55": {
+                    "kode": "NAV 10-07.55",
+                    "termer": {
+                        "nb": "ab0242;"
+                    },
+                    "tekster": {
+                        "nb": "ab0242;"
+                    }
+                },
+                "NAVe 10-07.08": {
+                    "kode": "NAVe 10-07.08",
+                    "termer": {
+                        "nb": "ab0243;"
+                    },
+                    "tekster": {
+                        "nb": "ab0243;"
+                    }
+                },
+                "NAVe 10-07.06": {
+                    "kode": "NAVe 10-07.06",
+                    "termer": {
+                        "nb": "ab0367;"
+                    },
+                    "tekster": {
+                        "nb": "ab0367;"
+                    }
+                },
+                "NAVe 10-07.05": {
+                    "kode": "NAVe 10-07.05",
+                    "termer": {
+                        "nb": ";ae0281"
+                    },
+                    "tekster": {
+                        "nb": ";ae0281"
+                    }
+                },
+                "NAVe 76-13.00": {
+                    "kode": "NAVe 76-13.00",
+                    "termer": {
+                        "nb": "ab0315;"
+                    },
+                    "tekster": {
+                        "nb": "ab0315;"
+                    }
+                },
+                "NAVe 10-07.03": {
+                    "kode": "NAVe 10-07.03",
+                    "termer": {
+                        "nb": ";ae0034"
+                    },
+                    "tekster": {
+                        "nb": ";ae0034"
+                    }
+                },
+                "NAVe 10-07.02": {
+                    "kode": "NAVe 10-07.02",
+                    "termer": {
+                        "nb": "ab0054;"
+                    },
+                    "tekster": {
+                        "nb": "ab0054;"
+                    }
+                },
+                "NAVe 90-00.08 K": {
+                    "kode": "NAVe 90-00.08 K",
+                    "termer": {
+                        "nb": ";ae0058"
+                    },
+                    "tekster": {
+                        "nb": ";ae0058"
+                    }
+                },
+                "NAVe 10-07.87": {
+                    "kode": "NAVe 10-07.87",
+                    "termer": {
+                        "nb": ";ae0034"
+                    },
+                    "tekster": {
+                        "nb": ";ae0034"
+                    }
+                },
+                "NAVp 10-07.24": {
+                    "kode": "NAVp 10-07.24",
+                    "termer": {
+                        "nb": "ab0368;"
+                    },
+                    "tekster": {
+                        "nb": "ab0368;"
+                    }
+                },
+                "NAVe 10-07.86": {
+                    "kode": "NAVe 10-07.86",
+                    "termer": {
+                        "nb": ";ae0034"
+                    },
+                    "tekster": {
+                        "nb": ";ae0034"
+                    }
+                },
+                "NAVp 10-07.20": {
+                    "kode": "NAVp 10-07.20",
+                    "termer": {
+                        "nb": "ab0378;"
+                    },
+                    "tekster": {
+                        "nb": "ab0378;"
+                    }
+                },
+                "NAV 10-07.02": {
+                    "kode": "NAV 10-07.02",
+                    "termer": {
+                        "nb": "ab0054;"
+                    },
+                    "tekster": {
+                        "nb": "ab0054;"
+                    }
+                },
+                "NAV 10-07.03": {
+                    "kode": "NAV 10-07.03",
+                    "termer": {
+                        "nb": ";ae0034"
+                    },
+                    "tekster": {
+                        "nb": ";ae0034"
+                    }
+                },
+                "NAV 10-07.05": {
+                    "kode": "NAV 10-07.05",
+                    "termer": {
+                        "nb": ";ae0281"
+                    },
+                    "tekster": {
+                        "nb": ";ae0281"
+                    }
+                },
+                "NAV 10-07.06": {
+                    "kode": "NAV 10-07.06",
+                    "termer": {
+                        "nb": "ab0367;"
+                    },
+                    "tekster": {
+                        "nb": "ab0367;"
+                    }
+                },
+                "NAV 10-07.08": {
+                    "kode": "NAV 10-07.08",
+                    "termer": {
+                        "nb": "ab0243;"
+                    },
+                    "tekster": {
+                        "nb": "ab0243;"
+                    }
+                },
+                "NAV 10-07.09": {
+                    "kode": "NAV 10-07.09",
+                    "termer": {
+                        "nb": "ab0443;"
+                    },
+                    "tekster": {
+                        "nb": "ab0443;"
+                    }
+                },
+                "NAV 76-13.00": {
+                    "kode": "NAV 76-13.00",
+                    "termer": {
+                        "nb": "ab0315;"
+                    },
+                    "tekster": {
+                        "nb": "ab0315;"
+                    }
+                },
+                "NAV 10-07.86": {
+                    "kode": "NAV 10-07.86",
+                    "termer": {
+                        "nb": ";ae0034"
+                    },
+                    "tekster": {
+                        "nb": ";ae0034"
+                    }
+                },
+                "NAV 10-07.87": {
+                    "kode": "NAV 10-07.87",
+                    "termer": {
+                        "nb": ";ae0034"
+                    },
+                    "tekster": {
+                        "nb": ";ae0034"
+                    }
+                },
+                "NAVe 10-00.42": {
+                    "kode": "NAVe 10-00.42",
+                    "termer": {
+                        "nb": "ab0315;"
+                    },
+                    "tekster": {
+                        "nb": "ab0315;"
+                    }
+                },
+                "NAVe 10-07.36": {
+                    "kode": "NAVe 10-07.36",
+                    "termer": {
+                        "nb": "ab0317;"
+                    },
+                    "tekster": {
+                        "nb": "ab0317;"
+                    }
+                },
+                "NAVe 10-07.31": {
+                    "kode": "NAVe 10-07.31",
+                    "termer": {
+                        "nb": ";ae0285"
+                    },
+                    "tekster": {
+                        "nb": ";ae0285"
+                    }
+                },
+                "NAVe 10-07.30": {
+                    "kode": "NAVe 10-07.30",
+                    "termer": {
+                        "nb": "ab0245;"
+                    },
+                    "tekster": {
+                        "nb": "ab0245;"
+                    }
+                },
+                "NAVp 10-07.31": {
+                    "kode": "NAVp 10-07.31",
+                    "termer": {
+                        "nb": ";ae0285"
+                    },
+                    "tekster": {
+                        "nb": ";ae0285"
+                    }
+                },
+                "NAV 10-07.36": {
+                    "kode": "NAV 10-07.36",
+                    "termer": {
+                        "nb": "ab0317;"
+                    },
+                    "tekster": {
+                        "nb": "ab0317;"
+                    }
+                },
+                "NAVp 10-07.09": {
+                    "kode": "NAVp 10-07.09",
+                    "termer": {
+                        "nb": "ab0443;"
+                    },
+                    "tekster": {
+                        "nb": "ab0443;"
+                    }
+                },
+                "NAVp 10-07.08": {
+                    "kode": "NAVp 10-07.08",
+                    "termer": {
+                        "nb": "ab0243;"
+                    },
+                    "tekster": {
+                        "nb": "ab0243;"
+                    }
+                },
+                "NAV 10-07.30": {
+                    "kode": "NAV 10-07.30",
+                    "termer": {
+                        "nb": "ab0245;"
+                    },
+                    "tekster": {
+                        "nb": "ab0245;"
+                    }
+                },
+                "NAV 10-07.31": {
+                    "kode": "NAV 10-07.31",
+                    "termer": {
+                        "nb": ";ae0285"
+                    },
+                    "tekster": {
+                        "nb": ";ae0285"
+                    }
+                },
+                "NAV 90-00.08 A": {
+                    "kode": "NAV 90-00.08 A",
+                    "termer": {
+                        "nb": ";ae0046"
+                    },
+                    "tekster": {
+                        "nb": ";ae0046"
+                    }
+                },
+                "NAV 10-00.42": {
+                    "kode": "NAV 10-00.42",
+                    "termer": {
+                        "nb": "ab0315;"
+                    },
+                    "tekster": {
+                        "nb": "ab0315;"
+                    }
+                },
+                "NAVe 10-07.27": {
+                    "kode": "NAVe 10-07.27",
+                    "termer": {
+                        "nb": ";ae0034"
+                    },
+                    "tekster": {
+                        "nb": ";ae0034"
+                    }
+                },
+                "NAVe 10-07.26": {
+                    "kode": "NAVe 10-07.26",
+                    "termer": {
+                        "nb": ";ae0034"
+                    },
+                    "tekster": {
+                        "nb": ";ae0034"
+                    }
+                },
+                "NAVe 10-07.25": {
+                    "kode": "NAVe 10-07.25",
+                    "termer": {
+                        "nb": ";ae0034"
+                    },
+                    "tekster": {
+                        "nb": ";ae0034"
+                    }
+                },
+                "NAVe 10-07.24": {
+                    "kode": "NAVe 10-07.24",
+                    "termer": {
+                        "nb": "ab0368;"
+                    },
+                    "tekster": {
+                        "nb": "ab0368;"
+                    }
+                },
+                "NAVp 10-07.03": {
+                    "kode": "NAVp 10-07.03",
+                    "termer": {
+                        "nb": ";ae0034"
+                    },
+                    "tekster": {
+                        "nb": ";ae0034"
+                    }
+                },
+                "NAVe 10-07.20": {
+                    "kode": "NAVe 10-07.20",
+                    "termer": {
+                        "nb": "ab0378;"
+                    },
+                    "tekster": {
+                        "nb": "ab0378;"
+                    }
+                },
+                "NAV 10-07.24": {
+                    "kode": "NAV 10-07.24",
+                    "termer": {
+                        "nb": "ab0368;"
+                    },
+                    "tekster": {
+                        "nb": "ab0368;"
+                    }
+                },
+                "NAV 10-07.25": {
+                    "kode": "NAV 10-07.25",
+                    "termer": {
+                        "nb": ";ae0034"
+                    },
+                    "tekster": {
+                        "nb": ";ae0034"
+                    }
+                },
+                "NAV 10-07.26": {
+                    "kode": "NAV 10-07.26",
+                    "termer": {
+                        "nb": ";ae0034"
+                    },
+                    "tekster": {
+                        "nb": ";ae0034"
+                    }
+                },
+                "NAV 10-07.27": {
+                    "kode": "NAV 10-07.27",
+                    "termer": {
+                        "nb": ";ae0034"
+                    },
+                    "tekster": {
+                        "nb": ";ae0034"
+                    }
+                },
+                "NAV 10-07.20": {
+                    "kode": "NAV 10-07.20",
+                    "termer": {
+                        "nb": "ab0378;"
+                    },
+                    "tekster": {
+                        "nb": "ab0378;"
+                    }
+                },
+                "NAVe 90-00.08 A": {
+                    "kode": "NAVe 90-00.08 A",
+                    "termer": {
+                        "nb": ";ae0046"
+                    },
+                    "tekster": {
+                        "nb": ";ae0046"
+                    }
+                },
+                "NAVe 10-07.09": {
+                    "kode": "NAVe 10-07.09",
+                    "termer": {
+                        "nb": "ab0443;"
+                    },
+                    "tekster": {
+                        "nb": "ab0443;"
+                    }
+                },
+                "NAVe 10-07.18": {
+                    "kode": "NAVe 10-07.18",
+                    "termer": {
+                        "nb": "ab0210;"
+                    },
+                    "tekster": {
+                        "nb": "ab0210;"
+                    }
+                },
+                "NAVe 10-07.15": {
+                    "kode": "NAVe 10-07.15",
+                    "termer": {
+                        "nb": "ab0317;"
+                    },
+                    "tekster": {
+                        "nb": "ab0317;"
+                    }
+                },
+                "NAVe 10-07.14": {
+                    "kode": "NAVe 10-07.14",
+                    "termer": {
+                        "nb": "ab0427;"
+                    },
+                    "tekster": {
+                        "nb": "ab0427;"
+                    }
+                },
+                "NAVe 10-07.55": {
+                    "kode": "NAVe 10-07.55",
+                    "termer": {
+                        "nb": "ab0242;"
+                    },
+                    "tekster": {
+                        "nb": "ab0242;"
+                    }
+                },
+                "NAVe 10-07.54": {
+                    "kode": "NAVe 10-07.54",
+                    "termer": {
+                        "nb": "ab0332;"
+                    },
+                    "tekster": {
+                        "nb": "ab0332;"
+                    }
+                },
+                "NAV 90-00.08 K": {
+                    "kode": "NAV 90-00.08 K",
+                    "termer": {
+                        "nb": ";ae0058"
+                    },
+                    "tekster": {
+                        "nb": ";ae0058"
+                    }
+                },
+                "NAVe 10-07.53": {
+                    "kode": "NAVe 10-07.53",
+                    "termer": {
+                        "nb": "ab0046;"
+                    },
+                    "tekster": {
+                        "nb": "ab0046;"
+                    }
+                },
+                "NAVe 10-07.52": {
+                    "kode": "NAVe 10-07.52",
+                    "termer": {
+                        "nb": "ab0046;"
+                    },
+                    "tekster": {
+                        "nb": "ab0046;"
+                    }
+                },
+                "NAVe 10-07.51": {
+                    "kode": "NAVe 10-07.51",
+                    "termer": {
+                        "nb": "ab0046;"
+                    },
+                    "tekster": {
+                        "nb": "ab0046;"
+                    }
+                },
+                "NAVe 10-07.50": {
+                    "kode": "NAVe 10-07.50",
+                    "termer": {
+                        "nb": "ab0046;"
+                    },
+                    "tekster": {
+                        "nb": "ab0046;"
+                    }
+                }
+            }
+        },
+        "GRU": {
+            "kode": "GRU",
+            "termer": {
+                "nb": "Grunn- og hjelpestønad"
+            },
+            "tekster": {
+                "nb": ""
+            },
+            "undernoder": {
+                "NAVp 06-04.04": {
+                    "kode": "NAVp 06-04.04",
+                    "termer": {
+                        "nb": "ab0138;ae0034"
+                    },
+                    "tekster": {
+                        "nb": "ab0138;ae0034"
+                    }
+                },
+                "NAVp 06-03.04": {
+                    "kode": "NAVp 06-03.04",
+                    "termer": {
+                        "nb": "ab0132;ae0034"
+                    },
+                    "tekster": {
+                        "nb": "ab0132;ae0034"
+                    }
+                },
+                "NAV 06-07.01": {
+                    "kode": "NAV 06-07.01",
+                    "termer": {
+                        "nb": "ab0132;ae0028"
+                    },
+                    "tekster": {
+                        "nb": "ab0132;ae0028"
+                    }
+                },
+                "NAV 06-07.02": {
+                    "kode": "NAV 06-07.02",
+                    "termer": {
+                        "nb": "ab0138;ae0028"
+                    },
+                    "tekster": {
+                        "nb": "ab0138;ae0028"
+                    }
+                },
+                "NAVe 06-07.02": {
+                    "kode": "NAVe 06-07.02",
+                    "termer": {
+                        "nb": "ab0138;ae0028"
+                    },
+                    "tekster": {
+                        "nb": "ab0138;ae0028"
+                    }
+                },
+                "NAVe 06-03.04": {
+                    "kode": "NAVe 06-03.04",
+                    "termer": {
+                        "nb": "ab0132;"
+                    },
+                    "tekster": {
+                        "nb": "ab0132;"
+                    }
+                },
+                "NAVe 06-04.04": {
+                    "kode": "NAVe 06-04.04",
+                    "termer": {
+                        "nb": "ab0138;"
+                    },
+                    "tekster": {
+                        "nb": "ab0138;"
+                    }
+                },
+                "NAV 90-00.08 K": {
+                    "kode": "NAV 90-00.08 K",
+                    "termer": {
+                        "nb": ";ae0058"
+                    },
+                    "tekster": {
+                        "nb": ";ae0058"
+                    }
+                },
+                "NAVe 06-07.01": {
+                    "kode": "NAVe 06-07.01",
+                    "termer": {
+                        "nb": "ab0132;ae0028"
+                    },
+                    "tekster": {
+                        "nb": "ab0132;ae0028"
+                    }
+                },
+                "NAV 06-03.04": {
+                    "kode": "NAV 06-03.04",
+                    "termer": {
+                        "nb": "ab0132;ae0034"
+                    },
+                    "tekster": {
+                        "nb": "ab0132;ae0034"
+                    }
+                },
+                "NAV 06-04.04": {
+                    "kode": "NAV 06-04.04",
+                    "termer": {
+                        "nb": "ab0138;ae0034"
+                    },
+                    "tekster": {
+                        "nb": "ab0138;ae0034"
+                    }
+                }
+            }
+        },
+        "OPP": {
+            "kode": "OPP",
+            "termer": {
+                "nb": "Oppfølging"
+            },
+            "tekster": {
+                "nb": ""
+            },
+            "undernoder": {
+                "NAVe 90-00.08 K": {
+                    "kode": "NAVe 90-00.08 K",
+                    "termer": {
+                        "nb": ";ae0058"
+                    },
+                    "tekster": {
+                        "nb": ";ae0058"
+                    }
+                },
+                "NAV 90-00.08 K": {
+                    "kode": "NAV 90-00.08 K",
+                    "termer": {
+                        "nb": ";ae0058"
+                    },
+                    "tekster": {
+                        "nb": ";ae0058"
+                    }
+                }
+            }
+        },
+        "RPO": {
+            "kode": "RPO",
+            "termer": {
+                "nb": "Retting av personopplysninger"
+            },
+            "tekster": {
+                "nb": ""
+            },
+            "undernoder": {
+                "NAV 95-20.05": {
+                    "kode": "NAV 95-20.05",
+                    "termer": {
+                        "nb": "ab0510;"
+                    },
+                    "tekster": {
+                        "nb": "ab0510;"
+                    }
+                }
+            }
+        },
+        "YRK": {
+            "kode": "YRK",
+            "termer": {
+                "nb": "Yrkesskade og menerstatning"
+            },
+            "tekster": {
+                "nb": "Yrkesskade og menerstatning"
+            },
+            "undernoder": {
+                "NAVe 13-00.50": {
+                    "kode": "NAVe 13-00.50",
+                    "termer": {
+                        "nb": "ab0185;"
+                    },
+                    "tekster": {
+                        "nb": "ab0185;"
+                    }
+                },
+                "NAV 13-00.50": {
+                    "kode": "NAV 13-00.50",
+                    "termer": {
+                        "nb": "ab0185;"
+                    },
+                    "tekster": {
+                        "nb": "ab0185;"
+                    }
+                },
+                "NAV 13-13.05": {
+                    "kode": "NAV 13-13.05",
+                    "termer": {
+                        "nb": "ab0085;"
+                    },
+                    "tekster": {
+                        "nb": "ab0085;"
+                    }
+                },
+                "NAV 13-07.05": {
+                    "kode": "NAV 13-07.05",
+                    "termer": {
+                        "nb": "ab0276;"
+                    },
+                    "tekster": {
+                        "nb": "ab0276;"
+                    }
+                },
+                "NAVe 13-13.05": {
+                    "kode": "NAVe 13-13.05",
+                    "termer": {
+                        "nb": "ab0085;"
+                    },
+                    "tekster": {
+                        "nb": "ab0085;"
+                    }
+                },
+                "NAVp 13-07.05": {
+                    "kode": "NAVp 13-07.05",
+                    "termer": {
+                        "nb": "ab0276;"
+                    },
+                    "tekster": {
+                        "nb": "ab0276;"
+                    }
+                },
+                "NAVe 13-07.05": {
+                    "kode": "NAVe 13-07.05",
+                    "termer": {
+                        "nb": "ab0276;"
+                    },
+                    "tekster": {
+                        "nb": "ab0276;"
+                    }
+                }
+            }
+        },
+        "FUL": {
+            "kode": "FUL",
+            "termer": {
+                "nb": "Fullmakt"
+            },
+            "tekster": {
+                "nb": ""
+            },
+            "undernoder": {
+                "NAVe 36-13.02": {
+                    "kode": "NAVe 36-13.02",
+                    "termer": {
+                        "nb": "ab0511;"
+                    },
+                    "tekster": {
+                        "nb": "ab0511;"
+                    }
+                },
+                "NAVe 36-13.01": {
+                    "kode": "NAVe 36-13.01",
+                    "termer": {
+                        "nb": "ab0512;"
+                    },
+                    "tekster": {
+                        "nb": "ab0512;"
+                    }
+                },
+                "NAV 52-00.06": {
+                    "kode": "NAV 52-00.06",
+                    "termer": {
+                        "nb": ";ae0035"
+                    },
+                    "tekster": {
+                        "nb": ";ae0035"
+                    }
+                },
+                "NAV 36-13.01": {
+                    "kode": "NAV 36-13.01",
+                    "termer": {
+                        "nb": "ab0512;"
+                    },
+                    "tekster": {
+                        "nb": "ab0512;"
+                    }
+                },
+                "NAV 36-13.02": {
+                    "kode": "NAV 36-13.02",
+                    "termer": {
+                        "nb": "ab0511;"
+                    },
+                    "tekster": {
+                        "nb": "ab0511;"
+                    }
+                },
+                "NAVe 52-00.06": {
+                    "kode": "NAVe 52-00.06",
+                    "termer": {
+                        "nb": ";ae0035"
+                    },
+                    "tekster": {
+                        "nb": ";ae0035"
+                    }
+                }
+            }
+        },
+        "BID": {
+            "kode": "BID",
+            "termer": {
+                "nb": "Bidrag"
+            },
+            "tekster": {
+                "nb": "Bidrag"
+            },
+            "undernoder": {
+                "NAV 57-00.05": {
+                    "kode": "NAV 57-00.05",
+                    "termer": {
+                        "nb": "ab0324;"
+                    },
+                    "tekster": {
+                        "nb": "ab0324;"
+                    }
+                },
+                "NAVe 54-00.10": {
+                    "kode": "NAVe 54-00.10",
+                    "termer": {
+                        "nb": "ab0324;"
+                    },
+                    "tekster": {
+                        "nb": "ab0324;"
+                    }
+                },
+                "NAV 57-00.08": {
+                    "kode": "NAV 57-00.08",
+                    "termer": {
+                        "nb": "ab0324;"
+                    },
+                    "tekster": {
+                        "nb": "ab0324;"
+                    }
+                },
+                "NAV 54-00.10": {
+                    "kode": "NAV 54-00.10",
+                    "termer": {
+                        "nb": "ab0324;"
+                    },
+                    "tekster": {
+                        "nb": "ab0324;"
+                    }
+                }
+            }
+        },
+        "UFO": {
+            "kode": "UFO",
+            "termer": {
+                "nb": "Uføretrygd"
+            },
+            "tekster": {
+                "nb": ""
+            },
+            "undernoder": {
+                "NAVe 22-06.01": {
+                    "kode": "NAVe 22-06.01",
+                    "termer": {
+                        "nb": "ab0150;"
+                    },
+                    "tekster": {
+                        "nb": "ab0150;"
+                    }
+                },
+                "NAVe 90-00.08 K": {
+                    "kode": "NAVe 90-00.08 K",
+                    "termer": {
+                        "nb": ";ae0058"
+                    },
+                    "tekster": {
+                        "nb": ";ae0058"
+                    }
+                },
+                "NAV 90-00.08 K": {
+                    "kode": "NAV 90-00.08 K",
+                    "termer": {
+                        "nb": ";ae0058"
+                    },
+                    "tekster": {
+                        "nb": ";ae0058"
+                    }
+                },
+                "NAV 22-06.01": {
+                    "kode": "NAV 22-06.01",
+                    "termer": {
+                        "nb": "ab0150;"
+                    },
+                    "tekster": {
+                        "nb": "ab0150;"
+                    }
+                }
+            }
+        },
+        "BIL": {
+            "kode": "BIL",
+            "termer": {
+                "nb": "Bil"
+            },
+            "tekster": {
+                "nb": ""
+            },
+            "undernoder": {
+                "NAVe 90-00.08 K": {
+                    "kode": "NAVe 90-00.08 K",
+                    "termer": {
+                        "nb": ";ae0058"
+                    },
+                    "tekster": {
+                        "nb": ";ae0058"
+                    }
+                },
+                "NAV 90-00.08 K": {
+                    "kode": "NAV 90-00.08 K",
+                    "termer": {
+                        "nb": ";ae0058"
+                    },
+                    "tekster": {
+                        "nb": ";ae0058"
+                    }
+                },
+                "NAV 90-00.08 A": {
+                    "kode": "NAV 90-00.08 A",
+                    "termer": {
+                        "nb": ";ae0046"
+                    },
+                    "tekster": {
+                        "nb": ";ae0046"
+                    }
+                },
+                "NAVe 90-00.08 A": {
+                    "kode": "NAVe 90-00.08 A",
+                    "termer": {
+                        "nb": ";ae0046"
+                    },
+                    "tekster": {
+                        "nb": ";ae0046"
+                    }
+                }
+            }
+        },
+        "SYK": {
+            "kode": "SYK",
+            "termer": {
+                "nb": "Sykepenger"
+            },
+            "tekster": {
+                "nb": ""
+            },
+            "undernoder": {
+                "NAVe 08-07.11": {
+                    "kode": "NAVe 08-07.11",
+                    "termer": {
+                        "nb": "ab0421;"
+                    },
+                    "tekster": {
+                        "nb": "ab0421;"
+                    }
+                },
+                "NAV 90-00.08": {
+                    "kode": "NAV 90-00.08",
+                    "termer": {
+                        "nb": ";ae0058"
+                    },
+                    "tekster": {
+                        "nb": ";ae0058"
+                    }
+                },
+                "NAV 08-20.20": {
+                    "kode": "NAV 08-20.20",
+                    "termer": {
+                        "nb": "ab0200;"
+                    },
+                    "tekster": {
+                        "nb": "ab0200;"
+                    }
+                },
+                "NAVe 08-09.06": {
+                    "kode": "NAVe 08-09.06",
+                    "termer": {
+                        "nb": ";ae0106"
+                    },
+                    "tekster": {
+                        "nb": ";ae0106"
+                    }
+                },
+                "NAVe 08-09.07": {
+                    "kode": "NAVe 08-09.07",
+                    "termer": {
+                        "nb": "ab0314;"
+                    },
+                    "tekster": {
+                        "nb": "ab0314;"
+                    }
+                },
+                "NAVe 08-09.08": {
+                    "kode": "NAVe 08-09.08",
+                    "termer": {
+                        "nb": ";ae0237"
+                    },
+                    "tekster": {
+                        "nb": ";ae0237"
+                    }
+                },
+                "NAV 08-09.06": {
+                    "kode": "NAV 08-09.06",
+                    "termer": {
+                        "nb": ";ae0106"
+                    },
+                    "tekster": {
+                        "nb": ";ae0106"
+                    }
+                },
+                "NAV 08-47.05": {
+                    "kode": "NAV 08-47.05",
+                    "termer": {
+                        "nb": ";ae0004"
+                    },
+                    "tekster": {
+                        "nb": ";ae0004"
+                    }
+                },
+                "NAVe 08-14.01": {
+                    "kode": "NAVe 08-14.01",
+                    "termer": {
+                        "nb": "ab0237;ae0121"
+                    },
+                    "tekster": {
+                        "nb": "ab0237;ae0121"
+                    }
+                },
+                "NAV 08-20.12": {
+                    "kode": "NAV 08-20.12",
+                    "termer": {
+                        "nb": "ab0200;ae0121"
+                    },
+                    "tekster": {
+                        "nb": "ab0200;ae0121"
+                    }
+                },
+                "NAV 08-09.07": {
+                    "kode": "NAV 08-09.07",
+                    "termer": {
+                        "nb": "ab0314;"
+                    },
+                    "tekster": {
+                        "nb": "ab0314;"
+                    }
+                },
+                "NAV 08-09.08": {
+                    "kode": "NAV 08-09.08",
+                    "termer": {
+                        "nb": ";ae0237"
+                    },
+                    "tekster": {
+                        "nb": ";ae0237"
+                    }
+                },
+                "NAV 08-20.05": {
+                    "kode": "NAV 08-20.05",
+                    "termer": {
+                        "nb": "ab0200;"
+                    },
+                    "tekster": {
+                        "nb": "ab0200;"
+                    }
+                },
+                "NAVe 08-35.01": {
+                    "kode": "NAVe 08-35.01",
+                    "termer": {
+                        "nb": ";ae0004"
+                    },
+                    "tekster": {
+                        "nb": ";ae0004"
+                    }
+                },
+                "NAV 08-14.01": {
+                    "kode": "NAV 08-14.01",
+                    "termer": {
+                        "nb": "ab0237;ae0121"
+                    },
+                    "tekster": {
+                        "nb": "ab0237;ae0121"
+                    }
+                },
+                "NAVe 08-47.05": {
+                    "kode": "NAVe 08-47.05",
+                    "termer": {
+                        "nb": ";ae0004"
+                    },
+                    "tekster": {
+                        "nb": ";ae0004"
+                    }
+                },
+                "NAVe 08-20.12": {
+                    "kode": "NAVe 08-20.12",
+                    "termer": {
+                        "nb": "ab0200;ae0121"
+                    },
+                    "tekster": {
+                        "nb": "ab0200;ae0121"
+                    }
+                },
+                "NAV 08-07.04 D": {
+                    "kode": "NAV 08-07.04 D",
+                    "termer": {
+                        "nb": "ab0434;"
+                    },
+                    "tekster": {
+                        "nb": "ab0434;"
+                    }
+                },
+                "NAV 08-07.11": {
+                    "kode": "NAV 08-07.11",
+                    "termer": {
+                        "nb": "ab0421;"
+                    },
+                    "tekster": {
+                        "nb": "ab0421;"
+                    }
+                },
+                "NAV 08-35.01": {
+                    "kode": "NAV 08-35.01",
+                    "termer": {
+                        "nb": ";ae0004"
+                    },
+                    "tekster": {
+                        "nb": ";ae0004"
+                    }
+                },
+                "NAVe 08-20.05": {
+                    "kode": "NAVe 08-20.05",
+                    "termer": {
+                        "nb": "ab0200;"
+                    },
+                    "tekster": {
+                        "nb": "ab0200;"
+                    }
+                },
+                "NAV 90-00.08 K": {
+                    "kode": "NAV 90-00.08 K",
+                    "termer": {
+                        "nb": ";ae0058"
+                    },
+                    "tekster": {
+                        "nb": ";ae0058"
+                    }
+                },
+                "NAVe 08-20.20": {
+                    "kode": "NAVe 08-20.20",
+                    "termer": {
+                        "nb": "ab0200;"
+                    },
+                    "tekster": {
+                        "nb": "ab0200;"
+                    }
+                }
+            }
+        },
+        "DAG": {
+            "kode": "DAG",
+            "termer": {
+                "nb": "Dagpenger"
+            },
+            "tekster": {
+                "nb": ""
+            },
+            "undernoder": {
+                "NAVe 04-02.03": {
+                    "kode": "NAVe 04-02.03",
+                    "termer": {
+                        "nb": "ab0309;ae0106"
+                    },
+                    "tekster": {
+                        "nb": "ab0309;ae0106"
+                    }
+                },
+                "NAV 00-10.04": {
+                    "kode": "NAV 00-10.04",
+                    "termer": {
+                        "nb": "ab0307;ae0106"
+                    },
+                    "tekster": {
+                        "nb": "ab0307;ae0106"
+                    }
+                },
+                "NAVe 04-01.04": {
+                    "kode": "NAVe 04-01.04",
+                    "termer": {
+                        "nb": "ab0005;"
+                    },
+                    "tekster": {
+                        "nb": "ab0005;"
+                    }
+                },
+                "NAVe 04-02.05": {
+                    "kode": "NAVe 04-02.05",
+                    "termer": {
+                        "nb": "ab0309;ae0106"
+                    },
+                    "tekster": {
+                        "nb": "ab0309;ae0106"
+                    }
+                },
+                "NAVe 04-02.01": {
+                    "kode": "NAVe 04-02.01",
+                    "termer": {
+                        "nb": "ab0002;ae0106"
+                    },
+                    "tekster": {
+                        "nb": "ab0002;ae0106"
+                    }
+                },
+                "NAV 04-01.04": {
+                    "kode": "NAV 04-01.04",
+                    "termer": {
+                        "nb": "ab0005;"
+                    },
+                    "tekster": {
+                        "nb": "ab0005;"
+                    }
+                },
+                "NAV 04-02.05": {
+                    "kode": "NAV 04-02.05",
+                    "termer": {
+                        "nb": "ab0309;ae0106"
+                    },
+                    "tekster": {
+                        "nb": "ab0309;ae0106"
+                    }
+                },
+                "NAV 04-02.03": {
+                    "kode": "NAV 04-02.03",
+                    "termer": {
+                        "nb": "ab0309;ae0106"
+                    },
+                    "tekster": {
+                        "nb": "ab0309;ae0106"
+                    }
+                },
+                "NAV 04-08.04": {
+                    "kode": "NAV 04-08.04",
+                    "termer": {
+                        "nb": "ab0005;"
+                    },
+                    "tekster": {
+                        "nb": "ab0005;"
+                    }
+                },
+                "NAV 04-02.01": {
+                    "kode": "NAV 04-02.01",
+                    "termer": {
+                        "nb": "ab0002;ae0106"
+                    },
+                    "tekster": {
+                        "nb": "ab0002;ae0106"
+                    }
+                },
+                "NAVe 04-16.04": {
+                    "kode": "NAVe 04-16.04",
+                    "termer": {
+                        "nb": "ab0005;"
+                    },
+                    "tekster": {
+                        "nb": "ab0005;"
+                    }
+                },
+                "NAVe 90-00.08 K": {
+                    "kode": "NAVe 90-00.08 K",
+                    "termer": {
+                        "nb": ";ae0058"
+                    },
+                    "tekster": {
+                        "nb": ";ae0058"
+                    }
+                },
+                "NAVe 04-08.04": {
+                    "kode": "NAVe 04-08.04",
+                    "termer": {
+                        "nb": "ab0005;"
+                    },
+                    "tekster": {
+                        "nb": "ab0005;"
+                    }
+                },
+                "NAV 90-00.08 K": {
+                    "kode": "NAV 90-00.08 K",
+                    "termer": {
+                        "nb": ";ae0058"
+                    },
+                    "tekster": {
+                        "nb": ";ae0058"
+                    }
+                },
+                "NAV 04-16.04": {
+                    "kode": "NAV 04-16.04",
+                    "termer": {
+                        "nb": "ab0005;"
+                    },
+                    "tekster": {
+                        "nb": "ab0005;"
+                    }
+                },
+                "NAVe 00-10.04": {
+                    "kode": "NAVe 00-10.04",
+                    "termer": {
+                        "nb": "ab0307;ae0106"
+                    },
+                    "tekster": {
+                        "nb": "ab0307;ae0106"
+                    }
+                },
+                "U020": {
+                    "kode": "U020",
+                    "termer": {
+                        "nb": ";ae0106"
+                    },
+                    "tekster": {
+                        "nb": ";ae0106"
+                    }
+                }
+            }
+        },
+        "KON": {
+            "kode": "KON",
+            "termer": {
+                "nb": "Kontantstøtte"
+            },
+            "tekster": {
+                "nb": ""
+            },
+            "undernoder": {
+                "NAV 34-00.15": {
+                    "kode": "NAV 34-00.15",
+                    "termer": {
+                        "nb": ";ae0120"
+                    },
+                    "tekster": {
+                        "nb": ";ae0120"
+                    }
+                },
+                "NAVe 34-00.15": {
+                    "kode": "NAVe 34-00.15",
+                    "termer": {
+                        "nb": ";ae0120"
+                    },
+                    "tekster": {
+                        "nb": ";ae0120"
+                    }
+                },
+                "NAVp 34-00.15": {
+                    "kode": "NAVp 34-00.15",
+                    "termer": {
+                        "nb": ";ae0120"
+                    },
+                    "tekster": {
+                        "nb": ";ae0120"
+                    }
+                }
+            }
+        },
+        "FOS": {
+            "kode": "FOS",
+            "termer": {
+                "nb": "Forsikring"
+            },
+            "tekster": {
+                "nb": ""
+            },
+            "undernoder": {
+                "NAVe 08-36.05": {
+                    "kode": "NAVe 08-36.05",
+                    "termer": {
+                        "nb": ";ae0221"
+                    },
+                    "tekster": {
+                        "nb": ";ae0221"
+                    }
+                },
+                "NAVe 08-36.06": {
+                    "kode": "NAVe 08-36.06",
+                    "termer": {
+                        "nb": ";ae0221"
+                    },
+                    "tekster": {
+                        "nb": ";ae0221"
+                    }
+                },
+                "NAVe 08-21.05": {
+                    "kode": "NAVe 08-21.05",
+                    "termer": {
+                        "nb": "ab0340;"
+                    },
+                    "tekster": {
+                        "nb": "ab0340;"
+                    }
+                },
+                "NAVe 08-21.15": {
+                    "kode": "NAVe 08-21.15",
+                    "termer": {
+                        "nb": "ab0340;"
+                    },
+                    "tekster": {
+                        "nb": "ab0340;"
+                    }
+                },
+                "NAVe 90-00.08 K": {
+                    "kode": "NAVe 90-00.08 K",
+                    "termer": {
+                        "nb": ";ae0058"
+                    },
+                    "tekster": {
+                        "nb": ";ae0058"
+                    }
+                },
+                "NAV 08-21.15": {
+                    "kode": "NAV 08-21.15",
+                    "termer": {
+                        "nb": "ab0340;"
+                    },
+                    "tekster": {
+                        "nb": "ab0340;"
+                    }
+                },
+                "NAV 08-36.06": {
+                    "kode": "NAV 08-36.06",
+                    "termer": {
+                        "nb": ";ae0221"
+                    },
+                    "tekster": {
+                        "nb": ";ae0221"
+                    }
+                },
+                "NAV 90-00.08 K": {
+                    "kode": "NAV 90-00.08 K",
+                    "termer": {
+                        "nb": ";ae0058"
+                    },
+                    "tekster": {
+                        "nb": ";ae0058"
+                    }
+                },
+                "NAV 08-36.05": {
+                    "kode": "NAV 08-36.05",
+                    "termer": {
+                        "nb": ";ae0221"
+                    },
+                    "tekster": {
+                        "nb": ";ae0221"
+                    }
+                },
+                "NAV 08-21.05": {
+                    "kode": "NAV 08-21.05",
+                    "termer": {
+                        "nb": "ab0340;"
+                    },
+                    "tekster": {
+                        "nb": "ab0340;"
+                    }
+                }
+            }
+        },
+        "MED": {
+            "kode": "MED",
+            "termer": {
+                "nb": "Medlemskap"
+            },
+            "tekster": {
+                "nb": ""
+            },
+            "undernoder": {
+                "NAVe 90-00.08 K": {
+                    "kode": "NAVe 90-00.08 K",
+                    "termer": {
+                        "nb": ";ae0058"
+                    },
+                    "tekster": {
+                        "nb": ";ae0058"
+                    }
+                },
+                "NAV 90-00.08 K": {
+                    "kode": "NAV 90-00.08 K",
+                    "termer": {
+                        "nb": ";ae0058"
+                    },
+                    "tekster": {
+                        "nb": ";ae0058"
+                    }
+                }
+            }
+        },
+        "HEL": {
+            "kode": "HEL",
+            "termer": {
+                "nb": "Helsetjenester og ort. hjelpemidler"
+            },
+            "tekster": {
+                "nb": ""
+            },
+            "undernoder": {
+                "NAV 10-07.13": {
+                    "kode": "NAV 10-07.13",
+                    "termer": {
+                        "nb": "ab0347;"
+                    },
+                    "tekster": {
+                        "nb": "ab0347;"
+                    }
+                },
+                "NAV 10-07.57": {
+                    "kode": "NAV 10-07.57",
+                    "termer": {
+                        "nb": "ab0349;"
+                    },
+                    "tekster": {
+                        "nb": "ab0349;"
+                    }
+                },
+                "NAV 10-07.58": {
+                    "kode": "NAV 10-07.58",
+                    "termer": {
+                        "nb": "ab0348;"
+                    },
+                    "tekster": {
+                        "nb": "ab0348;"
+                    }
+                },
+                "NAV 10-07.59": {
+                    "kode": "NAV 10-07.59",
+                    "termer": {
+                        "nb": "ab0346;"
+                    },
+                    "tekster": {
+                        "nb": "ab0346;"
+                    }
+                },
+                "NAV 10-07.16": {
+                    "kode": "NAV 10-07.16",
+                    "termer": {
+                        "nb": "ab0350;"
+                    },
+                    "tekster": {
+                        "nb": "ab0350;"
+                    }
+                },
+                "NAVe 10-07.16": {
+                    "kode": "NAVe 10-07.16",
+                    "termer": {
+                        "nb": "ab0350;"
+                    },
+                    "tekster": {
+                        "nb": "ab0350;"
+                    }
+                },
+                "NAVe 10-07.59": {
+                    "kode": "NAVe 10-07.59",
+                    "termer": {
+                        "nb": "ab0346;"
+                    },
+                    "tekster": {
+                        "nb": "ab0346;"
+                    }
+                },
+                "NAVe 10-07.58": {
+                    "kode": "NAVe 10-07.58",
+                    "termer": {
+                        "nb": "ab0348;"
+                    },
+                    "tekster": {
+                        "nb": "ab0348;"
+                    }
+                },
+                "NAVe 10-07.13": {
+                    "kode": "NAVe 10-07.13",
+                    "termer": {
+                        "nb": "ab0347;"
+                    },
+                    "tekster": {
+                        "nb": "ab0347;"
+                    }
+                },
+                "NAVe 10-07.57": {
+                    "kode": "NAVe 10-07.57",
+                    "termer": {
+                        "nb": "ab0349;"
+                    },
+                    "tekster": {
+                        "nb": "ab0349;"
+                    }
+                },
+                "NAVe 10-07.11": {
+                    "kode": "NAVe 10-07.11",
+                    "termer": {
+                        "nb": "ab0013;ae0034"
+                    },
+                    "tekster": {
+                        "nb": "ab0013;ae0034"
+                    }
+                },
+                "NAV 10-07.11": {
+                    "kode": "NAV 10-07.11",
+                    "termer": {
+                        "nb": "ab0013;ae0034"
+                    },
+                    "tekster": {
+                        "nb": "ab0013;ae0034"
+                    }
+                }
+            }
+        },
+        "SUP": {
+            "kode": "SUP",
+            "termer": {
+                "nb": "Supplerende stønad"
+            },
+            "tekster": {
+                "nb": ""
+            },
+            "undernoder": {
+                "NAVe 64-01.00": {
+                    "kode": "NAVe 64-01.00",
+                    "termer": {
+                        "nb": "ab0431;ae0288"
+                    },
+                    "tekster": {
+                        "nb": "ab0431;ae0288"
+                    }
+                },
+                "NAV 00-03.01": {
+                    "kode": "NAV 00-03.01",
+                    "termer": {
+                        "nb": "ab0534;"
+                    },
+                    "tekster": {
+                        "nb": "ab0534;"
+                    }
+                },
+                "NAVe 64-21.00": {
+                    "kode": "NAVe 64-21.00",
+                    "termer": {
+                        "nb": "ab0432;ae0288"
+                    },
+                    "tekster": {
+                        "nb": "ab0432;ae0288"
+                    }
+                },
+                "NAV 90-00.08 K": {
+                    "kode": "NAV 90-00.08 K",
+                    "termer": {
+                        "nb": ";ae0058"
+                    },
+                    "tekster": {
+                        "nb": ";ae0058"
+                    }
+                },
+                "NAV 90-00.08 A": {
+                    "kode": "NAV 90-00.08 A",
+                    "termer": {
+                        "nb": ";ae0046"
+                    },
+                    "tekster": {
+                        "nb": ";ae0046"
+                    }
+                },
+                "NAV 64-21.00": {
+                    "kode": "NAV 64-21.00",
+                    "termer": {
+                        "nb": "ab0432;ae0034"
+                    },
+                    "tekster": {
+                        "nb": "ab0432;ae0034"
+                    }
+                },
+                "NAV 64-01.00": {
+                    "kode": "NAV 64-01.00",
+                    "termer": {
+                        "nb": "ab0431;ae0034"
+                    },
+                    "tekster": {
+                        "nb": "ab0431;ae0034"
+                    }
+                }
+            }
+        },
+        "AAP": {
+            "kode": "AAP",
+            "termer": {
+                "nb": "Arbeidsavklaringspenger"
+            },
+            "tekster": {
+                "nb": ""
+            },
+            "undernoder": {
+                "NAVe 11-12.05": {
+                    "kode": "NAVe 11-12.05",
+                    "termer": {
+                        "nb": "ab0297;"
+                    },
+                    "tekster": {
+                        "nb": "ab0297;"
+                    }
+                },
+                "NAVe 11-03.08": {
+                    "kode": "NAVe 11-03.08",
+                    "termer": {
+                        "nb": ";ae0237"
+                    },
+                    "tekster": {
+                        "nb": ";ae0237"
+                    }
+                },
+                "NAVe 90-00.08 K": {
+                    "kode": "NAVe 90-00.08 K",
+                    "termer": {
+                        "nb": ";ae0058"
+                    },
+                    "tekster": {
+                        "nb": ";ae0058"
+                    }
+                },
+                "NAV 11-12.05": {
+                    "kode": "NAV 11-12.05",
+                    "termer": {
+                        "nb": "ab0297;"
+                    },
+                    "tekster": {
+                        "nb": "ab0297;"
+                    }
+                },
+                "NAV 25-16.03": {
+                    "kode": "NAV 25-16.03",
+                    "termer": {
+                        "nb": "ab0364;"
+                    },
+                    "tekster": {
+                        "nb": "ab0364;"
+                    }
+                },
+                "NAV 90-00.08 K": {
+                    "kode": "NAV 90-00.08 K",
+                    "termer": {
+                        "nb": ";ae0058"
+                    },
+                    "tekster": {
+                        "nb": ";ae0058"
+                    }
+                },
+                "NAV 11-03.08": {
+                    "kode": "NAV 11-03.08",
+                    "termer": {
+                        "nb": ";ae0237"
+                    },
+                    "tekster": {
+                        "nb": ";ae0237"
+                    }
+                }
+            }
+        },
+        "TSO": {
+            "kode": "TSO",
+            "termer": {
+                "nb": "Tilleggsstønad"
+            },
+            "tekster": {
+                "nb": ""
+            },
+            "undernoder": {
+                "NAVe 00-01.01": {
+                    "kode": "NAVe 00-01.01",
+                    "termer": {
+                        "nb": "ab0321;"
+                    },
+                    "tekster": {
+                        "nb": "ab0321;"
+                    }
+                },
+                "NAVe 90-00.08 K": {
+                    "kode": "NAVe 90-00.08 K",
+                    "termer": {
+                        "nb": ";ae0058"
+                    },
+                    "tekster": {
+                        "nb": ";ae0058"
+                    }
+                },
+                "NAV 90-00.08 K": {
+                    "kode": "NAV 90-00.08 K",
+                    "termer": {
+                        "nb": ";ae0058"
+                    },
+                    "tekster": {
+                        "nb": ";ae0058"
+                    }
+                },
+                "NAV 00-01.01": {
+                    "kode": "NAV 00-01.01",
+                    "termer": {
+                        "nb": "ab0321;"
+                    },
+                    "tekster": {
+                        "nb": "ab0321;"
+                    }
+                }
+            }
+        },
+        "GEN": {
+            "kode": "GEN",
+            "termer": {
+                "nb": "Generell"
+            },
+            "tekster": {
+                "nb": ""
+            },
+            "undernoder": {
+                "NAV 36-18.01": {
+                    "kode": "NAV 36-18.01",
+                    "termer": {
+                        "nb": ";ae0224"
+                    },
+                    "tekster": {
+                        "nb": ";ae0224"
+                    }
+                },
+                "NAVe 36-18.01": {
+                    "kode": "NAVe 36-18.01",
+                    "termer": {
+                        "nb": ";ae0224"
+                    },
+                    "tekster": {
+                        "nb": ";ae0224"
+                    }
+                }
+            }
+        },
+        "TSR": {
+            "kode": "TSR",
+            "termer": {
+                "nb": "Tilleggsstønad - arbeidssøkere"
+            },
+            "tekster": {
+                "nb": "Tilleggsstønad - arbeidssøkere"
+            },
+            "undernoder": {
+                "NAVe 76-05.01": {
+                    "kode": "NAVe 76-05.01",
+                    "termer": {
+                        "nb": "ab0564;"
+                    },
+                    "tekster": {
+                        "nb": "ab0564;"
+                    }
+                },
+                "NAVe 76-05.02": {
+                    "kode": "NAVe 76-05.02",
+                    "termer": {
+                        "nb": "ab0564;"
+                    },
+                    "tekster": {
+                        "nb": "ab0564;"
+                    }
+                },
+                "NAVe 76-05.03": {
+                    "kode": "NAVe 76-05.03",
+                    "termer": {
+                        "nb": "ab0564;"
+                    },
+                    "tekster": {
+                        "nb": "ab0564;"
+                    }
+                },
+                "NAVe 90-00.08 K": {
+                    "kode": "NAVe 90-00.08 K",
+                    "termer": {
+                        "nb": ";ae0058"
+                    },
+                    "tekster": {
+                        "nb": ";ae0058"
+                    }
+                },
+                "NAV 90-00.08 K": {
+                    "kode": "NAV 90-00.08 K",
+                    "termer": {
+                        "nb": ";ae0058"
+                    },
+                    "tekster": {
+                        "nb": ";ae0058"
+                    }
+                },
+                "NAV 76-05.01": {
+                    "kode": "NAV 76-05.01",
+                    "termer": {
+                        "nb": "ab0564;"
+                    },
+                    "tekster": {
+                        "nb": "ab0564;"
+                    }
+                },
+                "NAV 76-05.02": {
+                    "kode": "NAV 76-05.02",
+                    "termer": {
+                        "nb": "ab0564;"
+                    },
+                    "tekster": {
+                        "nb": "ab0564;"
+                    }
+                },
+                "NAV 76-05.03": {
+                    "kode": "NAV 76-05.03",
+                    "termer": {
+                        "nb": "ab0564;"
+                    },
+                    "tekster": {
+                        "nb": "ab0564;"
+                    }
+                }
+            }
+        },
+        "AAR": {
+            "kode": "AAR",
+            "termer": {
+                "nb": "Aa-registeret"
+            },
+            "tekster": {
+                "nb": ""
+            },
+            "undernoder": {
+                "NAV 25-01.11": {
+                    "kode": "NAV 25-01.11",
+                    "termer": {
+                        "nb": ";ae0218"
+                    },
+                    "tekster": {
+                        "nb": ";ae0218"
+                    }
+                },
+                "NAVe 25-01.11": {
+                    "kode": "NAVe 25-01.11",
+                    "termer": {
+                        "nb": ";ae0218"
+                    },
+                    "tekster": {
+                        "nb": ";ae0218"
+                    }
+                }
+            }
+        },
+        "TIL": {
+            "kode": "TIL",
+            "termer": {
+                "nb": "Tiltak"
+            },
+            "tekster": {
+                "nb": ""
+            },
+            "undernoder": {
+                "NAV 76-13.81": {
+                    "kode": "NAV 76-13.81",
+                    "termer": {
+                        "nb": "ab0054;"
+                    },
+                    "tekster": {
+                        "nb": "ab0054;"
+                    }
+                },
+                "NAVe 76-13.81": {
+                    "kode": "NAVe 76-13.81",
+                    "termer": {
+                        "nb": "ab0054;"
+                    },
+                    "tekster": {
+                        "nb": "ab0054;"
+                    }
+                }
+            }
+        },
+        "GRA": {
+            "kode": "GRA",
+            "termer": {
+                "nb": "Gravferdsstønad"
+            },
+            "tekster": {
+                "nb": ""
+            },
+            "undernoder": {
+                "NAVe 90-00.08 K": {
+                    "kode": "NAVe 90-00.08 K",
+                    "termer": {
+                        "nb": ";ae0058"
+                    },
+                    "tekster": {
+                        "nb": ";ae0058"
+                    }
+                },
+                "NAV 90-00.08 K": {
+                    "kode": "NAV 90-00.08 K",
+                    "termer": {
+                        "nb": ";ae0058"
+                    },
+                    "tekster": {
+                        "nb": ";ae0058"
+                    }
+                }
+            }
+        },
+        "PEN": {
+            "kode": "PEN",
+            "termer": {
+                "nb": "Pensjon"
+            },
+            "tekster": {
+                "nb": ""
+            },
+            "undernoder": {
+                "NAV 00-03.04": {
+                    "kode": "NAV 00-03.04",
+                    "termer": {
+                        "nb": "ab0567;"
+                    },
+                    "tekster": {
+                        "nb": "ab0567;"
+                    }
+                },
+                "NAVe 00-03.04": {
+                    "kode": "NAVe 00-03.04",
+                    "termer": {
+                        "nb": "ab0567;"
+                    },
+                    "tekster": {
+                        "nb": "ab0567;"
+                    }
+                }
+            }
+        },
+        "ENF": {
+            "kode": "ENF",
+            "termer": {
+                "nb": "Enslig mor eller far"
+            },
+            "tekster": {
+                "nb": "Enslig mor eller far"
+            },
+            "undernoder": {
+                "NAVe 90-00.08 K": {
+                    "kode": "NAVe 90-00.08 K",
+                    "termer": {
+                        "nb": ";ae0058"
+                    },
+                    "tekster": {
+                        "nb": ";ae0058"
+                    }
+                },
+                "NAV 90-00.08 K": {
+                    "kode": "NAV 90-00.08 K",
+                    "termer": {
+                        "nb": ";ae0058"
+                    },
+                    "tekster": {
+                        "nb": ";ae0058"
+                    }
+                }
+            }
+        }
+    }
+}
